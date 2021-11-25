@@ -47,6 +47,7 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
       type: 'advisor.booking.reminder',
       purchase_id: _.get(payload, 'purchase.id'),
       service_booking_id: _.get(payload, 'purchase.service_bookings.0.id'),
+      sound: 'sound1',
     },
   };
 };

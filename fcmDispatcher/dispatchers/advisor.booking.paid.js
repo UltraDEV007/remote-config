@@ -86,6 +86,7 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers, clients: { has
       type: 'advisor.booking.paid',
       purchase_id: _.get(payload, 'purchase.id'),
       service_booking_id: _.get(payload, 'purchase.service_bookings.0.id'),
+      sound: 'sound1',
     },
   };
 };
