@@ -22,7 +22,7 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
   };
 };
 
-exports.dispatch = async ({ payload }, { ctxData, utils, helpers, hasuraClient }) => {
+exports.dispatch = async ({ payload }, { ctxData, utils, helpers, clients: { hasuraClient } }) => {
   const { _, moment } = helpers;
 
   const advisor_id = _.get(payload, 'session.advisor_id');
