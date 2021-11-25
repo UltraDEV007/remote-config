@@ -22,7 +22,7 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
   };
 };
 
-exports.dispatch = async ({ payload }, { ctxData, utils, helpers, clients: { hasuraClient } }) => {
+exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   const { _, moment } = helpers;
 
   const advisor_id = _.get(payload, 'session.advisor_id');
@@ -31,6 +31,27 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers, clients: { has
   const duration = _.get(payload, 'session.session_duration');
 
   const userDisplayName = _.get(ctxData, 'user.profile.display_name');
+
+  return {
+    notification: {
+      // title: `Your booking with ${userDisplayName} has been canceled`,
+      title: `Lịch hẹn với ${userDisplayName} đã bị huỷ.`,
+      body: `Gói ${helpers.formatCallDuration(duration)} - ${$start_at
+        .utcOffset(await utils.getUserTimezone(advisor_id))
+        .format(helpers.START_TIME_FORMAT)}`,
+    },
+    data: {
+      type: 'advisor.booking.cancel',
+      purchase_id: _.get(payload, 'purchase.id'),
+      service_booking_id: _.get(payload, 'purchase.service_bookings.0.id'),
+    },
+  };
+};
+
+exports.effect = async ({ payload }, { helpers, clients: { hasuraClient } }) => {
+  const { _ } = helpers;
+
+  const advisor_id = _.get(payload, 'session.advisor_id');
 
   await hasuraClient.getClient().request(
     `
@@ -51,19 +72,4 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers, clients: { has
       payload,
     }
   );
-
-  return {
-    notification: {
-      // title: `Your booking with ${userDisplayName} has been canceled`,
-      title: `Lịch hẹn với ${userDisplayName} đã bị huỷ.`,
-      body: `Gói ${helpers.formatCallDuration(duration)} - ${$start_at
-        .utcOffset(await utils.getUserTimezone(advisor_id))
-        .format(helpers.START_TIME_FORMAT)}`,
-    },
-    data: {
-      type: 'advisor.booking.cancel',
-      purchase_id: _.get(payload, 'purchase.id'),
-      service_booking_id: _.get(payload, 'purchase.service_bookings.0.id'),
-    },
-  };
 };

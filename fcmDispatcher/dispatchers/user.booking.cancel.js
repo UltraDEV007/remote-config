@@ -22,7 +22,7 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
   };
 };
 
-exports.dispatch = async ({ payload }, { ctxData, utils, helpers, clients: { hasuraClient } }) => {
+exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   const { _, moment } = helpers;
 
   const user_id = _.get(payload, 'session.user_id');
@@ -31,6 +31,26 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers, clients: { has
   const duration = _.get(payload, 'session.session_duration');
 
   const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
+
+  return {
+    notification: {
+      title: `Lịch hẹn với ${advisorDisplayName} đã bị huỷ.`,
+      body: `Gói ${helpers.formatCallDuration(duration)} - ${$start_at
+        .utcOffset(await utils.getUserTimezone(user_id))
+        .format(helpers.START_TIME_FORMAT)}`,
+    },
+    data: {
+      type: 'user.booking.cancel',
+      purchase_id: _.get(payload, 'purchase.id'),
+      service_booking_id: _.get(payload, 'purchase.service_bookings.0.id'),
+    },
+  };
+};
+
+exports.effect = async ({ payload }, { helpers, clients: { hasuraClient } }) => {
+  const { _ } = helpers;
+
+  const user_id = _.get(payload, 'session.user_id');
 
   await hasuraClient.getClient().request(
     `
@@ -51,18 +71,4 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers, clients: { has
       payload,
     }
   );
-
-  return {
-    notification: {
-      title: `Lịch hẹn với ${advisorDisplayName} đã bị huỷ.`,
-      body: `Gói ${helpers.formatCallDuration(duration)} - ${$start_at
-        .utcOffset(await utils.getUserTimezone(user_id))
-        .format(helpers.START_TIME_FORMAT)}`,
-    },
-    data: {
-      type: 'user.booking.cancel',
-      purchase_id: _.get(payload, 'purchase.id'),
-      service_booking_id: _.get(payload, 'purchase.service_bookings.0.id'),
-    },
-  };
 };

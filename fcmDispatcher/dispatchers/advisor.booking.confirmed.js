@@ -17,20 +17,20 @@ exports.getQuery = () => `
 
 exports.getVars = ({ payload }, { helpers: { _ } }) => {
   return {
-    user_id: _.get(payload, "session.user_id"),
-    advisor_id: _.get(payload, "session.advisor_id"),
+    user_id: _.get(payload, 'session.user_id'),
+    advisor_id: _.get(payload, 'session.advisor_id'),
   };
 };
 
 exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   const { _, moment } = helpers;
 
-  const advisor_id = _.get(payload, "session.advisor_id");
-  const service = _.get(payload, "purchase.service_bookings.0");
-  const $start_at = moment(_.get(service, "start_at"));
-  const duration = _.get(payload, "session.session_duration");
+  const advisor_id = _.get(payload, 'session.advisor_id');
+  const service = _.get(payload, 'purchase.service_bookings.0');
+  const $start_at = moment(_.get(service, 'start_at'));
+  const duration = _.get(payload, 'session.session_duration');
 
-  const userDisplayName = _.get(ctxData, "user.profile.display_name");
+  const userDisplayName = _.get(ctxData, 'user.profile.display_name');
 
   return {
     notification: {
@@ -41,9 +41,9 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
         .format(helpers.START_TIME_FORMAT)}`,
     },
     data: {
-      type: "advisor.booking.confirmed",
-      purchase_id: _.get(payload, "purchase.id"),
-      service_booking_id: _.get(payload, "purchase.service_bookings.0.id"),
+      type: 'advisor.booking.confirmed',
+      purchase_id: _.get(payload, 'purchase.id'),
+      service_booking_id: _.get(payload, 'purchase.service_bookings.0.id'),
       sound: true,
     },
   };
