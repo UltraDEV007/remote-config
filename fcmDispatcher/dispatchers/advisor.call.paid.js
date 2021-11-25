@@ -82,7 +82,7 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers, clients: { has
         .format(helpers.START_TIME_FORMAT)}`,
     },
     data: {
-      type: 'advisor.booking.paid',
+      type: 'advisor.call.paid',
       purchase_id: _.get(payload, 'purchase.id'),
     },
   };
