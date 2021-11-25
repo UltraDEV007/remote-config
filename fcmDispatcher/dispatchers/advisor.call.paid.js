@@ -52,6 +52,7 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
     data: {
       type: 'advisor.call.paid',
       purchase_id: _.get(payload, 'purchase.id'),
+      sound: 'sound1',
     },
   };
 };
