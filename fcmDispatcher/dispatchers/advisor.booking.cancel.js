@@ -61,11 +61,8 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
     },
     android: {
       priority: 'high',
-      data: {
-        sound: 'notification',
-      },
       notification: {
-        sound: 'notification',
+        sound: 'default',
       },
     },
   };
