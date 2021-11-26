@@ -61,8 +61,13 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
     },
     android: {
       priority: 'high',
+      data: {
+        sound: 'notification',
+        channelId: 'unitz-notifee-video-channel-2',
+      },
       notification: {
-        sound: 'default',
+        sound: 'notification',
+        channelId: 'unitz-notifee-video-channel-2',
       },
     },
   };
