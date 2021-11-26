@@ -42,17 +42,40 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
   // query transaction info
   const statements = _.get(ctxData, 'statements');
   const amount = _.get(_.find(statements, { name: 'advisor_income' }), 'amount');
-
+  const title = `Bạn đã nhận được ${helpers.formatCurrencySSR(amount)} cho cuộc gọi ${kind} với ${userDisplayName}.`;
+  const body = `Gói ${helpers.formatCallDuration(duration)}`;
   return {
     notification: {
       // title: `Your booking #${bookingId} is completed`,
-      title: `Bạn đã nhận được ${helpers.formatCurrencySSR(amount)} cho cuộc gọi ${kind} với ${userDisplayName}.`,
-      body: `Gói ${helpers.formatCallDuration(duration)}`,
+      title,
+      body,
     },
     data: {
       type: 'advisor.call.paid',
       purchase_id: _.get(payload, 'purchase.id'),
       sound: 'sound1',
+    },
+    apns: {
+      payload: {
+        aps: {
+          alert: {
+            title,
+            body,
+          },
+          sound: 'notification.mp3',
+        },
+      },
+    },
+    android: {
+      priority: 'high',
+      data: {
+        sound: 'notification',
+        channelId: 'unitz-notifee-video-channel-2',
+      },
+      notification: {
+        sound: 'notification',
+        channelId: 'unitz-notifee-video-channel-2',
+      },
     },
   };
 };

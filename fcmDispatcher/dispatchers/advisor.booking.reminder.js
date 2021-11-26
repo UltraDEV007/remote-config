@@ -34,20 +34,43 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   const duration = _.get(payload, 'session.session_duration');
 
   const userDisplayName = _.get(ctxData, 'user.profile.display_name');
-
+  const title = `Lịch hẹn với ${userDisplayName} sẽ bắt đầu sau ${diffMin} phút.`;
+  const body = `Gói ${helpers.formatCallDuration(duration)} - ${$start_at
+    .utcOffset(await utils.getUserTimezone(advisor_id))
+    .format(helpers.START_TIME_FORMAT)}`;
   return {
     notification: {
       // title: `Your booking #${bookingId} will start in ${diffMin} minutes`,
-      title: `Lịch hẹn với ${userDisplayName} sẽ bắt đầu sau ${diffMin} phút.`,
-      body: `Gói ${helpers.formatCallDuration(duration)} - ${$start_at
-        .utcOffset(await utils.getUserTimezone(advisor_id))
-        .format(helpers.START_TIME_FORMAT)}`,
+      title,
+      body,
     },
     data: {
       type: 'advisor.booking.reminder',
       purchase_id: _.get(payload, 'purchase.id'),
       service_booking_id: _.get(payload, 'purchase.service_bookings.0.id'),
       sound: 'sound1',
+    },
+    apns: {
+      payload: {
+        aps: {
+          alert: {
+            title,
+            body,
+          },
+          sound: 'notification.mp3',
+        },
+      },
+    },
+    android: {
+      priority: 'high',
+      data: {
+        sound: 'notification',
+        channelId: 'unitz-notifee-video-channel-2',
+      },
+      notification: {
+        sound: 'notification',
+        channelId: 'unitz-notifee-video-channel-2',
+      },
     },
   };
 };
