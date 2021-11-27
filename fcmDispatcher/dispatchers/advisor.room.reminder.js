@@ -1,62 +1,44 @@
 exports.getQuery = () => `
-  query($user_id: String!, $advisor_id: String!, $purchase_id: uuid!) {
-    user: user_by_pk(id: $user_id) {
-      id
-      profile {
-        display_name
-      }
-    }
+  query($advisor_id: String!, $room_id: uuid!, $course_id: uuid!) {
     advisor: advisor_by_pk(id: $advisor_id) {
       id
       profile {
         display_name
       }
     }
-    purchase: purchase_by_pk(id: $purchase_id) {
-      course_rooms {
-        id
-      }
-      courses {
-        pricing_type
-        price_amount
-        price_currency
-        per_amount
-        per_unit
-        course {
-          id
-          name
-          description
-        }
-      }
+    room: course_room_by_pk(id: $room_id) {
+      id
+      start_at
+      end_at
+    }
+    course: course_by_pk(id: $course_id) {
+      id
+      name
     }
   }
 `;
 
 exports.getVars = ({ payload }, { helpers: { _ } }) => {
   return {
-    user_id: _.get(payload, 'purchase.user_id'),
     advisor_id: _.get(payload, 'course.advisor_id'),
-    purchase_id: _.get(payload, 'purchase.id'),
+    course_id: _.get(payload, 'course.id'),
+    room_id: _.get(payload, 'room.id'),
   };
 };
 
 exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
-  const { _ } = helpers;
+  const { _, moment } = helpers;
 
-  const course = _.get(ctxData, 'purchase.courses.0.course');
-  const per_unit = _.get(ctxData, 'purchase.courses.0.per_unit');
-  const per_amount = _.get(ctxData, 'purchase.courses.0.per_amount');
-  const price_amount = _.get(ctxData, 'purchase.courses.0.price_amount');
-  const price_currency = _.get(ctxData, 'purchase.courses.0.price_currency');
+  const course = _.get(ctxData, 'course');
+  const room = _.get(ctxData, 'room');
+  const start_at = _.get(ctxData, 'room.start_at');
+  const $now = moment();
+  const diffMin = moment(start_at).diff($now, 'minute');
 
-  const userDisplayName = _.get(ctxData, 'user.profile.display_name');
   const courseDisplayName = _.get(course, 'name');
 
-  const title = `${userDisplayName} đã mua khoá học ${courseDisplayName}.`;
-  const body =
-    per_unit === 'per_session'
-      ? `Than toán ${helpers.formatCurrencySSR(price_amount, price_currency)} cho ${per_amount} buổi`
-      : `Trọn gói: ${helpers.formatCurrencySSR(price_amount, price_currency)}`;
+  const title = `Lớp học ${courseDisplayName}`;
+  const body = `Sẽ bắt đầu sau ${diffMin} phút.`;
 
   return {
     notification: {
@@ -65,7 +47,8 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
     },
     data: {
       type: 'advisor.room.reminder',
-      purchase_id: _.get(payload, 'purchase.id'),
+      room_id: _.get(room, 'id') || '',
+      course_id: _.get(course, 'id') || '',
       sound: 'sound1',
     },
     apns: {
@@ -83,11 +66,9 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
       priority: 'high',
       data: {
         sound: 'notification',
-        channelId: 'unitz-notifee-video-channel-2',
       },
       notification: {
         sound: 'notification',
-        channelId: 'unitz-notifee-video-channel-2',
       },
     },
   };
