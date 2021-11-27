@@ -166,6 +166,6 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
         type: 'divider',
       },
     ],
-    channel: 'C02NPMN3DHR',
+    channel: 'C02P4M8KFBK',
   });
 };
