@@ -117,8 +117,10 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
   const statements = _.get(ctxData, 'statements');
   const advisor_income = _.get(_.find(statements, { name: 'advisor_income' }), 'amount');
   const platform_income = _.get(_.find(statements, { name: 'platform_income' }), 'amount');
+  const title = `${userDisplayName} completed booking with ${advisorDisplayName}`;
 
   await slackClient.getClient().client.chat.postMessage({
+    text: title,
     blocks: [
       {
         type: 'header',
@@ -132,7 +134,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
         elements: [
           {
             type: 'mrkdwn',
-            text: `${userDisplayName} completed booking with ${advisorDisplayName}`,
+            text: title,
           },
         ],
       },

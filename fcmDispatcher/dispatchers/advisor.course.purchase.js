@@ -136,6 +136,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
   console.log('title', title, body);
 
   await slackClient.getClient().client.chat.postMessage({
+    text: title,
     blocks: [
       {
         type: 'header',

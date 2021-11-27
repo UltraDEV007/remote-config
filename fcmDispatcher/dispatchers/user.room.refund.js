@@ -1,5 +1,11 @@
 exports.getQuery = () => `
-  query($advisor_id: String!, $room_id: uuid!, $course_id: uuid!) {
+  query($user_id: String!, $advisor_id: String!, $room_id: uuid!, $course_id: uuid!) {
+    user: user_by_pk(id: $user_id) {
+      id
+      profile {
+        display_name
+      }
+    }
     advisor: advisor_by_pk(id: $advisor_id) {
       id
       profile {
@@ -20,6 +26,7 @@ exports.getQuery = () => `
 
 exports.getVars = ({ payload }, { helpers: { _ } }) => {
   return {
+    user_id: _.get(payload, 'attendee_purchase.user_id'),
     advisor_id: _.get(payload, 'course.advisor_id'),
     course_id: _.get(payload, 'course.id'),
     room_id: _.get(payload, 'room.id'),
@@ -82,7 +89,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
 
   const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
   const courseDisplayName = _.get(course, 'name');
-  const advisor_id = _.get(ctxData, 'advisor.id');
+  const user_id = _.get(ctxData, 'user.id');
 
   const statements = _.get(ctxData, 'statements');
   const advisor_income = _.get(_.find(statements, { name: 'advisor_income' }), 'amount');
@@ -93,7 +100,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
     mutation upsertnotifevent($payload: jsonb, $type: String) {
       insert_notification_one(
         object: {
-          owner_id: "${advisor_id}"
+          owner_id: "${user_id}"
           type_id: $type
           payload: $payload
         }
@@ -114,6 +121,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
   console.log('title', title, body);
 
   await slackClient.getClient().client.chat.postMessage({
+    text: title,
     blocks: [
       {
         type: 'header',

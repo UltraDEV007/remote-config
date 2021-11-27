@@ -1,23 +1,18 @@
 exports.getQuery = () => `
-  query($user_id: String!, $advisor_id: String!, $transaction_id: uuid!) {
-    user: user_by_pk(id: $user_id) {
-      id
-      profile {
-        display_name
-      }
-    }
+  query($advisor_id: String!, $room_id: uuid!, $course_id: uuid!) {
     advisor: advisor_by_pk(id: $advisor_id) {
       id
       profile {
         display_name
       }
     }
-    statements: transaction_statement(
-      where: {
-        transaction_id: { _eq: $transaction_id}
-      }
-    ) {
-      amount
+    room: course_room_by_pk(id: $room_id) {
+      id
+      start_at
+      end_at
+    }
+    course: course_by_pk(id: $course_id) {
+      id
       name
     }
   }
@@ -25,34 +20,35 @@ exports.getQuery = () => `
 
 exports.getVars = ({ payload }, { helpers: { _ } }) => {
   return {
-    user_id: _.get(payload, 'session.user_id'),
-    advisor_id: _.get(payload, 'session.advisor_id'),
-    transaction_id: _.get(payload, 'session.transaction_id'),
+    advisor_id: _.get(payload, 'course.advisor_id'),
+    course_id: _.get(payload, 'course.id'),
+    room_id: _.get(payload, 'room.id'),
   };
 };
 
 exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
   const { _ } = helpers;
 
-  const duration = _.get(payload, 'session.session_duration');
-  const kind = _.get(payload, 'session.kind');
+  const course = _.get(ctxData, 'course');
+  const room = _.get(ctxData, 'room');
 
-  const userDisplayName = _.get(ctxData, 'user.profile.display_name');
+  const courseDisplayName = _.get(course, 'name');
 
-  // query transaction info
   const statements = _.get(ctxData, 'statements');
   const amount = _.get(_.find(statements, { name: 'advisor_income' }), 'amount');
-  const title = `Bạn đã nhận được ${helpers.formatCurrencySSR(amount)} cho cuộc gọi ${kind} với ${userDisplayName}.`;
-  const body = `Gói ${helpers.formatCallDuration(duration)}`;
+
+  const title = `Khoá học ${courseDisplayName} đã hoàn tất`;
+  const body = `Bạn nhận được ${helpers.formatCurrencySSR(amount)}`;
+
   return {
     notification: {
-      // title: `Your booking #${bookingId} is completed`,
       title,
       body,
     },
     data: {
-      type: 'advisor.call.paid',
-      purchase_id: _.get(payload, 'purchase.id'),
+      type: 'advisor.room.paid',
+      room_id: _.get(room, 'id') || '',
+      course_id: _.get(course, 'id') || '',
       sound: 'sound1',
     },
     apns: {
@@ -70,11 +66,9 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
       priority: 'high',
       data: {
         sound: 'notification',
-        channelId: 'unitz-notifee-video-channel-2',
       },
       notification: {
         sound: 'notification',
-        channelId: 'unitz-notifee-video-channel-2',
       },
     },
   };
@@ -83,11 +77,16 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
 exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient, hasuraClient } }) => {
   const { _ } = helpers;
 
-  const advisor_id = _.get(payload, 'session.advisor_id');
-  const userDisplayName = _.get(ctxData, 'user.profile.display_name');
+  const course = _.get(ctxData, 'course');
+  const room = _.get(ctxData, 'room');
+
   const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
-  const duration = _.get(payload, 'session.session_duration');
-  const kind = _.get(payload, 'session.kind');
+  const courseDisplayName = _.get(course, 'name');
+  const advisor_id = _.get(ctxData, 'advisor.id');
+
+  const statements = _.get(ctxData, 'statements');
+  const advisor_income = _.get(_.find(statements, { name: 'advisor_income' }), 'amount');
+  const platform_income = _.get(_.find(statements, { name: 'platform_income' }), 'amount');
 
   await hasuraClient.getClient().request(
     `
@@ -104,22 +103,24 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
     }
   `,
     {
-      type: 'advisor.call.paid',
+      type: 'advisor.room.paid',
       payload,
     }
   );
 
-  const statements = _.get(ctxData, 'statements');
-  const advisor_income = _.get(_.find(statements, { name: 'advisor_income' }), 'amount');
-  const platform_income = _.get(_.find(statements, { name: 'platform_income' }), 'amount');
+  const title = `Khoá học "${courseDisplayName}" của ${advisorDisplayName} đã được thanh toán.`;
+  const body = `Income: ${helpers.formatCurrencySSR(advisor_income)} / ${helpers.formatCurrencySSR(platform_income)}`;
+
+  console.log('title', title, body);
 
   await slackClient.getClient().client.chat.postMessage({
+    text: title,
     blocks: [
       {
         type: 'header',
         text: {
           type: 'plain_text',
-          text: 'advisor.call.paid',
+          text: 'advisor.room.paid',
         },
       },
       {
@@ -127,7 +128,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
         elements: [
           {
             type: 'mrkdwn',
-            text: `${userDisplayName} completed call(${kind}) with ${advisorDisplayName}`,
+            text: title,
           },
         ],
       },
@@ -136,9 +137,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
         elements: [
           {
             type: 'mrkdwn',
-            text: `Duration: ${helpers.formatCallDuration(duration)} - Income: ${helpers.formatCurrencySSR(
-              advisor_income
-            )} / ${helpers.formatCurrencySSR(platform_income)}`,
+            text: body,
           },
         ],
       },
