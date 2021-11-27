@@ -32,13 +32,13 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
   const course = _.get(ctxData, 'course');
   const room = _.get(ctxData, 'room');
   const start_at = _.get(ctxData, 'room.start_at');
-  const end_at = _.get(ctxData, 'room.start_at');
+  const end_at = _.get(ctxData, 'room.end_at');
   const duration = moment(end_at).diff(moment(start_at), 'second');
 
   const courseDisplayName = _.get(course, 'name');
 
   const title = `Lớp học ${courseDisplayName}`;
-  const body = `Đã bắt đầu - Thời lượng ${helpers.formatCallDuration(duration)} phút.`;
+  const body = `Đã bắt đầu - Thời lượng ${helpers.formatCallDuration(duration)}.`;
 
   return {
     notification: {
