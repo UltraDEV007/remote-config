@@ -10,6 +10,23 @@ exports.getQuery = () => `
       id
       start_at
       end_at
+      purchases {
+        id
+        user_id
+        purchase_id
+        purchase {
+          transaction_purchase {
+            transaction {
+              statement {
+                id
+                name
+                type
+                amount
+              }
+            }
+          }
+        }
+      }
     }
     course: course_by_pk(id: $course_id) {
       id
@@ -26,13 +43,17 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
   };
 };
 
-exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
-  const { _ } = helpers;
+exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
+  const { _, moment } = helpers;
 
   const course = _.get(ctxData, 'course');
   const room = _.get(ctxData, 'room');
+  const $start_at = moment(_.get(room, 'start_at'));
+  const advisor_id = _.get(ctxData, 'advisor.id');
 
-  const courseDisplayName = _.get(course, 'name');
+  const courseDisplayName = `${_.get(course, 'name')}(${$start_at
+    .utcOffset(await utils.getUserTimezone(advisor_id))
+    .format(helpers.START_TIME_FORMAT)})`;
 
   const title = `Lớp học ${courseDisplayName} không diễn ra.`;
   const body = 'Bạn không nhận được học phí từ lớp học.';

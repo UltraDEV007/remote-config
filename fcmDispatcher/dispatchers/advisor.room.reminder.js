@@ -26,7 +26,7 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
   };
 };
 
-exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
+exports.dispatch = async ({ payload }, { ctxData, helpers, utils }) => {
   const { _, moment } = helpers;
 
   const course = _.get(ctxData, 'course');
@@ -34,8 +34,12 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
   const start_at = _.get(ctxData, 'room.start_at');
   const $now = moment();
   const diffMin = moment(start_at).diff($now, 'minute');
+  const $start_at = moment(_.get(room, 'start_at'));
+  const advisor_id = _.get(ctxData, 'advisor.id');
 
-  const courseDisplayName = _.get(course, 'name');
+  const courseDisplayName = `${_.get(course, 'name')}(${$start_at
+    .utcOffset(await utils.getUserTimezone(advisor_id))
+    .format(helpers.START_TIME_FORMAT)})`;
 
   const title = `Lớp học ${courseDisplayName}`;
   const body = `Sẽ bắt đầu sau ${diffMin} phút.`;

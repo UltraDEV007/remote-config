@@ -33,13 +33,18 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
   };
 };
 
-exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
-  const { _ } = helpers;
+exports.dispatch = async ({ payload }, { ctxData, helpers, utils }) => {
+  const { _, moment } = helpers;
 
   const course = _.get(ctxData, 'course');
   const room = _.get(ctxData, 'room');
 
-  const courseDisplayName = _.get(course, 'name');
+  const $start_at = moment(_.get(room, 'start_at'));
+  const advisor_id = _.get(ctxData, 'advisor.id');
+
+  const courseDisplayName = `${_.get(course, 'name')}(${$start_at
+    .utcOffset(await utils.getUserTimezone(advisor_id))
+    .format(helpers.START_TIME_FORMAT)})`;
 
   const statements = _.get(ctxData, 'statements');
   const amount = _.get(_.find(statements, { name: 'advisor_income' }), 'amount');
