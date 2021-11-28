@@ -1,19 +1,28 @@
 exports.getQuery = () => `
-  query($advisor_id: String!, $room_id: uuid!, $course_id: uuid!) {
+  query($advisor_id: String!, $course_id: uuid!) {
     advisor: advisor_by_pk(id: $advisor_id) {
       id
       profile {
         display_name
       }
     }
-    room: course_room_by_pk(id: $room_id) {
-      id
-      start_at
-      end_at
-    }
     course: course_by_pk(id: $course_id) {
       id
       name
+      purchases {
+        purchase {
+          transaction_purchase {
+            transaction {
+              statement {
+                id
+                name
+                type
+                amount
+              }
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -22,7 +31,6 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
   return {
     advisor_id: _.get(payload, 'course.advisor_id'),
     course_id: _.get(payload, 'course.id'),
-    room_id: _.get(payload, 'room.id'),
   };
 };
 
@@ -30,12 +38,12 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
   const { _ } = helpers;
 
   const course = _.get(ctxData, 'course');
-  const room = _.get(ctxData, 'room');
 
   const courseDisplayName = _.get(course, 'name');
 
-  const statements = _.get(ctxData, 'statements');
-  const amount = _.get(_.find(statements, { name: 'advisor_income' }), 'amount');
+  const statements = helpers.flattenGet(course, 'purchases.purchase.transaction_purchase.transaction.statement');
+
+  const amount = _.sumBy(_.filter(statements, { name: 'advisor_income' }), 'amount');
 
   const title = `Khoá học ${courseDisplayName} đã hoàn tất`;
   const body = `Bạn nhận được ${helpers.formatCurrencySSR(amount)}`;
@@ -46,8 +54,7 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
       body,
     },
     data: {
-      type: 'advisor.room.paid',
-      room_id: _.get(room, 'id') || '',
+      type: 'advisor.course.paid',
       course_id: _.get(course, 'id') || '',
       sound: 'sound1',
     },
@@ -78,15 +85,14 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
   const { _ } = helpers;
 
   const course = _.get(ctxData, 'course');
-  const room = _.get(ctxData, 'room');
 
   const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
   const courseDisplayName = _.get(course, 'name');
   const advisor_id = _.get(ctxData, 'advisor.id');
 
-  const statements = _.get(ctxData, 'statements');
-  const advisor_income = _.get(_.find(statements, { name: 'advisor_income' }), 'amount');
-  const platform_income = _.get(_.find(statements, { name: 'platform_income' }), 'amount');
+  const statements = helpers.flattenGet(course, 'purchases.purchase.transaction_purchase.transaction.statement');
+  const advisor_income = _.sumBy(_.filter(statements, { name: 'advisor_income' }), 'amount');
+  const platform_income = _.sumBy(_.filter(statements, { name: 'platform_income' }), 'amount');
 
   await hasuraClient.getClient().request(
     `
