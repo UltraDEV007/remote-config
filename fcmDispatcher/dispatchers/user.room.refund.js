@@ -1,5 +1,11 @@
 exports.getQuery = () => `
-  query($user_id: String!, $advisor_id: String!, $room_id: uuid!, $course_id: uuid!) {
+  query(
+    $user_id: String!,
+    $advisor_id: String!,
+    $room_id: uuid!,
+    $course_id: uuid!,
+    $attendee_purchase_id: uuid!,
+  ) {
     user: user_by_pk(id: $user_id) {
       id
       profile {
@@ -16,6 +22,23 @@ exports.getQuery = () => `
       id
       start_at
       end_at
+      purchases(where: { id: {_eq: $attendee_purchase_id}}) {
+        id
+        user_id
+        purchase_id
+        purchase {
+          transaction_purchase {
+            transaction {
+              statement {
+                id
+                name
+                type
+                amount
+              }
+            }
+          }
+        }
+      }
     }
     course: course_by_pk(id: $course_id) {
       id
@@ -27,6 +50,7 @@ exports.getQuery = () => `
 exports.getVars = ({ payload }, { helpers: { _ } }) => {
   return {
     user_id: _.get(payload, 'attendee_purchase.user_id'),
+    attendee_purchase_id: _.get(payload, 'attendee_purchase.id'),
     advisor_id: _.get(payload, 'course.advisor_id'),
     course_id: _.get(payload, 'course.id'),
     room_id: _.get(payload, 'room.id'),
@@ -46,8 +70,9 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils }) => {
     .utcOffset(await utils.getUserTimezone(advisor_id))
     .format(helpers.START_TIME_FORMAT)})`;
 
-  const statements = _.get(ctxData, 'statements');
-  const amount = _.get(_.find(statements, { name: 'advisor_income' }), 'amount');
+  const statements = helpers.flattenGet(room, 'purchases.purchase.transaction_purchase.transaction.statement');
+
+  const amount = _.get(_.find(statements, { name: 'refund' }), 'amount');
 
   const title = `Lớp học ${courseDisplayName} không diễn ra.`;
   const body = `Unitz đã hoàn trả lại cho bạn ${helpers.formatCurrencySSR(amount)} vào ví.`;
@@ -86,19 +111,25 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils }) => {
   };
 };
 
-exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient, hasuraClient } }) => {
-  const { _ } = helpers;
+exports.effect = async ({ payload }, { ctxData, helpers, utils, clients: { slackClient, hasuraClient } }) => {
+  const { _, moment } = helpers;
 
   const course = _.get(ctxData, 'course');
   const room = _.get(ctxData, 'room');
 
+  const $start_at = moment(_.get(room, 'start_at'));
+  const advisor_id = _.get(ctxData, 'advisor.id');
+
+  const courseDisplayName = `${_.get(course, 'name')}(${$start_at
+    .utcOffset(await utils.getUserTimezone(advisor_id))
+    .format(helpers.START_TIME_FORMAT)})`;
+
   const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
-  const courseDisplayName = _.get(course, 'name');
   const user_id = _.get(ctxData, 'user.id');
 
-  const statements = _.get(ctxData, 'statements');
-  const advisor_income = _.get(_.find(statements, { name: 'advisor_income' }), 'amount');
-  const platform_income = _.get(_.find(statements, { name: 'platform_income' }), 'amount');
+  const statements = helpers.flattenGet(room, 'purchases.purchase.transaction_purchase.transaction.statement');
+
+  const amount = _.get(_.find(statements, { name: 'refund' }), 'amount');
 
   await hasuraClient.getClient().request(
     `
@@ -121,9 +152,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
   );
 
   const title = `Lớp học "${courseDisplayName}" của ${advisorDisplayName} đã được hoàn tiền.`;
-  const body = `Income: ${helpers.formatCurrencySSR(advisor_income)} / ${helpers.formatCurrencySSR(platform_income)}`;
-
-  console.log('title', title, body);
+  const body = `Refund: ${helpers.formatCurrencySSR(amount)}`;
 
   await slackClient.getClient().client.chat.postMessage({
     text: title,
