@@ -45,8 +45,6 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils, clients: { rou
   const title = `Lớp học ${courseDisplayName}`;
   const body = `Đã bắt đầu - Thời lượng ${helpers.formatCallDuration(duration)}.`;
 
-  console.log('asdasdas', routeWebClient.getClient().toUserUrl('room', room));
-
   return {
     notification: {
       title,
