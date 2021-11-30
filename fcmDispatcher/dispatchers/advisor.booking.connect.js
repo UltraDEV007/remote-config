@@ -56,7 +56,7 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, models }) => {
 
   const videoCalModel = new VideoRoomModel();
   await videoCalModel.joinBooking({
-    user,
+    user: advisor,
     advisor,
     transaction,
     service,
@@ -65,7 +65,7 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, models }) => {
   const notifSessionObject = {
     user_id,
     advisor_id,
-    ...(await videoCalModel.getNotifSessionObject()),
+    ...(await videoCalModel.getSessionObject()),
     ..._.pick(session, ['kind', 'session_duration']),
     start_at: _.get(payload, 'purchase.service_bookings.0.start_at'),
     purchase_id: _.get(payload, 'purchase.id'),
