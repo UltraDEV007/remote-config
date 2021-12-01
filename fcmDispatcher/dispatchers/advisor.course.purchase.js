@@ -34,31 +34,28 @@ exports.getQuery = () => `
 
 exports.getVars = ({ payload }, { helpers: { _ } }) => {
   return {
-    user_id: _.get(payload, "purchase.user_id"),
-    advisor_id: _.get(payload, "course.advisor_id"),
-    purchase_id: _.get(payload, "purchase.id"),
+    user_id: _.get(payload, 'purchase.user_id'),
+    advisor_id: _.get(payload, 'course.advisor_id'),
+    purchase_id: _.get(payload, 'purchase.id'),
   };
 };
 
 exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
   const { _ } = helpers;
 
-  const course = _.get(ctxData, "purchase.courses.0.course");
-  const per_unit = _.get(ctxData, "purchase.courses.0.per_unit");
-  const per_amount = _.get(ctxData, "purchase.courses.0.per_amount");
-  const price_amount = _.get(ctxData, "purchase.courses.0.price_amount");
-  const price_currency = _.get(ctxData, "purchase.courses.0.price_currency");
+  const course = _.get(ctxData, 'purchase.courses.0.course');
+  const per_unit = _.get(ctxData, 'purchase.courses.0.per_unit');
+  const per_amount = _.get(ctxData, 'purchase.courses.0.per_amount');
+  const price_amount = _.get(ctxData, 'purchase.courses.0.price_amount');
+  const price_currency = _.get(ctxData, 'purchase.courses.0.price_currency');
 
-  const userDisplayName = _.get(ctxData, "user.profile.display_name");
-  const courseDisplayName = _.get(course, "name");
+  const userDisplayName = _.get(ctxData, 'user.profile.display_name');
+  const courseDisplayName = _.get(course, 'name');
 
   const title = `${userDisplayName} đã mua khoá học ${courseDisplayName}.`;
   const body =
-    per_unit === "per_session"
-      ? `Thanh toán ${helpers.formatCurrencySSR(
-          price_amount,
-          price_currency
-        )} cho ${per_amount} buổi`
+    per_unit === 'per_session'
+      ? `Thanh toán ${helpers.formatCurrencySSR(price_amount, price_currency)} cho ${per_amount} buổi`
       : `Trọn gói: ${helpers.formatCurrencySSR(price_amount, price_currency)}`;
 
   return {
@@ -68,9 +65,9 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
       body,
     },
     data: {
-      type: "advisor.call.paid",
-      purchase_id: _.get(payload, "purchase.id"),
-      sound: "sound1",
+      type: 'advisor.course.purchase',
+      purchase_id: _.get(payload, 'purchase.id'),
+      sound: 'sound1',
     },
     apns: {
       payload: {
@@ -79,39 +76,36 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
             title,
             body,
           },
-          sound: "notification.mp3",
+          sound: 'notification.mp3',
         },
       },
     },
     android: {
-      priority: "high",
+      priority: 'high',
       data: {
-        sound: "notification",
-        channelId: "unitz-notifee-video-channel-2",
+        sound: 'notification',
+        channelId: 'unitz-notifee-video-channel-2',
       },
       notification: {
-        sound: "notification",
-        channelId: "unitz-notifee-video-channel-2",
+        sound: 'notification',
+        channelId: 'unitz-notifee-video-channel-2',
       },
     },
   };
 };
 
-exports.effect = async (
-  { payload },
-  { ctxData, helpers, clients: { slackClient, hasuraClient } }
-) => {
+exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient, hasuraClient } }) => {
   const { _ } = helpers;
 
-  const advisor_id = _.get(payload, "session.advisor_id");
-  const course = _.get(ctxData, "purchase.courses.0.course");
-  const per_unit = _.get(ctxData, "purchase.courses.0.per_unit");
-  const per_amount = _.get(ctxData, "purchase.courses.0.per_amount");
-  const price_amount = _.get(ctxData, "purchase.courses.0.price_amount");
+  const advisor_id = _.get(payload, 'session.advisor_id');
+  const course = _.get(ctxData, 'purchase.courses.0.course');
+  const per_unit = _.get(ctxData, 'purchase.courses.0.per_unit');
+  const per_amount = _.get(ctxData, 'purchase.courses.0.per_amount');
+  const price_amount = _.get(ctxData, 'purchase.courses.0.price_amount');
 
-  const advisorDisplayName = _.get(ctxData, "advisor.profile.display_name");
-  const userDisplayName = _.get(ctxData, "user.profile.display_name");
-  const courseDisplayName = _.get(course, "name");
+  const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
+  const userDisplayName = _.get(ctxData, 'user.profile.display_name');
+  const courseDisplayName = _.get(course, 'name');
 
   await hasuraClient.getClient().request(
     `
@@ -128,51 +122,51 @@ exports.effect = async (
     }
   `,
     {
-      type: "advisor.course.purchase",
+      type: 'advisor.course.purchase',
       payload,
     }
   );
 
   const title = `${userDisplayName} đã mua khoá học "${courseDisplayName}" của ${advisorDisplayName}.`;
   const body =
-    per_unit === "per_session"
+    per_unit === 'per_session'
       ? `${per_amount} buổi: ${helpers.formatCurrencySSR(price_amount)}`
       : `Trọn gói: ${helpers.formatCurrencySSR(price_amount)}`;
 
-  console.log("title", title, body);
+  console.log('title', title, body);
 
   await slackClient.getClient().client.chat.postMessage({
     text: title,
     blocks: [
       {
-        type: "header",
+        type: 'header',
         text: {
-          type: "plain_text",
-          text: "advisor.course.purchase",
+          type: 'plain_text',
+          text: 'advisor.course.purchase',
         },
       },
       {
-        type: "context",
+        type: 'context',
         elements: [
           {
-            type: "mrkdwn",
+            type: 'mrkdwn',
             text: title,
           },
         ],
       },
       {
-        type: "context",
+        type: 'context',
         elements: [
           {
-            type: "mrkdwn",
+            type: 'mrkdwn',
             text: body,
           },
         ],
       },
       {
-        type: "divider",
+        type: 'divider',
       },
     ],
-    channel: "C02P4M8KFBK",
+    channel: 'C02P4M8KFBK',
   });
 };
