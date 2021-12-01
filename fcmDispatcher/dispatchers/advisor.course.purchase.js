@@ -97,7 +97,7 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
 exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient, hasuraClient } }) => {
   const { _ } = helpers;
 
-  const advisor_id = _.get(payload, 'session.advisor_id');
+  const advisor_id = _.get(ctxData, 'advisor.id');
   const course = _.get(ctxData, 'purchase.courses.0.course');
   const per_unit = _.get(ctxData, 'purchase.courses.0.per_unit');
   const per_amount = _.get(ctxData, 'purchase.courses.0.per_amount');
