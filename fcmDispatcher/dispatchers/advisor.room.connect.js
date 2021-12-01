@@ -71,9 +71,11 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils, clients: { rou
       priority: 'high',
       data: {
         sound: 'notification',
+        channelId: 'unitz-notifee-video-channel-2',
       },
       notification: {
         sound: 'notification',
+        channelId: 'unitz-notifee-video-channel-2',
       },
     },
   };
