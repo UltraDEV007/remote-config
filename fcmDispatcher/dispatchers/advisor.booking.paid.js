@@ -119,7 +119,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
   const platform_income = _.get(_.find(statements, { name: 'platform_income' }), 'amount');
   const title = `${userDisplayName} completed booking with ${advisorDisplayName}`;
 
-  await slackClient.getClient().client.chat.postMessage({
+  await slackClient.getClient().postMessage({
     text: title,
     blocks: [
       {
