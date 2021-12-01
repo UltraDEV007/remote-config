@@ -154,7 +154,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients: { slack
   const title = `Lớp học "${courseDisplayName}" của ${advisorDisplayName} đã được hoàn tiền.`;
   const body = `Refund: ${helpers.formatCurrencySSR(amount)}`;
 
-  await slackClient.getClient().client.chat.postMessage({
+  await slackClient.getClient().postMessage({
     text: title,
     blocks: [
       {
