@@ -93,10 +93,11 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
   };
 };
 
-exports.effect = async ({ payload }, { ctxData, helpers, clients: { hasuraClient } }) => {
+exports.effect = async ({ payload }, { ctxData, helpers, clients: { hasuraClient, sendgridClient } }) => {
   const { _ } = helpers;
 
   const user_id = _.get(ctxData, 'user.id');
+  const course = _.get(ctxData, 'purchase.courses.0.course');
 
   await hasuraClient.getClient().request(
     `
@@ -117,4 +118,13 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { hasuraClient
       payload,
     }
   );
+
+  // send email effect
+  sendgridClient.getClient().sendEmail(user_id, {
+    template: {
+      name: 'user.course.purchase',
+    },
+    ...ctxData,
+    course,
+  });
 };
