@@ -69,7 +69,7 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils, clients: { rou
       headers: {
         'apns-push-type': 'background',
         'apns-priority': '5',
-        'apns-topic': 'app.unitz.user', // your app bundle identifier
+        'apns-topic': 'app.unitz.advisor', // your app bundle identifier
       },
     },
   };
