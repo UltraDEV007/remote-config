@@ -94,7 +94,7 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
   };
 };
 
-exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient, hasuraClient } }) => {
+exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient, hasuraClient, sendgridClient } }) => {
   const { _ } = helpers;
 
   const advisor_id = _.get(ctxData, 'advisor.id');
@@ -107,7 +107,8 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
   const userDisplayName = _.get(ctxData, 'user.profile.display_name');
   const courseDisplayName = _.get(course, 'name');
 
-  await hasuraClient.getClient().request(
+  // inapp noti effect
+  hasuraClient.getClient().request(
     `
     mutation upsertnotifevent($payload: jsonb, $type: String) {
       insert_notification_one(
@@ -135,7 +136,8 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
 
   console.log('title', title, body);
 
-  await slackClient.getClient().postMessage({
+  // slack message effect
+  slackClient.getClient().postMessage({
     text: title,
     blocks: [
       {
@@ -168,5 +170,14 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
       },
     ],
     channel: 'C02P4M8KFBK',
+  });
+
+  // send email effect
+  sendgridClient.getClient().sendEmail(advisor_id, {
+    template: {
+      name: 'advisor.course.purchase',
+    },
+    ...ctxData,
+    course,
   });
 };
