@@ -96,7 +96,7 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
 exports.effect = async ({ payload }, { ctxData, helpers, clients: { hasuraClient } }) => {
   const { _ } = helpers;
 
-  const user_id = _.get(payload, 'user.id');
+  const user_id = _.get(ctxData, 'user.id');
 
   await hasuraClient.getClient().request(
     `
