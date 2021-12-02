@@ -179,5 +179,8 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
     },
     ...ctxData,
     course,
+    tuition: {
+       amount: helpers.formatCurrencySSR(price_amount),
+    }
   });
 };
