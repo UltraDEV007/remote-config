@@ -26,7 +26,7 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
   };
 };
 
-exports.dispatch = async ({ payload }, { ctxData, helpers, utils }) => {
+exports.dispatch = async ({ payload }, { ctxData, helpers, utils, clients: { routeWebClient } }) => {
   const { _, moment } = helpers;
 
   const course = _.get(ctxData, 'course');
@@ -54,6 +54,7 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils }) => {
       type: 'user.room.reminder',
       room_id: _.get(room, 'id') || '',
       course_id: _.get(course, 'id') || '',
+      room_url: routeWebClient.getClient().toUserUrl('room', room),
       sound: 'sound1',
     },
     apns: {
