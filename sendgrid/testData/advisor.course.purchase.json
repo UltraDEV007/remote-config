@@ -32,5 +32,6 @@
     "id": "cf4d0773-cde2-4a8d-9d83-506601887779",
     "name": "UnitzDev course [Repeat]",
     "description": "<p>Thay Hung chuyen luyen thi</p><p>Sieu toc</p>"
-  }
+  },
+  "tuition": { "amount": "1.6M" }
 }
