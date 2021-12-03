@@ -1,0 +1,409 @@
+{
+  "template": {
+    "name": "advisor.room.paid"
+  },
+  "advisor": {
+    "id": "PdOJWFBgNPUEMhX1JlsDm7zWy012",
+    "profile": {
+      "display_name": "Hung Tran"
+    }
+  },
+  "room": {
+    "id": "3828a71c-4982-423b-937e-8e7a70aa5de9",
+    "start_at": "2021-11-28T04:30:00+00:00",
+    "end_at": "2021-11-28T05:00:00+00:00",
+    "purchases": [
+      {
+        "id": "93afdf55-dccd-4d92-a7c2-4c13ca458367",
+        "user_id": "YUgdOvgNaTPOBfBJSs3YZN7rngS2",
+        "purchase_id": "f3d8e709-3d4c-4844-be1f-ff06090df065",
+        "purchase": {
+          "transaction_purchase": {
+            "transaction": {
+              "statement": [
+                {
+                  "id": "01b8be75-4d74-4e30-91e7-d798810c0bde",
+                  "name": "refund",
+                  "type": "refund",
+                  "amount": 200000
+                },
+                {
+                  "id": "54607d3c-87fa-466a-96e4-507cd021c9d9",
+                  "name": "platform_iss",
+                  "type": "refund",
+                  "amount": -200000
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "93afdf55-dccd-4d92-a7c2-4c13ca458367",
+        "user_id": "YUgdOvgNaTPOBfBJSs3YZN7rngS2",
+        "purchase_id": "f3d8e709-3d4c-4844-be1f-ff06090df065",
+        "purchase": {
+          "transaction_purchase": {
+            "transaction": {
+              "statement": [
+                {
+                  "id": "4e3d05fd-6db7-4d83-8a64-5b3a94e4737b",
+                  "name": "tuition",
+                  "type": "payment",
+                  "amount": -200000
+                },
+                {
+                  "id": "5438f81f-2975-410a-a1d7-f5202af6c8d1",
+                  "name": "advisor_income",
+                  "type": "payment",
+                  "amount": 180000
+                },
+                {
+                  "id": "09270997-49c0-4652-aaa1-76458e09d497",
+                  "name": "advisor_tax",
+                  "type": null,
+                  "amount": 0
+                },
+                {
+                  "id": "5eb92036-add2-4260-9026-38d58f3e9920",
+                  "name": "platform_income",
+                  "type": "charge_payment",
+                  "amount": 20000
+                },
+                {
+                  "id": "2379ff8c-05b6-4f05-a77f-2143e44f63e9",
+                  "name": "platform_tax",
+                  "type": null,
+                  "amount": 0
+                },
+                {
+                  "id": "9e3a6c09-1366-4ed5-ab26-c53897bfedab",
+                  "name": "subtotal",
+                  "type": null,
+                  "amount": 200000
+                },
+                {
+                  "id": "520db5f9-b511-4b7e-9cf8-886aef41849f",
+                  "name": "tax",
+                  "type": null,
+                  "amount": 0
+                },
+                {
+                  "id": "5e43e3ab-fc93-49f4-9670-ac4a53106596",
+                  "name": "discount",
+                  "type": null,
+                  "amount": 0
+                },
+                {
+                  "id": "f2e84117-30a7-481e-ae0f-d11feffdf526",
+                  "name": "total",
+                  "type": null,
+                  "amount": 200000
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "93afdf55-dccd-4d92-a7c2-4c13ca458367",
+        "user_id": "YUgdOvgNaTPOBfBJSs3YZN7rngS2",
+        "purchase_id": "f3d8e709-3d4c-4844-be1f-ff06090df065",
+        "purchase": {
+          "transaction_purchase": {
+            "transaction": {
+              "statement": [
+                {
+                  "id": "65eda852-bbd1-4c27-a237-757fac1afdd9",
+                  "name": "refund",
+                  "type": "refund",
+                  "amount": 200000
+                },
+                {
+                  "id": "9a5a2f31-db46-4589-9bde-944352d0c478",
+                  "name": "platform_iss",
+                  "type": "refund",
+                  "amount": -200000
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "93afdf55-dccd-4d92-a7c2-4c13ca458367",
+        "user_id": "YUgdOvgNaTPOBfBJSs3YZN7rngS2",
+        "purchase_id": "f3d8e709-3d4c-4844-be1f-ff06090df065",
+        "purchase": {
+          "transaction_purchase": {
+            "transaction": {
+              "statement": [
+                {
+                  "id": "0f0cba8f-a8a3-42b6-96d9-2ecdb7226e1f",
+                  "name": "refund",
+                  "type": "refund",
+                  "amount": 200000
+                },
+                {
+                  "id": "3b659e5a-c1fe-477c-bde4-66cba54fd692",
+                  "name": "platform_iss",
+                  "type": "refund",
+                  "amount": -200000
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "93afdf55-dccd-4d92-a7c2-4c13ca458367",
+        "user_id": "YUgdOvgNaTPOBfBJSs3YZN7rngS2",
+        "purchase_id": "f3d8e709-3d4c-4844-be1f-ff06090df065",
+        "purchase": {
+          "transaction_purchase": {
+            "transaction": {
+              "statement": [
+                {
+                  "id": "55f50929-388a-456b-91af-9dec75f5c950",
+                  "name": "refund",
+                  "type": "refund",
+                  "amount": 200000
+                },
+                {
+                  "id": "fec29971-c26e-4e8b-a424-47c9af4eb87c",
+                  "name": "platform_iss",
+                  "type": "refund",
+                  "amount": -200000
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "93afdf55-dccd-4d92-a7c2-4c13ca458367",
+        "user_id": "YUgdOvgNaTPOBfBJSs3YZN7rngS2",
+        "purchase_id": "f3d8e709-3d4c-4844-be1f-ff06090df065",
+        "purchase": {
+          "transaction_purchase": {
+            "transaction": {
+              "statement": [
+                {
+                  "id": "de8ae344-34f9-4944-a22c-fda8dcec5e13",
+                  "name": "refund",
+                  "type": "refund",
+                  "amount": 200000
+                },
+                {
+                  "id": "fa04b233-254d-43cd-8b27-7d1048258403",
+                  "name": "platform_iss",
+                  "type": "refund",
+                  "amount": -200000
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "88bc1195-991c-4202-bd79-2920c7312907",
+        "user_id": "YUgdOvgNaTPOBfBJSs3YZN7rngS2",
+        "purchase_id": "300b64a2-c03a-4b4c-9a6f-48097ba8fc36",
+        "purchase": {
+          "transaction_purchase": {
+            "transaction": {
+              "statement": [
+                {
+                  "id": "4c6ab79f-593f-4c41-98c5-56abf822b465",
+                  "name": "refund",
+                  "type": "refund",
+                  "amount": 200000
+                },
+                {
+                  "id": "1e451838-27d7-44d6-b5e9-f297cea11bff",
+                  "name": "platform_iss",
+                  "type": "refund",
+                  "amount": -200000
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "88bc1195-991c-4202-bd79-2920c7312907",
+        "user_id": "YUgdOvgNaTPOBfBJSs3YZN7rngS2",
+        "purchase_id": "300b64a2-c03a-4b4c-9a6f-48097ba8fc36",
+        "purchase": {
+          "transaction_purchase": {
+            "transaction": {
+              "statement": [
+                {
+                  "id": "7e105ae5-c5ed-4f48-9628-dec1669f3d3c",
+                  "name": "tuition",
+                  "type": "payment",
+                  "amount": -200000
+                },
+                {
+                  "id": "fe84b755-7164-4237-bace-d8544cda0a1c",
+                  "name": "advisor_income",
+                  "type": "payment",
+                  "amount": 180000
+                },
+                {
+                  "id": "d30fc328-f716-4ba7-ac41-1a35decbdf20",
+                  "name": "advisor_tax",
+                  "type": null,
+                  "amount": 0
+                },
+                {
+                  "id": "d2da1c12-82ea-422c-b870-7b3869d9f66e",
+                  "name": "platform_income",
+                  "type": "charge_payment",
+                  "amount": 20000
+                },
+                {
+                  "id": "fd5d2dfd-6037-4d69-aa23-3c728d4c03dd",
+                  "name": "platform_tax",
+                  "type": null,
+                  "amount": 0
+                },
+                {
+                  "id": "4b4cd24a-4243-4686-9256-e0a48e1599c4",
+                  "name": "subtotal",
+                  "type": null,
+                  "amount": 200000
+                },
+                {
+                  "id": "b8a28e5b-dbe4-428d-a620-182e5b664489",
+                  "name": "tax",
+                  "type": null,
+                  "amount": 0
+                },
+                {
+                  "id": "08e454f8-02a5-4aab-a607-9d573de82e6a",
+                  "name": "discount",
+                  "type": null,
+                  "amount": 0
+                },
+                {
+                  "id": "51bd1a41-5a55-430b-91f2-640584ace887",
+                  "name": "total",
+                  "type": null,
+                  "amount": 200000
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "88bc1195-991c-4202-bd79-2920c7312907",
+        "user_id": "YUgdOvgNaTPOBfBJSs3YZN7rngS2",
+        "purchase_id": "300b64a2-c03a-4b4c-9a6f-48097ba8fc36",
+        "purchase": {
+          "transaction_purchase": {
+            "transaction": {
+              "statement": [
+                {
+                  "id": "f3db685c-2c98-4ef3-b0e8-fa8bdc2c01bb",
+                  "name": "refund",
+                  "type": "refund",
+                  "amount": 200000
+                },
+                {
+                  "id": "860e2f86-7636-43b7-801e-66531daa5b55",
+                  "name": "platform_iss",
+                  "type": "refund",
+                  "amount": -200000
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "88bc1195-991c-4202-bd79-2920c7312907",
+        "user_id": "YUgdOvgNaTPOBfBJSs3YZN7rngS2",
+        "purchase_id": "300b64a2-c03a-4b4c-9a6f-48097ba8fc36",
+        "purchase": {
+          "transaction_purchase": {
+            "transaction": {
+              "statement": [
+                {
+                  "id": "d7bf2479-6250-4ad1-be55-5a66803c4871",
+                  "name": "refund",
+                  "type": "refund",
+                  "amount": 200000
+                },
+                {
+                  "id": "60e748be-e2d4-4c22-a503-980b6865d7be",
+                  "name": "platform_iss",
+                  "type": "refund",
+                  "amount": -200000
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "88bc1195-991c-4202-bd79-2920c7312907",
+        "user_id": "YUgdOvgNaTPOBfBJSs3YZN7rngS2",
+        "purchase_id": "300b64a2-c03a-4b4c-9a6f-48097ba8fc36",
+        "purchase": {
+          "transaction_purchase": {
+            "transaction": {
+              "statement": [
+                {
+                  "id": "745a0900-3cd1-4cc0-805f-23224fe27a5e",
+                  "name": "refund",
+                  "type": "refund",
+                  "amount": 200000
+                },
+                {
+                  "id": "b3269520-1c7a-4ccb-bb5c-92fdc0b880c3",
+                  "name": "platform_iss",
+                  "type": "refund",
+                  "amount": -200000
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "88bc1195-991c-4202-bd79-2920c7312907",
+        "user_id": "YUgdOvgNaTPOBfBJSs3YZN7rngS2",
+        "purchase_id": "300b64a2-c03a-4b4c-9a6f-48097ba8fc36",
+        "purchase": {
+          "transaction_purchase": {
+            "transaction": {
+              "statement": [
+                {
+                  "id": "cf4b30a9-8faa-4adf-aa8d-8fb55a882ef8",
+                  "name": "refund",
+                  "type": "refund",
+                  "amount": 200000
+                },
+                {
+                  "id": "b34a1d36-372c-4c7a-88fb-19dae85a8796",
+                  "name": "platform_iss",
+                  "type": "refund",
+                  "amount": -200000
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "course": {
+    "id": "cf4d0773-cde2-4a8d-9d83-506601887779",
+    "name": "UnitzDev course [Repeat]"
+  },
+  "tuition": {
+    "amount": "360K"
+  }
+}
