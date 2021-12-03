@@ -23,7 +23,7 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
 };
 
 exports.render = async ({ payload }, { ctxData, utils, helpers }) => {
-  const { _, moment, i18n } = helpers;
+  const { _, moment } = helpers;
 
   const advisor_id = _.get(payload, 'session.advisor_id');
   const service = _.get(payload, 'purchase.service_bookings.0');
@@ -32,8 +32,7 @@ exports.render = async ({ payload }, { ctxData, utils, helpers }) => {
 
   const userDisplayName = _.get(ctxData, 'user.profile.display_name');
 
-  const title = i18n.t('booking.notification.title', { userDisplayName:  });
-  // `Lịch hẹn với ${userDisplayName} đã bị huỷ.`);
+  const title = `Lịch hẹn với ${userDisplayName} đã bị huỷ.`;
   const body = `Gói ${helpers.formatCallDuration(duration)} - ${$start_at
     .utcOffset(await utils.getUserTimezone(advisor_id))
     .format(helpers.START_TIME_FORMAT)}`;
@@ -44,14 +43,15 @@ exports.render = async ({ payload }, { ctxData, utils, helpers }) => {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: title,
+          text:
+            "*1️⃣ Use the `/task` command*. Type `/task` followed by a short description of your tasks and I'll ask for a due date (if applicable). Try it out by using the `/task` command in this channel.",
         },
       },
       {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: 'This is a section {{session.advisor_id}} block with a button.',
+          text: 'This is a section block with a button.',
         },
         accessory: {
           type: 'button',
