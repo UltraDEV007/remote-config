@@ -83,8 +83,9 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
   };
 };
 
-exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient, hasuraClient } }) => {
+exports.effect = async ({ payload }, { ctxData, helpers, clients }) => {
   const { _ } = helpers;
+  const { slackClient, hasuraClient } = clients;
 
   const course = _.get(ctxData, 'course');
 
@@ -154,5 +155,17 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient,
       },
     ],
     channel: 'C02P4M8KFBK',
+  });
+
+  // send email effect
+  clients.sendgridClient.getClient().sendEmail(advisor_id, {
+    template: {
+      name: 'advisor.course.paid',
+    },
+    ...ctxData,
+    course,
+    tuition: {
+      amount: helpers.formatCurrencySSR(advisor_income),
+    },
   });
 };
