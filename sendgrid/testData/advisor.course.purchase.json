@@ -14,8 +14,54 @@
       "display_name": "Hung Vuong"
     }
   },
-  "purchase": null,
+  "purchase": {
+    "course_rooms": [
+      {
+        "id": "1e0e3d56-f6a0-48a1-9ff7-a9d5eedc6308"
+      },
+      {
+        "id": "e87c2a4a-b715-43d4-bb44-e17f5f32ed33"
+      },
+      {
+        "id": "4ccee926-dee1-4895-8439-9f3cbe376527"
+      },
+      {
+        "id": "ac848ed4-f2a4-46de-b490-ceb8ed96cca1"
+      },
+      {
+        "id": "ab2a8a2c-3713-48e0-a049-3b5fa4e05f72"
+      },
+      {
+        "id": "6833ea4c-3cb6-47fb-9daa-3bf41e84f39e"
+      },
+      {
+        "id": "2b2f3921-9a71-4461-aa1a-48b512749cc0"
+      },
+      {
+        "id": "038d7007-4c11-4cbe-b031-aadeccf19f54"
+      }
+    ],
+    "courses": [
+      {
+        "pricing_type": "per_session",
+        "price_amount": 1600000,
+        "price_currency": "vnd",
+        "per_amount": 8,
+        "per_unit": "per_session",
+        "course": {
+          "id": "cf4d0773-cde2-4a8d-9d83-506601887779",
+          "name": "UnitzDev course [Repeat]",
+          "description": "<p>Thay Hung chuyen luyen thi</p><p>Sieu toc</p>"
+        }
+      }
+    ]
+  },
+  "course": {
+    "id": "cf4d0773-cde2-4a8d-9d83-506601887779",
+    "name": "UnitzDev course [Repeat]",
+    "description": "<p>Thay Hung chuyen luyen thi</p><p>Sieu toc</p>"
+  },
   "tuition": {
-    "amount": "0"
+    "amount": "1.6M"
   }
 }
