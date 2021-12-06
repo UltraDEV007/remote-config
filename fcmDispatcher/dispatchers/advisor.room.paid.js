@@ -10,6 +10,7 @@ exports.getQuery = () => `
       id
       start_at
       end_at
+      course_session_id
       purchases {
         id
         user_id
@@ -31,6 +32,12 @@ exports.getQuery = () => `
     course: course_by_pk(id: $course_id) {
       id
       name
+      start_at
+      session_duration
+      sessions {
+        id
+        is_active
+      }
     }
   }
 `;
@@ -115,6 +122,13 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const advisor_income = _.sumBy(_.filter(statements, { name: 'advisor_income' }), 'amount');
   const platform_income = _.sumBy(_.filter(statements, { name: 'platform_income' }), 'amount');
 
+  const course_start_at = moment(_.get(course, 'start_at'));
+  const session_count = _.get(ctxData, 'course.sessions.length', 0);
+  const session_duration = _.get(ctxData, 'course.session_duration', 0);
+  const course_sessions = _.get(ctxData, 'course.sessions', []);
+  const current_session = _.get(room, 'course_session_id', '');
+  const session_at = _.findIndex(course_sessions, (item) => _.get(item, 'id') === current_session);
+
   await hasuraClient.getClient().request(
     `
     mutation upsertnotifevent($payload: jsonb, $type: String) {
@@ -178,7 +192,13 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
       name: 'advisor.room.paid',
     },
     ...ctxData,
-    course,
+    course: {
+      ..._.pick(course, ['id', 'name']),
+      start_at: course_start_at.utcOffset(await utils.getUserTimezone(advisor_id)).format(helpers.START_TIME_FORMAT),
+      session_count,
+      session_duration: helpers.formatCallDuration(session_duration),
+      session_at: session_at >= 0 ? session_at + 1 : session_at,
+    },
     tuition: {
       amount: helpers.formatCurrencySSR(advisor_income),
     },
