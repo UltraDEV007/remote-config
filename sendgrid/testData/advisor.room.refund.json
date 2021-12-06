@@ -1,0 +1,24 @@
+{
+  "template": {
+    "name": "advisor.room.refund"
+  },
+  "advisor": {
+    "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
+    "profile": {
+      "display_name": "Nam Phương"
+    }
+  },
+  "room": {
+    "id": "5aceb16c-17f9-4c39-8ee9-573fd7f57c79",
+    "start_at": "2021-12-01T03:00:04.45+00:00",
+    "end_at": "2021-12-01T03:30:04.45+00:00",
+    "purchases": []
+  },
+  "course": {
+    "id": "d8eef82e-1b43-4cfc-9d17-c88818eb7a1f",
+    "name": "Khoá học lập trình Javascript",
+    "start_at": "Wed 01/12 10:00",
+    "sessions_count": 2,
+    "sessions_duration": "30 phút"
+  }
+}
