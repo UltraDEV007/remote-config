@@ -10,6 +10,7 @@ exports.getQuery = () => `
       id
       start_at
       end_at
+      course_session_id
       purchases {
         id
         user_id
@@ -111,7 +112,7 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients: { hasur
   const session_count = _.get(ctxData, 'course.sessions.length', 0);
   const session_duration = _.get(ctxData, 'course.session_duration', 0);
   const course_sessions = _.get(ctxData, 'course.sessions', []);
-  const current_session = _.get(room, 'purchases.0.purchase.transaction_purchase.session_id', '');
+  const current_session = _.get(room, 'course_session_id', '');
   const session_at = _.findIndex(course_sessions, (item) => _.get(item, 'id') === current_session);
 
   await hasuraClient.getClient().request(

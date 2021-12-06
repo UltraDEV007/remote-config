@@ -10,10 +10,35 @@ exports.getQuery = () => `
       id
       start_at
       end_at
+      course_session_id
+      purchases {
+        id
+        user_id
+        purchase_id
+        purchase {
+          transaction_purchase {
+            transaction {
+              statement {
+                id
+                name
+                type
+                amount
+              }
+              session_id
+            }
+          }
+        }
+      }
     }
     course: course_by_pk(id: $course_id) {
       id
       name
+      start_at
+      session_duration
+      sessions {
+        id
+        is_active
+      }
     }
   }
 `;
@@ -79,4 +104,32 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils, clients: { rou
       },
     },
   };
+};
+
+exports.effect = async ({ payload }, { ctxData, utils, helpers, clients: { sendgridClient } }) => {
+  const { _, moment } = helpers;
+
+  const advisor_id = _.get(payload, 'course.advisor_id');
+  const course = _.get(ctxData, 'course');
+  const room = _.get(ctxData, 'room');
+  const $start_at = moment(_.get(room, 'start_at'));
+  const session_count = _.get(ctxData, 'course.sessions.length', 0);
+  const session_duration = _.get(ctxData, 'course.session_duration', 0);
+  const course_sessions = _.get(ctxData, 'course.sessions', []);
+  const current_session = _.get(room, 'course_session_id', '');
+  const session_at = _.findIndex(course_sessions, (item) => _.get(item, 'id') === current_session);
+
+  sendgridClient.getClient().sendEmail(advisor_id, {
+    template: {
+      name: 'advisor.room.reminder',
+    },
+    ...ctxData,
+    course: {
+      ..._.pick(course, ['id', 'name']),
+      start_at: $start_at.utcOffset(await utils.getUserTimezone(advisor_id)).format(helpers.START_TIME_FORMAT),
+      session_count,
+      session_duration: helpers.formatCallDuration(session_duration),
+      session_at: session_at >= 0 ? session_at + 1 : session_at,
+    },
+  });
 };
