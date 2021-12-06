@@ -23,6 +23,7 @@ exports.getQuery = () => `
                 type
                 amount
               }
+              session_id
             }
           }
         }
@@ -31,6 +32,12 @@ exports.getQuery = () => `
     course: course_by_pk(id: $course_id) {
       id
       name
+      start_at
+      session_duration
+      sessions {
+        id
+        is_active
+      }
     }
   }
 `;
@@ -48,7 +55,7 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
 
   const course = _.get(ctxData, 'course');
   const room = _.get(ctxData, 'room');
-  const $start_at = moment(_.get(room, 'start_at'));
+  const $start_at = moment(_.get(course, 'start_at'));
   const advisor_id = _.get(ctxData, 'advisor.id');
 
   const courseDisplayName = `${_.get(course, 'name')}(${$start_at
@@ -94,10 +101,18 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   };
 };
 
-exports.effect = async ({ payload }, { helpers, clients: { hasuraClient } }) => {
-  const { _ } = helpers;
+exports.effect = async ({ payload }, { ctxData, utils, helpers, clients: { hasuraClient, sendgridClient } }) => {
+  const { _, moment } = helpers;
 
   const advisor_id = _.get(payload, 'course.advisor_id');
+  const course = _.get(ctxData, 'course');
+  const room = _.get(ctxData, 'room');
+  const $start_at = moment(_.get(room, 'start_at'));
+  const session_count = _.get(ctxData, 'course.sessions.length', 0);
+  const session_duration = _.get(ctxData, 'course.session_duration', 0);
+  const course_sessions = _.get(ctxData, 'course.sessions', []);
+  const current_session = _.get(room, 'purchases.0.purchase.transaction_purchase.session_id', '');
+  const session_at = _.findIndex(course_sessions, (item) => _.get(item, 'id') === current_session);
 
   await hasuraClient.getClient().request(
     `
@@ -118,4 +133,18 @@ exports.effect = async ({ payload }, { helpers, clients: { hasuraClient } }) => 
       payload,
     }
   );
+
+  sendgridClient.getClient().sendEmail(advisor_id, {
+    template: {
+      name: 'advisor.room.refund',
+    },
+    ...ctxData,
+    course: {
+      ..._.pick(course, ['id', 'name']),
+      start_at: $start_at.utcOffset(await utils.getUserTimezone(advisor_id)).format(helpers.START_TIME_FORMAT),
+      session_count,
+      session_duration: helpers.formatCallDuration(session_duration),
+      session_at: session_at >= 0 ? session_at + 1 : session_at,
+    },
+  });
 };
