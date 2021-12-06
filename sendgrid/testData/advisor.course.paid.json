@@ -3,146 +3,19 @@
     "name": "advisor.course.paid"
   },
   "advisor": {
-    "id": "PdOJWFBgNPUEMhX1JlsDm7zWy012",
+    "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
     "profile": {
-      "display_name": "Hung Tran"
+      "display_name": "Nam Phương"
     }
   },
   "course": {
-    "id": "744e3186-6919-49c5-b602-511e1a0cd79e",
-    "name": "[DEV] Khoa hoc tron goi 1 buoi",
-    "purchases": [
-      {
-        "purchase": {
-          "transaction_purchase": {
-            "transaction": {
-              "statement": [
-                {
-                  "id": "df68d442-b415-495f-8e57-bc9d2ea018e0",
-                  "name": "tuition",
-                  "type": "payment",
-                  "amount": -700000
-                },
-                {
-                  "id": "f4207550-660f-416d-862a-837f58880d0e",
-                  "name": "advisor_income",
-                  "type": "payment",
-                  "amount": 630000
-                },
-                {
-                  "id": "888d1282-3e5f-4f27-965a-860b01ae15b3",
-                  "name": "advisor_tax",
-                  "type": null,
-                  "amount": 0
-                },
-                {
-                  "id": "e77748c0-68d0-4ec0-82a5-64d4459e0ee1",
-                  "name": "platform_income",
-                  "type": "charge_payment",
-                  "amount": 70000
-                },
-                {
-                  "id": "d9857fcf-2734-4294-b8db-cca69b5d5463",
-                  "name": "platform_tax",
-                  "type": null,
-                  "amount": 0
-                },
-                {
-                  "id": "2fb556b4-8e4b-48a2-be2f-cde059f62305",
-                  "name": "subtotal",
-                  "type": null,
-                  "amount": 700000
-                },
-                {
-                  "id": "9af87c82-aa1c-48cc-8ebd-fd1f492f0cc8",
-                  "name": "tax",
-                  "type": null,
-                  "amount": 0
-                },
-                {
-                  "id": "6752c04e-24cb-4958-80e7-470e1215757c",
-                  "name": "discount",
-                  "type": null,
-                  "amount": 0
-                },
-                {
-                  "id": "3d11d405-669f-4b96-8fb0-c3283d8f5cbd",
-                  "name": "total",
-                  "type": null,
-                  "amount": 700000
-                }
-              ]
-            }
-          }
-        }
-      },
-      {
-        "purchase": {
-          "transaction_purchase": {
-            "transaction": {
-              "statement": [
-                {
-                  "id": "5d073a31-e035-480a-a45b-f28bd66f4b4e",
-                  "name": "total",
-                  "type": null,
-                  "amount": 700000
-                },
-                {
-                  "id": "596754ec-fae4-4b5c-ad7f-7d99220ad951",
-                  "name": "tuition",
-                  "type": "payment",
-                  "amount": -700000
-                },
-                {
-                  "id": "9e96de0e-9fea-48fa-9707-a26a5b2b3330",
-                  "name": "advisor_income",
-                  "type": "payment",
-                  "amount": 630000
-                },
-                {
-                  "id": "6d3e12a3-e8c5-49a4-abce-54f5a2471ef6",
-                  "name": "advisor_tax",
-                  "type": null,
-                  "amount": 0
-                },
-                {
-                  "id": "078bc274-1f19-4515-9146-dcfac375d508",
-                  "name": "platform_income",
-                  "type": "charge_payment",
-                  "amount": 70000
-                },
-                {
-                  "id": "6fd7271d-092e-4f15-a188-9f02c1b4d270",
-                  "name": "platform_tax",
-                  "type": null,
-                  "amount": 0
-                },
-                {
-                  "id": "8e9b760d-759d-41f4-b30b-89c92519061e",
-                  "name": "subtotal",
-                  "type": null,
-                  "amount": 700000
-                },
-                {
-                  "id": "163fa44f-906f-4b31-b892-84f518842e6b",
-                  "name": "tax",
-                  "type": null,
-                  "amount": 0
-                },
-                {
-                  "id": "adfe31ec-af18-4e83-baf8-7051eb87feec",
-                  "name": "discount",
-                  "type": null,
-                  "amount": 0
-                }
-              ]
-            }
-          }
-        }
-      }
-    ]
+    "id": "6ad222b5-5d40-40cd-b1e4-1f320d3febbd",
+    "name": "Khoá học 1 buổi ",
+    "start_at": "Thu 02/12 00:00",
+    "session_count": 1,
+    "session_duration": "30 phút"
   },
   "tuition": {
-    "amount": "1.3M"
+    "amount": "90K"
   }
 }
