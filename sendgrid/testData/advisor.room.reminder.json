@@ -12,6 +12,7 @@
     "id": "bb948bd2-7de1-48c0-8ab0-e78e2bff3fbf",
     "start_at": "2021-12-01T04:30:22.127+00:00",
     "end_at": "2021-12-01T05:00:22.127+00:00",
+    "course_session_id": "d7da8da8-e3f2-4a11-ab49-fe7b8fc72d70",
     "purchases": [
       {
         "id": "20018469-f8b2-47e3-97d5-804670c81be4",
@@ -157,6 +158,6 @@
     "start_at": "Wed 01/12 11:30",
     "session_count": 2,
     "session_duration": "30 phút",
-    "session_at": -1
+    "session_at": 2
   }
 }
