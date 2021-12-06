@@ -3,24 +3,51 @@
     "name": "advisor.room.refund"
   },
   "advisor": {
-    "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
+    "id": "DNRwzfAoM6NPY4v2j5w4yuRvk6l2",
     "profile": {
-      "display_name": "Nam Phương"
+      "display_name": "Vy Nguyễn"
     }
   },
   "room": {
-    "id": "5aceb16c-17f9-4c39-8ee9-573fd7f57c79",
-    "start_at": "2021-12-01T03:00:04.45+00:00",
-    "end_at": "2021-12-01T03:30:04.45+00:00",
-    "course_session_id": "9b4fe42c-64da-4979-a646-4801d5f7d83a",
-    "purchases": []
+    "id": "4040ebed-c696-4b7f-ae7a-4c3e9ab4b0b2",
+    "start_at": "2021-12-06T09:45:00.428+00:00",
+    "end_at": "2021-12-06T10:00:00.428+00:00",
+    "course_session_id": "6c96f87c-bee8-4848-afab-d4118e2c0e7c",
+    "purchases": [
+      {
+        "id": "00102b10-623a-4345-a4a4-f0de4b45e89c",
+        "user_id": "cGNygB3hEQNNWWWVOOO4ZhFpt0n2",
+        "purchase_id": "fa0ad9c1-28f5-4ffa-88d6-c19d0b458238",
+        "purchase": {
+          "transaction_purchase": {
+            "transaction": {
+              "statement": [
+                {
+                  "id": "0cb86de6-8a37-4da0-a214-d7fb0445c5f6",
+                  "name": "refund",
+                  "type": "refund",
+                  "amount": 20000
+                },
+                {
+                  "id": "4604d231-4bba-48aa-8a18-8e9d6069e9fb",
+                  "name": "platform_iss",
+                  "type": "refund",
+                  "amount": -20000
+                }
+              ],
+              "session_id": "4040ebed-c696-4b7f-ae7a-4c3e9ab4b0b2"
+            }
+          }
+        }
+      }
+    ]
   },
   "course": {
-    "id": "d8eef82e-1b43-4cfc-9d17-c88818eb7a1f",
-    "name": "Khoá học lập trình Javascript",
-    "start_at": "Wed 01/12 00:00",
-    "session_count": 2,
-    "session_duration": "30 phút",
+    "id": "664d58e5-9230-4ae0-adc2-3cd9777f77b6",
+    "name": "Categories",
+    "start_at": "Mon 06/12 00:00",
+    "session_count": 1,
+    "session_duration": "15 phút",
     "session_at": 1
   }
 }
