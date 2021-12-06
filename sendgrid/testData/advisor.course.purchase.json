@@ -3,24 +3,54 @@
     "name": "advisor.course.purchase"
   },
   "user": {
-    "id": "cGNygB3hEQNNWWWVOOO4ZhFpt0n2",
+    "id": "fH3k96KDlzYx42whT6Mfu5LODQv2",
     "profile": {
-      "display_name": "Test 2"
+      "display_name": "Nhat Dev"
     }
   },
   "advisor": {
-    "id": "DNRwzfAoM6NPY4v2j5w4yuRvk6l2",
+    "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
     "profile": {
-      "display_name": "Vy Nguyễn"
+      "display_name": "Nam Phương"
     }
   },
-  "purchase": null,
+  "purchase": {
+    "course_rooms": [
+      {
+        "id": "a26f30ba-f14c-4fe8-b12d-37be31c18017"
+      }
+    ],
+    "courses": [
+      {
+        "pricing_type": "per_session",
+        "price_amount": 100000,
+        "price_currency": "vnd",
+        "per_amount": 1,
+        "per_unit": "per_session",
+        "course": {
+          "id": "ea2f8635-6aeb-4bd5-871a-eae3747f503d",
+          "name": "Khoa Hoc ABC",
+          "description": "<p>Khoa Hoc ABC</p>",
+          "start_at": "2021-12-05T17:00:00+00:00",
+          "session_duration": 1800,
+          "sessions": [
+            {
+              "id": "9c393a4e-04e8-4163-ba21-021a7a3a5d6a",
+              "is_active": true
+            }
+          ]
+        }
+      }
+    ]
+  },
   "course": {
-    "start_at": "Mon 06/12 16:08",
-    "session_count": 0,
-    "session_duration": "0 phút"
+    "id": "ea2f8635-6aeb-4bd5-871a-eae3747f503d",
+    "name": "Khoa Hoc ABC",
+    "start_at": "Mon 06/12 00:00",
+    "session_count": 1,
+    "session_duration": "30 phút"
   },
   "tuition": {
-    "amount": "0"
+    "amount": "100K"
   }
 }
