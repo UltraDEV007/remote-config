@@ -18,7 +18,7 @@
   "course": {
     "id": "d8eef82e-1b43-4cfc-9d17-c88818eb7a1f",
     "name": "Khoá học lập trình Javascript",
-    "start_at": "Wed 01/12 10:00",
+    "start_at": "Wed 01/12 00:00",
     "session_count": 2,
     "session_duration": "30 phút",
     "session_at": 1
