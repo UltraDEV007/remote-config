@@ -1,0 +1,25 @@
+{
+  "template": {
+    "name": "advisor.room.connect"
+  },
+  "advisor": {
+    "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
+    "profile": {
+      "display_name": "Nam Phương"
+    }
+  },
+  "room": {
+    "id": "1f26d981-9c57-4ad5-9629-25fa1c179bae",
+    "start_at": "2021-12-06T07:45:00+00:00",
+    "end_at": "2021-12-06T08:15:00+00:00",
+    "course_session_id": "6f5dfba8-5c19-426e-a3f1-e9b7a2a70737"
+  },
+  "course": {
+    "id": "cf4aa2a3-3893-4df3-be73-6860e0b66d20",
+    "name": "Khoá học mobile 1",
+    "start_at": "Thu 02/12 00:00",
+    "session_count": 5,
+    "session_duration": "30 phút",
+    "session_at": 1
+  }
+}
