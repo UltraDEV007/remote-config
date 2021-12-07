@@ -14,13 +14,54 @@
       "display_name": "Vy Nguyễn"
     }
   },
-  "purchase": null,
+  "purchase": {
+    "course_rooms": [
+      {
+        "id": "f5ce71e1-f2e3-45ac-8cf6-9efd69cb4561"
+      },
+      {
+        "id": "4b4e14a4-2092-4325-80c7-30c3b542b33d"
+      },
+      {
+        "id": "f86b20ae-33e5-4e77-a1ce-9b6ce40edd9f"
+      }
+    ],
+    "courses": [
+      {
+        "pricing_type": "per_course",
+        "price_amount": 20000,
+        "price_currency": "vnd",
+        "per_amount": 1,
+        "per_unit": "per_course",
+        "course": {
+          "id": "e0edbd19-81bc-4d8e-9a6f-cb9602a13999",
+          "name": "How to eat cup cake",
+          "description": "<p>....</p>",
+          "start_at": "2021-12-06T17:00:00+00:00",
+          "session_duration": 900,
+          "sessions": [
+            {
+              "id": "8d21a296-ba3d-4417-82c3-dba2b7124b38",
+              "is_active": true
+            }
+          ],
+          "first_room": [
+            {
+              "start_at": "2021-12-07T10:00:00+00:00"
+            }
+          ]
+        }
+      }
+    ]
+  },
   "course": {
-    "first_session_start": "Thứ ba 07/12 17:07",
-    "session_count": 0,
-    "session_duration": "0 phút"
+    "id": "e0edbd19-81bc-4d8e-9a6f-cb9602a13999",
+    "name": "How to eat cup cake",
+    "first_session_start": "Thứ ba 07/12 17:00",
+    "session_count": 1,
+    "session_duration": "15 phút"
   },
   "tuition": {
-    "amount": "0"
+    "amount": "20K"
   }
 }
