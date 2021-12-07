@@ -9,33 +9,33 @@
     }
   },
   "room": {
-    "id": "4040ebed-c696-4b7f-ae7a-4c3e9ab4b0b2",
-    "start_at": "2021-12-06T09:45:00.428+00:00",
-    "end_at": "2021-12-06T10:00:00.428+00:00",
-    "course_session_id": "6c96f87c-bee8-4848-afab-d4118e2c0e7c",
+    "id": "30871797-859e-4d96-b254-f60f4ebe6fa6",
+    "start_at": "2021-12-07T08:30:50.408+00:00",
+    "end_at": "2021-12-07T08:45:50.408+00:00",
+    "course_session_id": "fe1634ff-dcb2-490a-82fc-8278c7578a57",
     "purchases": [
       {
-        "id": "00102b10-623a-4345-a4a4-f0de4b45e89c",
+        "id": "fba1d340-4d2b-42b0-9fa4-2737c8d738ea",
         "user_id": "cGNygB3hEQNNWWWVOOO4ZhFpt0n2",
-        "purchase_id": "fa0ad9c1-28f5-4ffa-88d6-c19d0b458238",
+        "purchase_id": "2fdd883a-782c-4e4a-9a07-914093ac56de",
         "purchase": {
           "transaction_purchase": {
             "transaction": {
               "statement": [
                 {
-                  "id": "0cb86de6-8a37-4da0-a214-d7fb0445c5f6",
+                  "id": "60a6a9e2-b9f2-403b-948c-726d2a43c30a",
                   "name": "refund",
                   "type": "refund",
                   "amount": 20000
                 },
                 {
-                  "id": "4604d231-4bba-48aa-8a18-8e9d6069e9fb",
+                  "id": "27f40e43-e82e-4493-a2ab-6e3adc56bc21",
                   "name": "platform_iss",
                   "type": "refund",
                   "amount": -20000
                 }
               ],
-              "session_id": "4040ebed-c696-4b7f-ae7a-4c3e9ab4b0b2"
+              "session_id": "30871797-859e-4d96-b254-f60f4ebe6fa6"
             }
           }
         }
@@ -43,11 +43,11 @@
     ]
   },
   "course": {
-    "id": "664d58e5-9230-4ae0-adc2-3cd9777f77b6",
-    "name": "Categories",
-    "start_at": "Thứ hai 06/12 16:45",
-    "session_count": 1,
+    "id": "cabaf192-ff07-4da1-99b0-d219065d6b66",
+    "name": "How to use Skype",
+    "start_at": "Thứ ba 07/12 15:30",
+    "session_count": 100000,
     "session_duration": "15 phút",
-    "session_at": "Thứ hai 06/12 16:45"
+    "session_at": "Thứ ba 07/12 15:30"
   }
 }
