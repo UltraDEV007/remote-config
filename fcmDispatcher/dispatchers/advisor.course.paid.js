@@ -198,7 +198,7 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients }) => {
         first_session_start
           .locale('vi')
           .utcOffset(await utils.getUserTimezone(advisor_id))
-          .format(helpers.START_TIME_FORMAT)
+          .format(helpers.START_TIME_FULL_FORMAT)
       ),
       start_at: session_at,
       session_count,

@@ -202,7 +202,7 @@ exports.effect = async (
         first_session_start
           .locale('vi')
           .utcOffset(await utils.getUserTimezone(advisor_id))
-          .format(helpers.START_TIME_FORMAT)
+          .format(helpers.START_TIME_FULL_FORMAT)
       ),
       session_count,
       session_duration: helpers.formatCallDuration(session_duration),

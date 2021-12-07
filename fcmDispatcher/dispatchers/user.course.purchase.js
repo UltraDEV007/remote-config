@@ -26,6 +26,15 @@ exports.getQuery = () => `
           id
           name
           description
+          start_at
+          session_duration
+          sessions {
+            id
+            is_active
+          }
+          first_room: rooms(order_by: {start_at: asc}, limit: 1) {
+            start_at
+          }
         }
       }
     }
@@ -93,11 +102,20 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
   };
 };
 
-exports.effect = async ({ payload }, { ctxData, helpers, clients: { hasuraClient, sendgridClient } }) => {
-  const { _ } = helpers;
+exports.effect = async ({ payload }, { ctxData, helpers, utils, clients: { hasuraClient, sendgridClient } }) => {
+  const { _, moment } = helpers;
 
   const user_id = _.get(ctxData, 'user.id');
   const course = _.get(ctxData, 'purchase.courses.0.course');
+  const session_count = _.get(course, 'sessions.length', 0);
+  const session_duration = _.get(course, 'session_duration', 0);
+  const first_session_start = moment(_.get(course, 'first_room.0.start_at'));
+  const advisor_id = _.get(ctxData, 'advisor.id');
+
+  const per_unit = _.get(ctxData, 'purchase.courses.0.per_unit');
+  const per_amount = _.get(ctxData, 'purchase.courses.0.per_amount');
+
+  const payment_count = per_unit === 'per_session' ? `${per_amount}` : 'Trọn gói';
 
   await hasuraClient.getClient().request(
     `
@@ -125,6 +143,20 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients: { hasuraClient
       name: 'user.course.purchase',
     },
     ...ctxData,
-    course,
+    course: {
+      ..._.pick(course, ['id', 'name']),
+      first_session_start: _.capitalize(
+        first_session_start
+          .locale('vi')
+          .utcOffset(await utils.getUserTimezone(advisor_id))
+          .format(helpers.START_TIME_FULL_FORMAT)
+      ),
+
+      session_count,
+      session_duration: helpers.formatCallDuration(session_duration),
+    },
+    tuition: {
+      payment_count,
+    },
   });
 };
