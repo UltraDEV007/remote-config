@@ -24,6 +24,12 @@ exports.getQuery = () => `
                 type
                 amount
               }
+              user {
+                profile {
+                  display_name
+                  id
+                }
+              }
             }
           }
         }
@@ -119,15 +125,19 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
     .format(helpers.START_TIME_FORMAT)})`;
 
   const statements = helpers.flattenGet(room, 'purchases.purchase.transaction_purchase.transaction.statement');
+  const users = helpers.flattenGet(room, 'purchases.purchase.transaction_purchase.transaction.user');
+
   const advisor_income = _.sumBy(_.filter(statements, { name: 'advisor_income' }), 'amount');
   const platform_income = _.sumBy(_.filter(statements, { name: 'platform_income' }), 'amount');
 
-  const course_start_at = moment(_.get(course, 'start_at'));
   const session_count = _.get(ctxData, 'course.sessions.length', 0);
   const session_duration = _.get(ctxData, 'course.session_duration', 0);
-  const course_sessions = _.get(ctxData, 'course.sessions', []);
-  const current_session = _.get(room, 'course_session_id', '');
-  const session_at = _.findIndex(course_sessions, (item) => _.get(item, 'id') === current_session);
+  const session_at = _.capitalize(
+    $start_at
+      .locale('vi')
+      .utcOffset(await utils.getUserTimezone(advisor_id))
+      .format(helpers.START_TIME_FULL_FORMAT)
+  );
 
   await hasuraClient.getClient().request(
     `
@@ -194,13 +204,14 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
     ...ctxData,
     course: {
       ..._.pick(course, ['id', 'name']),
-      start_at: course_start_at.utcOffset(await utils.getUserTimezone(advisor_id)).format(helpers.START_TIME_FORMAT),
+      start_at: session_at,
       session_count,
       session_duration: helpers.formatCallDuration(session_duration),
-      session_at: session_at >= 0 ? session_at + 1 : session_at,
+      session_at,
     },
     tuition: {
       amount: helpers.formatCurrencySSR(advisor_income),
+      pay_from: _.map(users, (user) => _.get(user, 'profile.display_name')).join(','),
     },
   });
 };

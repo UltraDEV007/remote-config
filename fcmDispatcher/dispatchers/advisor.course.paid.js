@@ -9,6 +9,15 @@ exports.getQuery = () => `
     course: course_by_pk(id: $course_id) {
       id
       name
+      start_at
+      session_duration
+      sessions {
+        id
+        is_active
+      }
+      first_room: rooms(order_by: {start_at: asc}, limit: 1) {
+        start_at
+      }
       purchases {
         purchase {
           transaction_purchase {
@@ -18,6 +27,12 @@ exports.getQuery = () => `
                 name
                 type
                 amount
+              }
+              user {
+                profile {
+                  display_name
+                  id
+                }
               }
             }
           }
@@ -83,8 +98,8 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
   };
 };
 
-exports.effect = async ({ payload }, { ctxData, helpers, clients }) => {
-  const { _ } = helpers;
+exports.effect = async ({ payload }, { ctxData, utils, helpers, clients }) => {
+  const { _, moment } = helpers;
   const { slackClient, hasuraClient } = clients;
 
   const course = _.get(ctxData, 'course');
@@ -96,6 +111,20 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients }) => {
   const statements = helpers.flattenGet(course, 'purchases.purchase.transaction_purchase.transaction.statement');
   const advisor_income = _.sumBy(_.filter(statements, { name: 'advisor_income' }), 'amount');
   const platform_income = _.sumBy(_.filter(statements, { name: 'platform_income' }), 'amount');
+
+  const users = helpers.flattenGet(course, 'purchases.purchase.transaction_purchase.transaction.user');
+
+  const $start_at = moment(_.get(course, 'start_at'));
+  const session_count = _.get(course, 'sessions.length', 0);
+  const session_duration = _.get(course, 'session_duration', 0);
+  const first_session_start = moment(_.get(course, 'first_room.0.start_at'));
+
+  const session_at = _.capitalize(
+    $start_at
+      .locale('vi')
+      .utcOffset(await utils.getUserTimezone(advisor_id))
+      .format(helpers.START_TIME_FULL_FORMAT)
+  );
 
   await hasuraClient.getClient().request(
     `
@@ -163,9 +192,21 @@ exports.effect = async ({ payload }, { ctxData, helpers, clients }) => {
       name: 'advisor.course.paid',
     },
     ...ctxData,
-    course,
+    course: {
+      ..._.pick(course, ['id', 'name']),
+      first_session_start: _.capitalize(
+        first_session_start
+          .locale('vi')
+          .utcOffset(await utils.getUserTimezone(advisor_id))
+          .format(helpers.START_TIME_FORMAT)
+      ),
+      start_at: session_at,
+      session_count,
+      session_duration: helpers.formatCallDuration(session_duration),
+    },
     tuition: {
       amount: helpers.formatCurrencySSR(advisor_income),
+      pay_from: _.map(users, (user) => _.get(user, 'profile.display_name')).join(','),
     },
   });
 };
