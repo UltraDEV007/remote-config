@@ -52,7 +52,11 @@
             {
               "id": "8da5e61b-2e97-466b-ab8d-c7e9cda0d20a",
               "price_amount": 100000,
-              "is_active": true
+              "is_active": true,
+              "purchase": {
+                "statement": [],
+                "user_id": "fH3k96KDlzYx42whT6Mfu5LODQv2"
+              }
             }
           ]
         }
