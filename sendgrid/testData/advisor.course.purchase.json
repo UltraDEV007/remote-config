@@ -39,6 +39,7 @@
           "description": "<p>....</p>",
           "start_at": "2021-12-06T17:00:00+00:00",
           "session_duration": 900,
+          "session_occurence": 3,
           "sessions": [
             {
               "id": "8d21a296-ba3d-4417-82c3-dba2b7124b38",
@@ -58,7 +59,7 @@
     "id": "e0edbd19-81bc-4d8e-9a6f-cb9602a13999",
     "name": "How to eat cup cake",
     "first_session_start": "Thứ ba 07/12 17:00",
-    "session_count": 1,
+    "session_count": 3,
     "session_duration": "15 phút"
   },
   "tuition": {
