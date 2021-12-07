@@ -35,6 +35,18 @@ exports.getQuery = () => `
           first_room: rooms(order_by: {start_at: asc}, limit: 1) {
             start_at
           }
+          purchases(where: {purchase: {user_id: {_eq: $user_id}}}) {
+            id
+            price_amount
+            is_active
+            purchase {
+              statement {
+                amount
+                id
+              }
+              user_id
+            }
+          }
         }
       }
     }
@@ -115,7 +127,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients: { hasur
   const per_unit = _.get(ctxData, 'purchase.courses.0.per_unit');
   const per_amount = _.get(ctxData, 'purchase.courses.0.per_amount');
 
-  const payment_count = per_unit === 'per_session' ? `${per_amount}` : 'Trọn gói';
+  const payment_count = per_unit === 'per_session' ? _.get(course, 'purchases.length') : 'Trọn gói';
 
   await hasuraClient.getClient().request(
     `
