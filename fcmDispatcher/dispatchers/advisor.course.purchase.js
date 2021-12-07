@@ -28,6 +28,7 @@ exports.getQuery = () => `
           description
           start_at
           session_duration
+          session_occurence
           sessions {
             id
             is_active
@@ -120,7 +121,7 @@ exports.effect = async (
   const courseDisplayName = _.get(course, 'name');
 
   const $start_at = moment(_.get(course, 'start_at'));
-  const session_count = _.get(course, 'sessions.length', 0);
+  const session_count = _.get(course, 'session_occurence', 0);
   const session_duration = _.get(course, 'session_duration', 0);
 
   const first_session_start = moment(_.get(course, 'first_room.0.start_at'));
@@ -204,7 +205,7 @@ exports.effect = async (
           .utcOffset(await utils.getUserTimezone(advisor_id))
           .format(helpers.START_TIME_FULL_FORMAT)
       ),
-      session_count,
+      session_count: helpers.formatSessionOccurence(session_count),
       session_duration: helpers.formatCallDuration(session_duration),
     },
     tuition: {

@@ -28,6 +28,7 @@ exports.getQuery = () => `
           description
           start_at
           session_duration
+          session_occurence
           sessions {
             id
             is_active
@@ -119,7 +120,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients: { hasur
 
   const user_id = _.get(ctxData, 'user.id');
   const course = _.get(ctxData, 'purchase.courses.0.course');
-  const session_count = _.get(course, 'sessions.length', 0);
+  const session_count = _.get(course, 'session_occurence', 0);
   const session_duration = _.get(course, 'session_duration', 0);
   const first_session_start = moment(_.get(course, 'first_room.0.start_at'));
   const advisor_id = _.get(ctxData, 'advisor.id');
@@ -164,7 +165,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients: { hasur
           .format(helpers.START_TIME_FULL_FORMAT)
       ),
 
-      session_count,
+      session_count: helpers.formatSessionOccurence(session_count),
       session_duration: helpers.formatCallDuration(session_duration),
     },
     tuition: {

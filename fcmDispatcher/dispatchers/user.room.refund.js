@@ -45,6 +45,7 @@ exports.getQuery = () => `
       name
       start_at
       session_duration
+      session_occurence
       sessions {
         id
         is_active
@@ -150,7 +151,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
       .utcOffset(await utils.getUserTimezone(advisor_id))
       .format(helpers.START_TIME_FULL_FORMAT)
   );
-  const session_count = _.get(ctxData, 'course.sessions.length', 0);
+  const session_count = _.get(ctxData, 'course.session_occurence', 0);
   const session_duration = _.get(ctxData, 'course.session_duration', 0);
 
   const per_unit = _.get(course, 'per_unit');
@@ -230,7 +231,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
     course: {
       ..._.pick(course, ['id', 'name']),
       session_at,
-      session_count,
+      session_count: helpers.formatSessionOccurence(session_count),
       session_duration: helpers.formatCallDuration(session_duration),
     },
     tuition: {

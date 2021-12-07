@@ -35,6 +35,7 @@ exports.getQuery = () => `
       name
       start_at
       session_duration
+      session_occurence
       sessions {
         id
         is_active
@@ -109,7 +110,7 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients: { hasur
   const course = _.get(ctxData, 'course');
   const room = _.get(ctxData, 'room');
   const $start_at = moment(_.get(room, 'start_at'));
-  const session_count = _.get(ctxData, 'course.sessions.length', 0);
+  const session_count = _.get(ctxData, 'course.session_occurence', 0);
   const session_duration = _.get(ctxData, 'course.session_duration', 0);
   const session_at = _.capitalize(
     $start_at
@@ -146,7 +147,7 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients: { hasur
     course: {
       ..._.pick(course, ['id', 'name']),
       start_at: session_at,
-      session_count,
+      session_count: helpers.formatSessionOccurence(session_count),
       session_duration: helpers.formatCallDuration(session_duration),
       session_at,
     },

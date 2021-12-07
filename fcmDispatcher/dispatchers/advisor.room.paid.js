@@ -40,6 +40,7 @@ exports.getQuery = () => `
       name
       start_at
       session_duration
+      session_occurence
       sessions {
         id
         is_active
@@ -130,7 +131,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const advisor_income = _.sumBy(_.filter(statements, { name: 'advisor_income' }), 'amount');
   const platform_income = _.sumBy(_.filter(statements, { name: 'platform_income' }), 'amount');
 
-  const session_count = _.get(ctxData, 'course.sessions.length', 0);
+  const session_count = _.get(ctxData, 'course.session_occurence', 0);
   const session_duration = _.get(ctxData, 'course.session_duration', 0);
   const session_at = _.capitalize(
     $start_at
@@ -205,7 +206,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
     course: {
       ..._.pick(course, ['id', 'name']),
       start_at: session_at,
-      session_count,
+      session_count: helpers.formatSessionOccurence(session_count),
       session_duration: helpers.formatCallDuration(session_duration),
       session_at,
     },

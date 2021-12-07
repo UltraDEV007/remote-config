@@ -11,6 +11,7 @@ exports.getQuery = () => `
       name
       start_at
       session_duration
+      session_occurence
       sessions {
         id
         is_active
@@ -115,7 +116,7 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients }) => {
   const users = helpers.flattenGet(course, 'purchases.purchase.transaction_purchase.transaction.user');
 
   const $start_at = moment(_.get(course, 'start_at'));
-  const session_count = _.get(course, 'sessions.length', 0);
+  const session_count = _.get(course, 'session_occurence', 0);
   const session_duration = _.get(course, 'session_duration', 0);
   const first_session_start = moment(_.get(course, 'first_room.0.start_at'));
 
@@ -201,7 +202,7 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients }) => {
           .format(helpers.START_TIME_FULL_FORMAT)
       ),
       start_at: session_at,
-      session_count,
+      session_count: helpers.formatSessionOccurence(session_count),
       session_duration: helpers.formatCallDuration(session_duration),
     },
     tuition: {
