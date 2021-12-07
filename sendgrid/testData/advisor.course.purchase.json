@@ -37,6 +37,15 @@
             {
               "id": "9c393a4e-04e8-4163-ba21-021a7a3a5d6a",
               "is_active": true
+            },
+            {
+              "id": "44c7c69f-11bb-47d1-b3e4-215c370afc26",
+              "is_active": true
+            }
+          ],
+          "first_room": [
+            {
+              "start_at": "2021-12-06T07:00:00.141+00:00"
             }
           ]
         }
@@ -46,8 +55,8 @@
   "course": {
     "id": "ea2f8635-6aeb-4bd5-871a-eae3747f503d",
     "name": "Khoa Hoc ABC",
-    "start_at": "Mon 06/12 00:00",
-    "session_count": 1,
+    "first_session_start": "T2 06/12 14:00",
+    "session_count": 2,
     "session_duration": "30 phút"
   },
   "tuition": {
