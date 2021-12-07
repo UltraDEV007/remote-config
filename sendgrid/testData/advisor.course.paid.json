@@ -9,13 +9,14 @@
     }
   },
   "course": {
-    "id": "6ad222b5-5d40-40cd-b1e4-1f320d3febbd",
-    "name": "Khoá học 1 buổi ",
+    "id": "cf4aa2a3-3893-4df3-be73-6860e0b66d20",
+    "name": "Khoá học mobile 1",
     "start_at": "Thu 02/12 00:00",
-    "session_count": 1,
+    "session_count": 5,
     "session_duration": "30 phút"
   },
   "tuition": {
-    "amount": "90K"
+    "amount": "90K",
+    "pay_from": "Nhat Dev"
   }
 }
