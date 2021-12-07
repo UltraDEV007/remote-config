@@ -3,63 +3,24 @@
     "name": "user.course.purchase"
   },
   "user": {
-    "id": "fH3k96KDlzYx42whT6Mfu5LODQv2",
+    "id": "CE642sgqc9gcqK57EMVFb4joBiZ2",
     "profile": {
-      "display_name": "Nhat Dev"
+      "display_name": "Hoang Pham"
     }
   },
   "advisor": {
-    "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
+    "id": "PdOJWFBgNPUEMhX1JlsDm7zWy012",
     "profile": {
-      "display_name": "Nam Phương"
+      "display_name": "Hung Vuong"
     }
   },
-  "purchase": {
-    "course_rooms": [
-      {
-        "id": "a26f30ba-f14c-4fe8-b12d-37be31c18017"
-      }
-    ],
-    "courses": [
-      {
-        "pricing_type": "per_session",
-        "price_amount": 100000,
-        "price_currency": "vnd",
-        "per_amount": 1,
-        "per_unit": "per_session",
-        "course": {
-          "id": "ea2f8635-6aeb-4bd5-871a-eae3747f503d",
-          "name": "Khoa Hoc ABC",
-          "description": "<p>Khoa Hoc ABC</p>",
-          "start_at": "2021-12-05T17:00:00+00:00",
-          "session_duration": 1800,
-          "sessions": [
-            {
-              "id": "9c393a4e-04e8-4163-ba21-021a7a3a5d6a",
-              "is_active": true
-            },
-            {
-              "id": "44c7c69f-11bb-47d1-b3e4-215c370afc26",
-              "is_active": true
-            }
-          ],
-          "first_room": [
-            {
-              "start_at": "2021-12-06T07:00:00.141+00:00"
-            }
-          ]
-        }
-      }
-    ]
-  },
+  "purchase": null,
   "course": {
-    "id": "ea2f8635-6aeb-4bd5-871a-eae3747f503d",
-    "name": "Khoa Hoc ABC",
-    "first_session_start": "Thứ hai 06/12 14:00",
-    "session_count": 2,
-    "session_duration": "30 phút"
+    "first_session_start": "Thứ ba 07/12 15:10",
+    "session_count": 0,
+    "session_duration": "0 phút"
   },
   "tuition": {
-    "payment_count": "1"
+    "payment_count": "Trọn gói"
   }
 }
