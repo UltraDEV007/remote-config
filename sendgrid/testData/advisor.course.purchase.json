@@ -3,52 +3,50 @@
     "name": "advisor.course.purchase"
   },
   "user": {
-    "id": "cGNygB3hEQNNWWWVOOO4ZhFpt0n2",
+    "id": "fH3k96KDlzYx42whT6Mfu5LODQv2",
     "profile": {
-      "display_name": "Đan Thanh"
+      "display_name": "Nhat Dev"
     }
   },
   "advisor": {
-    "id": "DNRwzfAoM6NPY4v2j5w4yuRvk6l2",
+    "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
     "profile": {
-      "display_name": "Vy Nguyễn"
+      "display_name": "Nam Phương"
     }
   },
   "purchase": {
     "course_rooms": [
       {
-        "id": "f5ce71e1-f2e3-45ac-8cf6-9efd69cb4561"
-      },
-      {
-        "id": "4b4e14a4-2092-4325-80c7-30c3b542b33d"
-      },
-      {
-        "id": "f86b20ae-33e5-4e77-a1ce-9b6ce40edd9f"
+        "id": "19d7cb5a-645e-4cca-8bad-e089a16e1e9e"
       }
     ],
     "courses": [
       {
-        "pricing_type": "per_course",
-        "price_amount": 20000,
+        "pricing_type": "per_session",
+        "price_amount": 100000,
         "price_currency": "vnd",
         "per_amount": 1,
-        "per_unit": "per_course",
+        "per_unit": "per_session",
         "course": {
-          "id": "e0edbd19-81bc-4d8e-9a6f-cb9602a13999",
-          "name": "How to eat cup cake",
-          "description": "<p>....</p>",
+          "id": "6362831e-cad1-4485-9098-e88b5ebe605a",
+          "name": "Khoá học Nấu cơm",
+          "description": "<p>Khoá học Nấu cơm</p>",
           "start_at": "2021-12-06T17:00:00+00:00",
-          "session_duration": 900,
-          "session_occurence": 3,
+          "session_duration": 1800,
+          "session_occurence": 100000,
           "sessions": [
             {
-              "id": "8d21a296-ba3d-4417-82c3-dba2b7124b38",
+              "id": "690def22-fd22-4fed-87d8-9714f39b2033",
+              "is_active": true
+            },
+            {
+              "id": "3fc024b9-0235-4cab-9733-1fa0b8d81452",
               "is_active": true
             }
           ],
           "first_room": [
             {
-              "start_at": "2021-12-07T10:00:00+00:00"
+              "start_at": "2021-12-07T09:30:00.623+00:00"
             }
           ]
         }
@@ -56,13 +54,17 @@
     ]
   },
   "course": {
-    "id": "e0edbd19-81bc-4d8e-9a6f-cb9602a13999",
-    "name": "How to eat cup cake",
-    "first_session_start": "Thứ ba 07/12 17:00",
-    "session_count": 3,
-    "session_duration": "15 phút"
+    "id": "6362831e-cad1-4485-9098-e88b5ebe605a",
+    "name": "Khoá học Nấu cơm",
+    "first_session_start": "Thứ ba 07/12 16:30",
+    "session_count": "Không giới hạn",
+    "session_duration": "30 phút"
   },
   "tuition": {
-    "amount": "20K"
+    "amount": "100K"
+  },
+  "route": {
+    "advisor_url": "https://partner.unitz.dev/advisor?id=rM3EUyLfbTZtgUg906cpzQgCUkj1",
+    "course_url": "https://partner.unitz.dev/course?id=6362831e-cad1-4485-9098-e88b5ebe605a"
   }
 }
