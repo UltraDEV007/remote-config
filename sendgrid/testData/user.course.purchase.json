@@ -33,6 +33,7 @@
           "description": "<p>Khoa Hoc ABC</p>",
           "start_at": "2021-12-05T17:00:00+00:00",
           "session_duration": 1800,
+          "session_occurence": 100000,
           "sessions": [
             {
               "id": "9c393a4e-04e8-4163-ba21-021a7a3a5d6a",
@@ -67,10 +68,15 @@
     "id": "ea2f8635-6aeb-4bd5-871a-eae3747f503d",
     "name": "Khoa Hoc ABC",
     "first_session_start": "Thứ hai 06/12 14:00",
-    "session_count": 2,
+    "session_count": "Không giới hạn",
     "session_duration": "30 phút"
   },
   "tuition": {
     "payment_count": 1
+  },
+  "route": {
+    "advisor_url": "",
+    "user_url": "",
+    "course_url": "https://partner.unitz.dev/course?id=undefined"
   }
 }
