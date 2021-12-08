@@ -62,7 +62,8 @@
     "session_duration": "30 phút"
   },
   "tuition": {
-    "amount": "100K"
+    "amount": "100K",
+    "payment_count": "1/100000 buổi"
   },
   "route": {
     "advisor_url": "https://partner.unitz.dev/advisor?id=rM3EUyLfbTZtgUg906cpzQgCUkj1",
