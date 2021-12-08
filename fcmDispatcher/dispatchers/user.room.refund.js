@@ -155,7 +155,9 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const session_duration = _.get(ctxData, 'course.session_duration', 0);
 
   const per_unit = _.get(course, 'per_unit');
-  const payment_count = per_unit === 'per_session' ? _.get(course, 'purchases.length') : 'Trọn gói';
+  const per_amount = _.get(course, 'per_amount');
+  const per_session = parseInt(session_count) === 100000 ? '' : `/${session_count}`;
+  const payment_count = per_unit === 'per_session' ? `${per_amount}${per_session} buổi` : 'Trọn gói';
 
   const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
   const user_id = _.get(ctxData, 'user.id');
@@ -236,6 +238,14 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
     },
     tuition: {
       payment_count,
+    },
+    route: {
+      advisor_url: clients.routeWebClient.getClient().toUserUrl('advisor', _.get(ctxData, 'advisor')),
+      user_url: clients.routeWebClient.getClient().toUserUrl('profile'),
+      course_url: clients.routeWebClient.getClient().toUserUrl('courseDetail', course),
+      course_filter_url: clients.routeWebClient.getClient().toUserUrl('courseFilter'),
+      room_url: clients.routeWebClient.getClient().toUserUrl('room', room),
+      wallet_url: clients.routeWebClient.getClient().toUserUrl('userWallet'),
     },
   });
 };
