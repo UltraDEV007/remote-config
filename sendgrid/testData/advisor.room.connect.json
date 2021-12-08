@@ -25,6 +25,6 @@
   "route": {
     "advisor_url": "https://partner.unitz.dev/",
     "room_url": "https://partner.unitz.dev/room?id=1f26d981-9c57-4ad5-9629-25fa1c179bae",
-    "course_url": "https://partner.unitz.dev/course?id=cf4aa2a3-3893-4df3-be73-6860e0b66d20"
+    "course_url": "https://partner.unitz.dev/course/detail?id=cf4aa2a3-3893-4df3-be73-6860e0b66d20"
   }
 }
