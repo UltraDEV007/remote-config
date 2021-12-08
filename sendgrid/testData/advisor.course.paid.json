@@ -9,11 +9,11 @@
     }
   },
   "course": {
-    "id": "6ad222b5-5d40-40cd-b1e4-1f320d3febbd",
-    "name": "Khoá học 1 buổi ",
-    "first_session_start": "Thứ năm 02/12 19:00",
+    "id": "cf4aa2a3-3893-4df3-be73-6860e0b66d20",
+    "name": "Khoá học mobile 1",
+    "first_session_start": "Thứ năm 02/12 15:00",
     "start_at": "Thứ năm 02/12 00:00",
-    "session_count": "Không giới hạn buổi",
+    "session_count": "8 buổi",
     "session_duration": "30 phút"
   },
   "tuition": {
@@ -21,8 +21,8 @@
     "pay_from": "Nhat Dev"
   },
   "route": {
-    "advisor_url": "https://partner.unitz.dev/advisor?id=rM3EUyLfbTZtgUg906cpzQgCUkj1",
-    "course_url": "https://partner.unitz.dev/course?id=6ad222b5-5d40-40cd-b1e4-1f320d3febbd",
+    "advisor_url": "https://partner.unitz.dev/",
+    "course_url": "https://partner.unitz.dev/course/detail?id=cf4aa2a3-3893-4df3-be73-6860e0b66d20",
     "add_course_url": "https://partner.unitz.dev/course/add",
     "advisor_wallet_url": "https://partner.unitz.dev/wallet"
   }
