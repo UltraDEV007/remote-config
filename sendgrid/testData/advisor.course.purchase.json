@@ -46,7 +46,8 @@
           ],
           "first_room": [
             {
-              "start_at": "2021-12-07T09:30:00.623+00:00"
+              "start_at": "2021-12-07T09:30:00.623+00:00",
+              "id": "64b7aaae-a1e4-4be6-906e-0b8f53312252"
             }
           ]
         }
@@ -65,6 +66,8 @@
   },
   "route": {
     "advisor_url": "https://partner.unitz.dev/advisor?id=rM3EUyLfbTZtgUg906cpzQgCUkj1",
-    "course_url": "https://partner.unitz.dev/course?id=6362831e-cad1-4485-9098-e88b5ebe605a"
+    "course_url": "https://partner.unitz.dev/course?id=6362831e-cad1-4485-9098-e88b5ebe605a",
+    "advisor_calendar_url": "https://partner.unitz.dev/calendar",
+    "room_url": "https://partner.unitz.dev/room?id=undefined"
   }
 }
