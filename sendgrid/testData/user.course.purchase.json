@@ -81,12 +81,12 @@
   "course": {
     "id": "ea2f8635-6aeb-4bd5-871a-eae3747f503d",
     "name": "Khoa Hoc ABC",
-    "first_session_start": "Thứ tư 08/12 17:09",
+    "first_session_start": "Thứ tư 08/12 17:16",
     "session_count": "Không giới hạn buổi",
     "session_duration": "30 phút"
   },
   "tuition": {
-    "payment_count": "1"
+    "payment_count": "1 buổi"
   },
   "route": {
     "advisor_url": "https://web.unitz.dev/advisor?id=rM3EUyLfbTZtgUg906cpzQgCUkj1",
