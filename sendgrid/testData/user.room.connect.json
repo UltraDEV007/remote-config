@@ -23,15 +23,17 @@
     "id": "cf4aa2a3-3893-4df3-be73-6860e0b66d20",
     "name": "Khoá học mobile 1",
     "session_at": "Thứ hai 06/12 14:45",
-    "session_count": 8,
+    "session_count": "8 buổi",
     "session_duration": "30 phút"
   },
   "tuition": {
     "payment_count": "Trọn gói"
   },
   "route": {
-    "advisor_url": "https://partner.unitz.dev/advisor?id=rM3EUyLfbTZtgUg906cpzQgCUkj1",
-    "room_url": "https://web.unitz.dev/room?id=1f26d981-9c57-4ad5-9629-25fa1c179bae",
-    "course_url": "https://partner.unitz.dev/course?id=cf4aa2a3-3893-4df3-be73-6860e0b66d20"
+    "advisor_url": "https://web.unitz.dev/advisor?id=rM3EUyLfbTZtgUg906cpzQgCUkj1",
+    "user_url": "https://web.unitz.dev/profile",
+    "course_url": "https://web.unitz.dev/course/detail?id=cf4aa2a3-3893-4df3-be73-6860e0b66d20",
+    "course_filter_url": "https://web.unitz.dev/education/course-filter",
+    "room_url": "https://web.unitz.dev/room?id=1f26d981-9c57-4ad5-9629-25fa1c179bae"
   }
 }
