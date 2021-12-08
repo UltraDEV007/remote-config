@@ -75,7 +75,7 @@
     "payment_count": 1
   },
   "route": {
-    "advisor_url": "",
+    "advisor_url": "https://partner.unitz.dev/advisor?id=rM3EUyLfbTZtgUg906cpzQgCUkj1",
     "user_url": "",
     "course_url": "https://partner.unitz.dev/course?id=ea2f8635-6aeb-4bd5-871a-eae3747f503d"
   }
