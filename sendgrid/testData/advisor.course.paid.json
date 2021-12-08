@@ -19,5 +19,9 @@
   "tuition": {
     "amount": "90K",
     "pay_from": "Nhat Dev"
+  },
+  "route": {
+    "advisor_url": "https://partner.unitz.dev/advisor?id=rM3EUyLfbTZtgUg906cpzQgCUkj1",
+    "course_url": "https://partner.unitz.dev/course?id=6ad222b5-5d40-40cd-b1e4-1f320d3febbd"
   }
 }
