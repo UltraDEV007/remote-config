@@ -63,7 +63,7 @@
   },
   "tuition": {
     "amount": "100K",
-    "payment_count": "1/100000 buổi"
+    "payment_count": "1 buổi"
   },
   "route": {
     "advisor_url": "https://partner.unitz.dev/advisor?id=rM3EUyLfbTZtgUg906cpzQgCUkj1",
