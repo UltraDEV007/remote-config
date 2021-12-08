@@ -46,8 +46,14 @@
     "id": "cabaf192-ff07-4da1-99b0-d219065d6b66",
     "name": "How to use Skype",
     "start_at": "Thứ ba 07/12 15:30",
-    "session_count": "Không giới hạn",
+    "session_count": "Không giới hạn buổi",
     "session_duration": "15 phút",
     "session_at": "Thứ ba 07/12 15:30"
+  },
+  "route": {
+    "advisor_url": "https://partner.unitz.dev/",
+    "room_url": "https://partner.unitz.dev/room?id=30871797-859e-4d96-b254-f60f4ebe6fa6",
+    "course_url": "https://partner.unitz.dev/course/detail?id=cabaf192-ff07-4da1-99b0-d219065d6b66",
+    "add_course_url": "https://partner.unitz.dev/course/add"
   }
 }
