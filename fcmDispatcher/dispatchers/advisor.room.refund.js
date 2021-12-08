@@ -103,7 +103,10 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   };
 };
 
-exports.effect = async ({ payload }, { ctxData, utils, helpers, clients: { hasuraClient, sendgridClient } }) => {
+exports.effect = async (
+  { payload },
+  { ctxData, utils, helpers, clients: { hasuraClient, routeWebClient, sendgridClient } }
+) => {
   const { _, moment } = helpers;
 
   const advisor_id = _.get(payload, 'course.advisor_id');
@@ -150,6 +153,12 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients: { hasur
       session_count: helpers.formatSessionOccurence(session_count),
       session_duration: helpers.formatCallDuration(session_duration),
       session_at,
+    },
+    route: {
+      advisor_url: routeWebClient.getClient().toAdvisorUrl('home'),
+      room_url: routeWebClient.getClient().toAdvisorUrl('room', room),
+      course_url: routeWebClient.getClient().toAdvisorUrl('courseDetail', course),
+      add_course_url: routeWebClient.getClient().toAdvisorUrl('addCourse'),
     },
   });
 };

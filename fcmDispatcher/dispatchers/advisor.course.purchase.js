@@ -35,6 +35,7 @@ exports.getQuery = () => `
           }
           first_room: rooms(order_by: {start_at: asc}, limit: 1) {
             start_at
+            id
           }
         }
       }
@@ -106,7 +107,7 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
 
 exports.effect = async (
   { payload },
-  { ctxData, utils, helpers, clients: { slackClient, hasuraClient, sendgridClient } }
+  { ctxData, utils, helpers, clients: { slackClient, hasuraClient, sendgridClient, routeWebClient } }
 ) => {
   const { _, moment } = helpers;
 
@@ -125,6 +126,10 @@ exports.effect = async (
   const session_duration = _.get(course, 'session_duration', 0);
 
   const first_session_start = moment(_.get(course, 'first_room.0.start_at'));
+  const first_room = _.get(course, 'first_room.0');
+
+  const per_session = parseInt(session_count) === 100000 ? '' : `/${session_count}`;
+  const payment_count = per_unit === 'per_session' ? `${per_amount}${per_session} buổi` : 'Trọn gói';
 
   // inapp noti effect
   hasuraClient.getClient().request(
@@ -210,6 +215,14 @@ exports.effect = async (
     },
     tuition: {
       amount: helpers.formatCurrencySSR(price_amount),
+      payment_count,
+    },
+    route: {
+      advisor_url: routeWebClient.getClient().toAdvisorUrl('home'),
+      course_url: routeWebClient.getClient().toAdvisorUrl('courseDetail', course),
+      advisor_calendar_url: routeWebClient.getClient().toAdvisorUrl('calendar', course),
+      room_url: routeWebClient.getClient().toAdvisorUrl('room', first_room),
+      add_course_url: routeWebClient.getClient().toAdvisorUrl('addCourse'),
     },
   });
 };

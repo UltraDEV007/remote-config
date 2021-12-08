@@ -16,6 +16,18 @@ exports.getQuery = () => `
       course_rooms {
         id
       }
+      first_room: course_rooms(order_by: {room: {start_at: asc}}, limit: 1) {
+        id
+        room {
+          start_at
+          id
+        }
+      }
+      course_rooms_aggregate {
+        aggregate {
+          count
+        }
+      }
       courses {
         pricing_type
         price_amount
@@ -115,20 +127,26 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
   };
 };
 
-exports.effect = async ({ payload }, { ctxData, helpers, utils, clients: { hasuraClient, sendgridClient } }) => {
+exports.effect = async (
+  { payload },
+  { ctxData, helpers, utils, clients: { hasuraClient, sendgridClient, routeWebClient } }
+) => {
   const { _, moment } = helpers;
 
   const user_id = _.get(ctxData, 'user.id');
   const course = _.get(ctxData, 'purchase.courses.0.course');
   const session_count = _.get(course, 'session_occurence', 0);
   const session_duration = _.get(course, 'session_duration', 0);
-  const first_session_start = moment(_.get(course, 'first_room.0.start_at'));
-  const advisor_id = _.get(ctxData, 'advisor.id');
+  const first_session_start = moment(_.get(ctxData, 'purchase.first_room.0.start_at'));
+  const room = _.get(ctxData, 'purchase.first_room.0');
 
+  const advisor_id = _.get(ctxData, 'advisor.id');
   const per_unit = _.get(ctxData, 'purchase.courses.0.per_unit');
   const per_amount = _.get(ctxData, 'purchase.courses.0.per_amount');
 
-  const payment_count = per_unit === 'per_session' ? _.get(course, 'purchases.length') : 'Trọn gói';
+  const per_session = parseInt(session_count) === 100000 ? '' : `/${session_count}`;
+
+  const payment_count = per_unit === 'per_session' ? `${per_amount}${per_session} buổi` : 'Trọn gói';
 
   await hasuraClient.getClient().request(
     `
@@ -170,6 +188,14 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients: { hasur
     },
     tuition: {
       payment_count,
+    },
+
+    route: {
+      advisor_url: routeWebClient.getClient().toUserUrl('advisor', _.get(ctxData, 'advisor')),
+      user_url: routeWebClient.getClient().toUserUrl('profile'),
+      course_url: routeWebClient.getClient().toUserUrl('courseDetail', course),
+      course_filter_url: routeWebClient.getClient().toUserUrl('courseFilter'),
+      room_url: routeWebClient.getClient().toUserUrl('room', room),
     },
   });
 };

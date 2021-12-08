@@ -11,6 +11,11 @@ exports.getQuery = () => `
       start_at
       end_at
       course_session_id
+      attendees_aggregate {
+        aggregate {
+          count
+        }
+      }
       purchases {
         id
         user_id
@@ -107,7 +112,7 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils, clients: { rou
   };
 };
 
-exports.effect = async ({ payload }, { ctxData, utils, helpers, clients: { sendgridClient } }) => {
+exports.effect = async ({ payload }, { ctxData, utils, helpers, clients: { sendgridClient, routeWebClient } }) => {
   const { _, moment } = helpers;
 
   const advisor_id = _.get(payload, 'course.advisor_id');
@@ -116,6 +121,8 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients: { sendg
   const $start_at = moment(_.get(room, 'start_at'));
   const session_count = _.get(ctxData, 'course.session_occurence', 0);
   const session_duration = _.get(ctxData, 'course.session_duration', 0);
+  const attend_count = _.get(ctxData, 'room.attendees_aggregate.aggregate.count', 0);
+
   const session_at = _.capitalize(
     $start_at
       .locale('vi')
@@ -134,6 +141,12 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients: { sendg
       session_count: helpers.formatSessionOccurence(session_count),
       session_duration: helpers.formatCallDuration(session_duration),
       session_at,
+      attend_count: `${attend_count} học viên`,
+    },
+    route: {
+      advisor_url: routeWebClient.getClient().toAdvisorUrl('home'),
+      room_url: routeWebClient.getClient().toAdvisorUrl('room', room),
+      course_url: routeWebClient.getClient().toAdvisorUrl('courseDetail', course),
     },
   });
 };

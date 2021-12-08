@@ -209,5 +209,11 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients }) => {
       amount: helpers.formatCurrencySSR(advisor_income),
       pay_from: _.map(users, (user) => _.get(user, 'profile.display_name')).join(','),
     },
+    route: {
+      advisor_url: clients.routeWebClient.getClient().toAdvisorUrl('home'),
+      course_url: clients.routeWebClient.getClient().toAdvisorUrl('courseDetail', course),
+      add_course_url: clients.routeWebClient.getClient().toAdvisorUrl('addCourse'),
+      advisor_wallet_url: clients.routeWebClient.getClient().toAdvisorUrl('wallet'),
+    },
   });
 };
