@@ -104,6 +104,7 @@
   "route": {
     "advisor_url": "https://partner.unitz.dev/advisor?id=rM3EUyLfbTZtgUg906cpzQgCUkj1",
     "room_url": "https://partner.unitz.dev/room?id=bfbdd54f-4bee-42fc-a892-4c7afe8d2122",
-    "course_url": "https://partner.unitz.dev/course?id=6ad222b5-5d40-40cd-b1e4-1f320d3febbd"
+    "course_url": "https://partner.unitz.dev/course?id=6ad222b5-5d40-40cd-b1e4-1f320d3febbd",
+    "all_course_url": "https://partner.unitz.dev/course"
   }
 }
