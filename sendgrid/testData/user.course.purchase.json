@@ -3,9 +3,9 @@
     "name": "user.course.purchase"
   },
   "user": {
-    "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
+    "id": "cGNygB3hEQNNWWWVOOO4ZhFpt0n2",
     "profile": {
-      "display_name": "Dev lap trinh"
+      "display_name": "Đan Thanh"
     }
   },
   "advisor": {
@@ -17,18 +17,18 @@
   "purchase": {
     "course_rooms": [
       {
-        "id": "a237d21c-ccd0-47ae-9d51-afbde6f42551"
+        "id": "f2e51fde-1adc-4682-a7e6-db3ad0b540be"
       },
       {
-        "id": "31daa550-bc99-4c9e-b43c-01741dfdff42"
+        "id": "7abd16d5-6078-4d00-b17e-d04eddc01d16"
       }
     ],
     "first_room": [
       {
-        "id": "a237d21c-ccd0-47ae-9d51-afbde6f42551",
+        "id": "f2e51fde-1adc-4682-a7e6-db3ad0b540be",
         "room": {
-          "start_at": "2021-12-10T04:00:00+00:00",
-          "id": "a2b902f3-b3ec-4e77-909b-9da61d8b6df1"
+          "start_at": "2021-12-09T07:45:00+00:00",
+          "id": "9eb7e207-b6a5-47a5-ad5c-8a59f2044c0c"
         }
       }
     ],
@@ -39,37 +39,37 @@
     },
     "courses": [
       {
-        "pricing_type": "per_session",
-        "price_amount": 40000,
+        "pricing_type": "per_course",
+        "price_amount": 20000,
         "price_currency": "vnd",
-        "per_amount": 2,
-        "per_unit": "per_session",
+        "per_amount": 1,
+        "per_unit": "per_course",
         "course": {
-          "id": "794fcfda-0e4a-403f-b5d1-a0fd24c21c3e",
-          "name": "2/Coding time",
-          "description": "<p>....</p>",
+          "id": "e1039f2a-8b81-49b7-88db-cfdad19a9b08",
+          "name": "4/ STA Course",
+          "description": "<p>111</p>",
           "start_at": "2021-12-08T17:00:00+00:00",
           "session_duration": 900,
-          "session_occurence": 4,
+          "session_occurence": 2,
           "sessions": [
             {
-              "id": "3b169dd5-5b3c-4f5f-af35-95d6ac51b55c",
+              "id": "95d813b8-a96b-4d6c-99a3-9f714232c075",
               "is_active": true
             }
           ],
           "first_room": [
             {
-              "start_at": "2021-12-09T04:00:00+00:00"
+              "start_at": "2021-12-09T07:45:00+00:00"
             }
           ],
           "purchases": [
             {
-              "id": "3172fd96-5f23-47c7-9da3-509d5d2ed8f4",
-              "price_amount": 40000,
+              "id": "d8e6070c-f608-4939-a579-1ee232cef852",
+              "price_amount": 20000,
               "is_active": true,
               "purchase": {
                 "statement": [],
-                "user_id": "rM3EUyLfbTZtgUg906cpzQgCUkj1"
+                "user_id": "cGNygB3hEQNNWWWVOOO4ZhFpt0n2"
               }
             }
           ]
@@ -78,20 +78,20 @@
     ]
   },
   "course": {
-    "id": "794fcfda-0e4a-403f-b5d1-a0fd24c21c3e",
-    "name": "2/Coding time",
-    "first_session_start": "Thứ năm 09/12 14:25",
-    "session_count": "4 buổi",
+    "id": "e1039f2a-8b81-49b7-88db-cfdad19a9b08",
+    "name": "4/ STA Course",
+    "first_session_start": "Thứ năm 09/12 15:07",
+    "session_count": "2 buổi",
     "session_duration": "15 phút"
   },
   "tuition": {
-    "payment_count": "2/4 buổi"
+    "payment_count": "Trọn gói"
   },
   "route": {
     "advisor_url": "https://web.unitz.dev/advisor?id=DNRwzfAoM6NPY4v2j5w4yuRvk6l2",
     "user_url": "https://web.unitz.dev/profile",
-    "course_url": "https://web.unitz.dev/course/detail?id=794fcfda-0e4a-403f-b5d1-a0fd24c21c3e",
+    "course_url": "https://web.unitz.dev/course/detail?id=e1039f2a-8b81-49b7-88db-cfdad19a9b08",
     "course_filter_url": "https://web.unitz.dev/education/course-filter",
-    "room_url": "https://web.unitz.dev/room?id=a237d21c-ccd0-47ae-9d51-afbde6f42551"
+    "room_url": "https://web.unitz.dev/room?id=f2e51fde-1adc-4682-a7e6-db3ad0b540be"
   }
 }
