@@ -80,7 +80,7 @@
   "course": {
     "id": "e1039f2a-8b81-49b7-88db-cfdad19a9b08",
     "name": "4/ STA Course",
-    "first_session_start": "Thứ năm 09/12 15:14",
+    "first_session_start": "Thứ năm 09/12 14:45",
     "session_count": "2 buổi",
     "session_duration": "15 phút"
   },
@@ -92,6 +92,6 @@
     "user_url": "https://web.unitz.dev/profile",
     "course_url": "https://web.unitz.dev/course/detail?id=e1039f2a-8b81-49b7-88db-cfdad19a9b08",
     "course_filter_url": "https://web.unitz.dev/education/course-filter",
-    "room_url": "https://web.unitz.dev/room?id=f2e51fde-1adc-4682-a7e6-db3ad0b540be"
+    "room_url": "https://web.unitz.dev/room?id=9eb7e207-b6a5-47a5-ad5c-8a59f2044c0c"
   }
 }
