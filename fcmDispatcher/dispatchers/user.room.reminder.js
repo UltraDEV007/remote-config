@@ -22,6 +22,7 @@ exports.getQuery = () => `
       name
       start_at
       session_duration
+      session_occurence
       sessions {
         id
         is_active
