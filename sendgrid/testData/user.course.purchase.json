@@ -3,9 +3,9 @@
     "name": "user.course.purchase"
   },
   "user": {
-    "id": "cGNygB3hEQNNWWWVOOO4ZhFpt0n2",
+    "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
     "profile": {
-      "display_name": "Đan Thanh"
+      "display_name": "Dev lap trinh"
     }
   },
   "advisor": {
@@ -17,62 +17,59 @@
   "purchase": {
     "course_rooms": [
       {
-        "id": "68bf9562-509c-48e0-bcb7-8f939dca7538"
+        "id": "a237d21c-ccd0-47ae-9d51-afbde6f42551"
       },
       {
-        "id": "2ea180e5-a1e1-42b1-98d9-38a564315bdc"
-      },
-      {
-        "id": "5f9a4295-99c1-4f53-92cd-bf691a98d211"
+        "id": "31daa550-bc99-4c9e-b43c-01741dfdff42"
       }
     ],
     "first_room": [
       {
-        "id": "68bf9562-509c-48e0-bcb7-8f939dca7538",
+        "id": "a237d21c-ccd0-47ae-9d51-afbde6f42551",
         "room": {
-          "start_at": "2021-12-10T03:45:00+00:00",
-          "id": "a46091ff-04ac-4d0d-a63c-a79c9295b9fe"
+          "start_at": "2021-12-10T04:00:00+00:00",
+          "id": "a2b902f3-b3ec-4e77-909b-9da61d8b6df1"
         }
       }
     ],
     "course_rooms_aggregate": {
       "aggregate": {
-        "count": 3
+        "count": 2
       }
     },
     "courses": [
       {
-        "pricing_type": "per_course",
-        "price_amount": 20000,
+        "pricing_type": "per_session",
+        "price_amount": 40000,
         "price_currency": "vnd",
-        "per_amount": 1,
-        "per_unit": "per_course",
+        "per_amount": 2,
+        "per_unit": "per_session",
         "course": {
-          "id": "1309d2a5-1434-4be7-a0a4-c1252d7a6702",
-          "name": "2/ Cooking time",
-          "description": "<p>...</p>",
+          "id": "794fcfda-0e4a-403f-b5d1-a0fd24c21c3e",
+          "name": "2/Coding time",
+          "description": "<p>....</p>",
           "start_at": "2021-12-08T17:00:00+00:00",
           "session_duration": 900,
           "session_occurence": 4,
           "sessions": [
             {
-              "id": "004e76f9-08ad-4ee7-a09d-1c99de1b7c26",
+              "id": "3b169dd5-5b3c-4f5f-af35-95d6ac51b55c",
               "is_active": true
             }
           ],
           "first_room": [
             {
-              "start_at": "2021-12-09T03:45:00+00:00"
+              "start_at": "2021-12-09T04:00:00+00:00"
             }
           ],
           "purchases": [
             {
-              "id": "8f2e09ef-d9c2-411c-a970-438263052cbf",
-              "price_amount": 20000,
+              "id": "3172fd96-5f23-47c7-9da3-509d5d2ed8f4",
+              "price_amount": 40000,
               "is_active": true,
               "purchase": {
                 "statement": [],
-                "user_id": "cGNygB3hEQNNWWWVOOO4ZhFpt0n2"
+                "user_id": "rM3EUyLfbTZtgUg906cpzQgCUkj1"
               }
             }
           ]
@@ -81,20 +78,20 @@
     ]
   },
   "course": {
-    "id": "1309d2a5-1434-4be7-a0a4-c1252d7a6702",
-    "name": "2/ Cooking time",
-    "first_session_start": "Thứ năm 09/12 11:22",
+    "id": "794fcfda-0e4a-403f-b5d1-a0fd24c21c3e",
+    "name": "2/Coding time",
+    "first_session_start": "Thứ năm 09/12 13:27",
     "session_count": "4 buổi",
     "session_duration": "15 phút"
   },
   "tuition": {
-    "payment_count": "Trọn gói"
+    "payment_count": "2/4 buổi"
   },
   "route": {
     "advisor_url": "https://web.unitz.dev/advisor?id=DNRwzfAoM6NPY4v2j5w4yuRvk6l2",
     "user_url": "https://web.unitz.dev/profile",
-    "course_url": "https://web.unitz.dev/course/detail?id=1309d2a5-1434-4be7-a0a4-c1252d7a6702",
+    "course_url": "https://web.unitz.dev/course/detail?id=794fcfda-0e4a-403f-b5d1-a0fd24c21c3e",
     "course_filter_url": "https://web.unitz.dev/education/course-filter",
-    "room_url": "https://web.unitz.dev/room?id=68bf9562-509c-48e0-bcb7-8f939dca7538"
+    "room_url": "https://web.unitz.dev/room?id=a237d21c-ccd0-47ae-9d51-afbde6f42551"
   }
 }
