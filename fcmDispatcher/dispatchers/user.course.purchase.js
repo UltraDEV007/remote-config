@@ -137,8 +137,8 @@ exports.effect = async (
   const course = _.get(ctxData, 'purchase.courses.0.course');
   const session_count = _.get(course, 'session_occurence', 0);
   const session_duration = _.get(course, 'session_duration', 0);
-  const first_session_start = moment(_.get(ctxData, 'purchase.first_room.0.start_at'));
-  const room = _.get(ctxData, 'purchase.first_room.0');
+  const first_session_start = moment(_.get(ctxData, 'purchase.first_room.0.room.start_at'));
+  const room = _.get(ctxData, 'purchase.first_room.0.room');
 
   const advisor_id = _.get(ctxData, 'advisor.id');
   const per_unit = _.get(ctxData, 'purchase.courses.0.per_unit');
