@@ -15,57 +15,46 @@
     }
   },
   "purchase": {
-    "course_rooms": [
-      {
-        "id": "f2e51fde-1adc-4682-a7e6-db3ad0b540be"
-      },
-      {
-        "id": "7abd16d5-6078-4d00-b17e-d04eddc01d16"
-      }
-    ],
-    "first_room": [
-      {
-        "id": "f2e51fde-1adc-4682-a7e6-db3ad0b540be",
-        "room": {
-          "start_at": "2021-12-09T07:45:00+00:00",
-          "id": "9eb7e207-b6a5-47a5-ad5c-8a59f2044c0c"
-        }
-      }
-    ],
+    "course_rooms": [],
+    "first_room": [],
     "course_rooms_aggregate": {
       "aggregate": {
-        "count": 2
+        "count": 0
       }
     },
     "courses": [
       {
         "pricing_type": "per_course",
-        "price_amount": 20000,
+        "price_amount": 200000,
         "price_currency": "vnd",
         "per_amount": 1,
         "per_unit": "per_course",
         "course": {
-          "id": "e1039f2a-8b81-49b7-88db-cfdad19a9b08",
-          "name": "4/ STA Course",
-          "description": "<p>111</p>",
+          "id": "9598bd7d-72ee-4bd7-abb1-bdf7bfb82f6f",
+          "name": "Final course",
+          "description": "<p>....</p>",
           "start_at": "2021-12-08T17:00:00+00:00",
           "session_duration": 900,
           "session_occurence": 2,
           "sessions": [
             {
-              "id": "95d813b8-a96b-4d6c-99a3-9f714232c075",
+              "id": "d4e7f1f9-def8-4929-83dd-c3597bbe8aef",
+              "is_active": true
+            },
+            {
+              "id": "2586db40-fe7e-4561-960a-58b614e5506a",
               "is_active": true
             }
           ],
           "first_room": [
             {
-              "start_at": "2021-12-09T07:45:00+00:00"
+              "start_at": "1970-01-01T00:00:00+00:00"
             }
           ],
           "purchases": [
             {
-              "id": "d8e6070c-f608-4939-a579-1ee232cef852",
-              "price_amount": 20000,
+              "id": "8b4b5bcb-8e44-4423-b1ee-801b46d01f42",
+              "price_amount": 200000,
               "is_active": true,
               "purchase": {
                 "statement": [],
@@ -78,9 +67,9 @@
     ]
   },
   "course": {
-    "id": "e1039f2a-8b81-49b7-88db-cfdad19a9b08",
-    "name": "4/ STA Course",
-    "first_session_start": "Thứ năm 09/12 14:45",
+    "id": "9598bd7d-72ee-4bd7-abb1-bdf7bfb82f6f",
+    "name": "Final course",
+    "first_session_start": "Thứ năm 09/12 17:44",
     "session_count": "2 buổi",
     "session_duration": "15 phút"
   },
@@ -90,8 +79,8 @@
   "route": {
     "advisor_url": "https://web.unitz.dev/advisor?id=DNRwzfAoM6NPY4v2j5w4yuRvk6l2",
     "user_url": "https://web.unitz.dev/profile",
-    "course_url": "https://web.unitz.dev/course/detail?id=e1039f2a-8b81-49b7-88db-cfdad19a9b08",
+    "course_url": "https://web.unitz.dev/course/detail?id=9598bd7d-72ee-4bd7-abb1-bdf7bfb82f6f",
     "course_filter_url": "https://web.unitz.dev/education/course-filter",
-    "room_url": "https://web.unitz.dev/room?id=9eb7e207-b6a5-47a5-ad5c-8a59f2044c0c"
+    "room_url": "https://web.unitz.dev/room?id=undefined"
   }
 }
