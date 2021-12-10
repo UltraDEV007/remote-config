@@ -64,20 +64,42 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils, clients: { rou
       room_url: routeWebClient.getClient().toAdvisorUrl('room', room),
       sound: 'sound1',
     },
-    android: {
-      priority: 'high',
-      ttl: 3000,
-    },
+    // android: {
+    //   priority: 'high',
+    //   ttl: 3000,
+    // },
+    // apns: {
+    //   payload: {
+    //     aps: {
+    //       contentAvailable: true,
+    //     },
+    //   },
+    //   headers: {
+    //     'apns-push-type': 'background',
+    //     'apns-priority': '5',
+    //     'apns-topic': 'app.unitz.advisor', // your app bundle identifier
+    //   },
+    // },
     apns: {
       payload: {
         aps: {
-          contentAvailable: true,
+          alert: {
+            title,
+            body,
+          },
+          sound: 'notification.mp3',
         },
       },
-      headers: {
-        'apns-push-type': 'background',
-        'apns-priority': '5',
-        'apns-topic': 'app.unitz.advisor', // your app bundle identifier
+    },
+    android: {
+      priority: 'high',
+      data: {
+        sound: 'notification',
+        channelId: 'unitz-notifee-video-channel-2',
+      },
+      notification: {
+        sound: 'notification',
+        channelId: 'unitz-notifee-video-channel-2',
       },
     },
   };
