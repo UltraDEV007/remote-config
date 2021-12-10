@@ -63,13 +63,13 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, models }) => {
   });
 
   const notifSessionObject = {
-    user_id,
-    advisor_id,
     ...(await videoCalModel.getSessionObject()),
     ..._.pick(session, ['kind', 'session_duration']),
     start_at: _.get(payload, 'purchase.service_bookings.0.start_at'),
     purchase_id: _.get(payload, 'purchase.id'),
     service_booking_id: _.get(payload, 'purchase.service_bookings.0.id'),
+    user_id,
+    advisor_id,
   };
 
   return {
