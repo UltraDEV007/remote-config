@@ -164,7 +164,8 @@
     "session_count": "Không giới hạn buổi",
     "session_duration": "30 phút",
     "session_at": "Thứ tư 01/12 11:30",
-    "attend_count": "1 học viên"
+    "attend_count": "1 học viên",
+    "diffMin": -18661
   },
   "route": {
     "advisor_url": "https://partner.unitz.dev/",
