@@ -116,6 +116,9 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
 
   const $start_at = moment(_.get(room, 'start_at'));
   const advisor_id = _.get(ctxData, 'advisor.id');
+  const $now = moment();
+
+  const diffMin = moment($start_at).diff($now, 'minute');
 
   const session_at = _.capitalize(
     $start_at
@@ -130,7 +133,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const per_amount = _.get(course, 'per_amount');
 
   const per_session = parseInt(session_count) === 100000 ? '' : `/${session_count}`;
-  const payment_count = per_unit === 'per_session' ? `${per_amount}${per_session} buổi` : 'Trọn gói';
+  const payment_count = ['per_session', 'session'].includes(per_unit) ? `${per_amount}${per_session} buổi` : 'Trọn gói';
 
   const user_id = _.get(ctxData, 'user.id');
 
@@ -145,6 +148,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
       session_at,
       session_count: helpers.formatSessionOccurence(session_count),
       session_duration: helpers.formatCallDuration(session_duration),
+      diffMin,
     },
     tuition: {
       payment_count,

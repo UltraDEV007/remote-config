@@ -87,10 +87,9 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
   const courseDisplayName = _.get(course, 'name');
 
   const title = `Bạn đã mua khoá học ${courseDisplayName}.`;
-  const body =
-    per_unit === 'per_session'
-      ? `Thanh toán ${helpers.formatCurrencySSR(price_amount, price_currency)} cho ${per_amount} buổi`
-      : `Trọn gói: ${helpers.formatCurrencySSR(price_amount, price_currency)}`;
+  const body = ['per_session', 'session'].includes(per_unit)
+    ? `Thanh toán ${helpers.formatCurrencySSR(price_amount, price_currency)} cho ${per_amount} buổi`
+    : `Trọn gói: ${helpers.formatCurrencySSR(price_amount, price_currency)}`;
 
   return {
     notification: {
@@ -146,7 +145,7 @@ exports.effect = async (
 
   const per_session = parseInt(session_count) === 100000 ? '' : `/${session_count}`;
 
-  const payment_count = per_unit === 'per_session' ? `${per_amount}${per_session} buổi` : 'Trọn gói';
+  const payment_count = ['per_session', 'session'].includes(per_unit) ? `${per_amount}${per_session} buổi` : 'Trọn gói';
 
   await hasuraClient.getClient().request(
     `

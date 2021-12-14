@@ -157,7 +157,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const per_unit = _.get(course, 'per_unit');
   const per_amount = _.get(course, 'per_amount');
   const per_session = parseInt(session_count) === 100000 ? '' : `/${session_count}`;
-  const payment_count = per_unit === 'per_session' ? `${per_amount}${per_session} buổi` : 'Trọn gói';
+  const payment_count = ['per_session', 'session'].includes(per_unit) ? `${per_amount}${per_session} buổi` : 'Trọn gói';
 
   const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
   const user_id = _.get(ctxData, 'user.id');

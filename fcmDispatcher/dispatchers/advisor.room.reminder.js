@@ -123,6 +123,9 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients: { sendg
   const session_duration = _.get(ctxData, 'course.session_duration', 0);
   const attend_count = _.get(ctxData, 'room.attendees_aggregate.aggregate.count', 0);
 
+  const $now = moment();
+  const diffMin = moment($start_at).diff($now, 'minute');
+
   const session_at = _.capitalize(
     $start_at
       .locale('vi')
@@ -142,6 +145,7 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients: { sendg
       session_duration: helpers.formatCallDuration(session_duration),
       session_at,
       attend_count: `${attend_count} học viên`,
+      diffMin,
     },
     route: {
       advisor_url: routeWebClient.getClient().toAdvisorUrl('home'),
