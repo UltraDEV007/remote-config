@@ -3,37 +3,38 @@
     "name": "user.room.reminder"
   },
   "advisor": {
-    "id": "DNRwzfAoM6NPY4v2j5w4yuRvk6l2",
+    "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
     "profile": {
-      "display_name": "Vy Nguyễn"
+      "display_name": "Nam Phương"
     }
   },
   "user": {
-    "id": "cGNygB3hEQNNWWWVOOO4ZhFpt0n2",
+    "id": "fH3k96KDlzYx42whT6Mfu5LODQv2",
     "profile": {
-      "display_name": "Đan Thanh"
+      "display_name": "Nhat Dev"
     }
   },
   "room": {
-    "id": "db65a402-5c05-4e6c-b5bc-091e6fd7f000",
-    "start_at": "2021-12-09T08:30:00+00:00",
-    "end_at": "2021-12-09T08:45:00+00:00"
+    "id": "ba0c4d0a-0dfc-49bc-a214-8df6cda75cdd",
+    "start_at": "2021-12-14T03:00:00.485+00:00",
+    "end_at": "2021-12-14T03:30:00.485+00:00"
   },
   "course": {
-    "id": "af3678d7-b91a-401a-aa29-5ee814c2757c",
-    "name": "5/ STA room",
-    "session_at": "Thứ năm 09/12 15:30",
-    "session_count": "2 buổi",
-    "session_duration": "15 phút"
+    "id": "a7809f9b-4dd5-4621-b765-05db3b8a886c",
+    "name": "Khoá học làm app ",
+    "session_at": "Thứ ba 14/12 10:00",
+    "session_count": "Không giới hạn buổi",
+    "session_duration": "30 phút",
+    "diffMin": -20
   },
   "tuition": {
-    "payment_count": "Trọn gói"
+    "payment_count": "1 buổi"
   },
   "route": {
-    "advisor_url": "https://web.unitz.dev/advisor?id=DNRwzfAoM6NPY4v2j5w4yuRvk6l2",
+    "advisor_url": "https://web.unitz.dev/advisor?id=rM3EUyLfbTZtgUg906cpzQgCUkj1",
     "user_url": "https://web.unitz.dev/profile",
-    "course_url": "https://web.unitz.dev/course/detail?id=af3678d7-b91a-401a-aa29-5ee814c2757c",
+    "course_url": "https://web.unitz.dev/course/detail?id=a7809f9b-4dd5-4621-b765-05db3b8a886c",
     "course_filter_url": "https://web.unitz.dev/education/course-filter",
-    "room_url": "https://web.unitz.dev/room?id=db65a402-5c05-4e6c-b5bc-091e6fd7f000"
+    "room_url": "https://web.unitz.dev/room?id=ba0c4d0a-0dfc-49bc-a214-8df6cda75cdd"
   }
 }
