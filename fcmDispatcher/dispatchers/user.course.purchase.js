@@ -58,6 +58,10 @@ exports.getQuery = () => `
                 id
               }
               user_id
+              courses {
+                per_amount
+                per_unit
+              }
             }
           }
         }
@@ -139,13 +143,17 @@ exports.effect = async (
   const first_session_start = moment(_.get(ctxData, 'purchase.first_room.0.room.start_at'));
   const room = _.get(ctxData, 'purchase.first_room.0.room');
 
+  const course_amount = helpers.flattenGet(course, 'purchases.purchase.courses');
+
   const advisor_id = _.get(ctxData, 'advisor.id');
   const per_unit = _.get(ctxData, 'purchase.courses.0.per_unit');
   const per_amount = _.get(ctxData, 'purchase.courses.0.per_amount');
 
   const per_session = parseInt(session_count) === 100000 ? '' : `/${session_count}`;
 
-  const payment_count = ['per_session', 'session'].includes(per_unit) ? `${per_amount}${per_session} buổi` : 'Trọn gói';
+  const num_per = _.sumBy(course_amount, 'per_amount');
+
+  const payment_count = ['per_session', 'session'].includes(per_unit) ? `${num_per}${per_session} buổi` : 'Trọn gói';
 
   await hasuraClient.getClient().request(
     `
