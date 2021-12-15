@@ -3,112 +3,91 @@
     "name": "user.course.purchase"
   },
   "user": {
-    "id": "WRQ3Pyd1hIMqQBt4S4Ur9dK4Vhk1",
+    "id": "cGNygB3hEQNNWWWVOOO4ZhFpt0n2",
     "profile": {
-      "display_name": "VÕ HOÀNG BÍCH PHƯỢNG"
+      "display_name": "Đan Thanh"
     }
   },
   "advisor": {
-    "id": "4piDVUSHDNXxzyRBRsrn4c",
+    "id": "DNRwzfAoM6NPY4v2j5w4yuRvk6l2",
     "profile": {
-      "display_name": "Nguyễn Văn Thi"
+      "display_name": "Vy Nguyễn"
     }
   },
   "purchase": {
     "course_rooms": [
       {
-        "id": "b192a3a3-5033-4882-914e-27e19379dd90"
-      },
-      {
-        "id": "fc0ca108-fc45-4f1c-9268-5c06d452611b"
-      },
-      {
-        "id": "7fba73fa-5ec4-4847-bc5e-3f7a4d07d2c1"
-      },
-      {
-        "id": "f65a2002-226e-4ecb-a6da-5b794a532eec"
-      },
-      {
-        "id": "0e0a16b0-bb97-4a4d-82dd-fd09f7dd0560"
-      },
-      {
-        "id": "0d8ea130-eb45-4071-8684-de5a0cee22e4"
-      },
-      {
-        "id": "57fd23a6-5999-4553-ad5b-08f7faaa9487"
-      },
-      {
-        "id": "f4a115f3-dadb-46f1-b09d-63bca93fc042"
-      },
-      {
-        "id": "2556e27e-4a96-4fc1-9822-0d4740a105a1"
-      },
-      {
-        "id": "c6f86855-cd27-428a-9cd0-6ddcc6041476"
-      },
-      {
-        "id": "08b1b974-fa03-425e-b6e7-7e33ba14b5c3"
-      },
-      {
-        "id": "4af1873f-250b-40a6-8faf-8912f143910b"
+        "id": "095b40e2-7528-4511-b9d4-a0f2139c68b7"
       }
     ],
     "first_room": [
       {
-        "id": "b192a3a3-5033-4882-914e-27e19379dd90",
+        "id": "095b40e2-7528-4511-b9d4-a0f2139c68b7",
         "room": {
-          "start_at": "2021-12-12T01:00:00+00:00",
-          "id": "70d365d7-307f-4101-b44a-73560be4539d"
+          "start_at": "2021-12-16T04:30:00+00:00",
+          "id": "7d3aedcc-d7e0-41db-a04a-70920eec65ff"
         }
       }
     ],
     "course_rooms_aggregate": {
       "aggregate": {
-        "count": 12
+        "count": 1
       }
     },
     "courses": [
       {
         "pricing_type": "per_session",
-        "price_amount": 1920000,
+        "price_amount": 20000,
         "price_currency": "vnd",
-        "per_amount": 12,
+        "per_amount": 1,
         "per_unit": "per_session",
         "course": {
-          "id": "822b4dce-c010-48c9-b41f-7381440c7fcb",
-          "name": "LỚP TIẾNG TRUNG VỠ LÒNG BUỔI SÁNG",
-          "description": "<p>Khóa học được đảm nhiệm bởi <span style=\"color: rgb(0, 138, 0);\">giảng viên thạc sỹ giàu kinh nghiệm</span>, đầy nhiệt huyết và tận tâm đối với từng học viên.</p><p><br></p><p><strong style=\"color: rgb(230, 0, 0);\">ĐỐI TƯỢNG </strong></p><p>Dành cho người chưa học qua tiếng Trung.</p><p><br></p><p><strong style=\"color: rgb(230, 0, 0);\">THỜI LƯỢNG HỌC</strong></p><p>Một khóa kéo dài trong 30 buổi/2.5 tháng (10 tuần).&nbsp;Một tuần/3 buổi.&nbsp;Một buổi học 90 phút.</p><p><br></p><p><strong style=\"color: rgb(230, 0, 0);\">GIÁO TRÌNH</strong></p><p><strong style=\"color: rgb(0, 138, 0);\">301 CÂU ĐÀM THOẠI TIẾNG TRUNG</strong><strong> </strong>và những từ ngữ thực tế do giáo viên biên soạn.</p><p><br></p><p><strong style=\"color: rgb(230, 0, 0);\">LỘ TRÌNH HỌC CHO NGƯỜI HỌC BẮT ĐẦU</strong></p><p>- 5 buổi đầu: Tập trung học phát âm (phiên âm<span style=\"color: rgb(0, 138, 0);\"> PINYIN</span>), các từ vựng và cấu trúc NGỮ PHÁP cơ bản, các quy tắc viết <span style=\"color: rgb(0, 138, 0);\">BÚT THUẬN</span>, các <span style=\"color: rgb(0, 138, 0);\">BỘ THỦ</span> trong tiếng Trung.</p><p><br></p><p><strong style=\"color: rgb(230, 0, 0);\">MỤC TIÊU</strong><strong> </strong></p><p>Giúp học viên nắm vững phần phát âm, thuận tiện cho việc tự học thêm ở nhà, trên mạng mà không phụ thuộc giáo viên. Các quy tắc viết bút thuận, các bộ thủ cơ bản giúp người học dễ dàng nhớ mặt chữ.</p><p>- 20 buổi tiếp theo: Bắt đầu học theo CHỦ ĐỀ giao tiếp cơ bản về cuộc sống hằng ngày.</p><p>- Học cách luyện <strong style=\"color: rgb(0, 138, 0);\">ĐÁNH CHỮ TIẾNG TRUNG</strong> trên điện thoại, PC, Laptop phù hợp cho việc học và việc làm.</p><p>- Giới thiệu các<strong> </strong><strong style=\"color: rgb(0, 138, 0);\">Apps</strong> học tiếng Trung, hỗ trợ học viên phát âm và nâng cao vốn từ vựng.</p><p>- 5 buổi còn lại: Các buổi luyện nói, giao tiếp với nhau, tổng hợp ôn luyện lại các từ vựng, cấu trúc ngữ pháp trong khóa học. Làm bài TEST để kiểm tra trình độ và lên lớp trung cấp để bắt đầu tiếp xúc với dạng bài thi HSK.</p><p><br></p><p><em>Học viên sẽ được kèm cặp, hướng dẫn một cách cẩn thận để luôn theo kịp bài học của mình. Học viên sẽ được học 4 kỹ năng Nghe - Nói - Đọc - Viết (hoặc chỉ học NGHE - NÓI đáp ứng nhu cầu học sinh)</em></p><p><em>Chúng tôi cam kết sẽ đem đến cho học viên những bài học thú vị và bổ ích, phù hợp với từng đối tượng học viên cũng như tính cách của mỗi người.</em></p><p><br></p><p><em>Với phương pháp giảng dạy hiện đại, lấy học viên làm trung tâm, giảng viên luôn tạo cảm hứng để học viên có được niềm yêu thích, đam mê học tiếng Trung. Học viên vừa đến lớp để học được kiến thức lại vừa để giao lưu, giải trí và chia sẻ cuộc sống, công việc và gia đình</em>.</p>",
-          "start_at": "2021-12-11T17:00:00+00:00",
-          "session_duration": 3600,
-          "session_occurence": 100000,
+          "id": "66333718-6351-4ed8-b133-b3b254bbb3a2",
+          "name": "T. Describe your hometown",
+          "description": "<p>...</p>",
+          "start_at": "2021-12-14T17:00:00+00:00",
+          "session_duration": 900,
+          "session_occurence": 3,
           "sessions": [
             {
-              "id": "499e5278-203d-49ed-ae0a-3fafe2587365",
+              "id": "524cba6c-0399-47f6-87fc-3bafabd3e214",
               "is_active": true
             }
           ],
           "first_room": [
             {
-              "start_at": "2021-12-05T01:00:00+00:00"
+              "start_at": "2021-12-15T04:30:00+00:00"
             }
           ],
           "purchases": [
             {
-              "id": "f62214f8-6511-4423-ba65-0eab6bf2039d",
-              "price_amount": 1920000,
+              "id": "dd6f9a22-a57a-4869-a57d-b7195e3ba14a",
+              "price_amount": 20000,
               "is_active": true,
               "purchase": {
                 "statement": [],
-                "user_id": "WRQ3Pyd1hIMqQBt4S4Ur9dK4Vhk1"
+                "user_id": "cGNygB3hEQNNWWWVOOO4ZhFpt0n2",
+                "courses": [
+                  {
+                    "per_amount": 1,
+                    "per_unit": "per_session"
+                  }
+                ]
               }
             },
             {
-              "id": "a77feb45-e5cb-4630-badb-6181758c5c39",
-              "price_amount": 1920000,
+              "id": "ce29b710-eeaf-40b5-987c-62247aafe68e",
+              "price_amount": 20000,
               "is_active": true,
               "purchase": {
                 "statement": [],
-                "user_id": "WRQ3Pyd1hIMqQBt4S4Ur9dK4Vhk1"
+                "user_id": "cGNygB3hEQNNWWWVOOO4ZhFpt0n2",
+                "courses": [
+                  {
+                    "per_amount": 1,
+                    "per_unit": "per_session"
+                  }
+                ]
               }
             }
           ]
@@ -117,20 +96,20 @@
     ]
   },
   "course": {
-    "id": "822b4dce-c010-48c9-b41f-7381440c7fcb",
-    "name": "LỚP TIẾNG TRUNG VỠ LÒNG BUỔI SÁNG",
-    "first_session_start": "Chủ nhật 12/12 08:00",
-    "session_count": "Không giới hạn buổi",
-    "session_duration": "60 phút"
+    "id": "66333718-6351-4ed8-b133-b3b254bbb3a2",
+    "name": "T. Describe your hometown",
+    "first_session_start": "Thứ năm 16/12 11:30",
+    "session_count": "3 buổi",
+    "session_duration": "15 phút"
   },
   "tuition": {
-    "payment_count": "12 buổi"
+    "payment_count": "1/3 buổi"
   },
   "route": {
-    "advisor_url": "https://unitz.app/advisor?id=4piDVUSHDNXxzyRBRsrn4c",
-    "user_url": "https://unitz.app/profile",
-    "course_url": "https://unitz.app/course/detail?id=822b4dce-c010-48c9-b41f-7381440c7fcb",
-    "course_filter_url": "https://unitz.app/education/course-filter",
-    "room_url": "https://unitz.app/room?id=70d365d7-307f-4101-b44a-73560be4539d"
+    "advisor_url": "https://web.unitz.dev/advisor?id=DNRwzfAoM6NPY4v2j5w4yuRvk6l2",
+    "user_url": "https://web.unitz.dev/profile",
+    "course_url": "https://web.unitz.dev/course/detail?id=66333718-6351-4ed8-b133-b3b254bbb3a2",
+    "course_filter_url": "https://web.unitz.dev/education/course-filter",
+    "room_url": "https://web.unitz.dev/room?id=7d3aedcc-d7e0-41db-a04a-70920eec65ff"
   }
 }
