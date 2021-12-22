@@ -16,7 +16,7 @@ exports.getQuery = () => `
         user_id
         purchase_id
         purchase {
-          transaction_purchase {
+          transaction_purchases {
             transaction {
               statement {
                 id
@@ -69,7 +69,8 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils }) => {
     .utcOffset(await utils.getUserTimezone(advisor_id))
     .format(helpers.START_TIME_FORMAT)})`;
 
-  const statements = helpers.flattenGet(room, 'purchases.purchase.transaction_purchase.transaction.statement');
+  const statements = helpers.flattenGet(room, 'purchases.purchase.transaction_purchases.transaction.statement');
+  console.log({ statements });
   const amount = _.sumBy(_.filter(statements, { name: 'advisor_income' }), 'amount');
 
   const title = `Lớp học ${courseDisplayName} đã hoàn tất`;
@@ -125,8 +126,8 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
     .utcOffset(await utils.getUserTimezone(advisor_id))
     .format(helpers.START_TIME_FORMAT)})`;
 
-  const statements = helpers.flattenGet(room, 'purchases.purchase.transaction_purchase.transaction.statement');
-  const users = helpers.flattenGet(room, 'purchases.purchase.transaction_purchase.transaction.user');
+  const statements = helpers.flattenGet(room, 'purchases.purchase.transaction_purchases.transaction.statement');
+  const users = helpers.flattenGet(room, 'purchases.purchase.transaction_purchases.transaction.user');
 
   const advisor_income = _.sumBy(_.filter(statements, { name: 'advisor_income' }), 'amount');
   const platform_income = _.sumBy(_.filter(statements, { name: 'platform_income' }), 'amount');

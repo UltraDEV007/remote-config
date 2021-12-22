@@ -21,7 +21,7 @@ exports.getQuery = () => `
       }
       purchases {
         purchase {
-          transaction_purchase {
+          transaction_purchases {
             transaction {
               statement {
                 id
@@ -57,7 +57,7 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
 
   const courseDisplayName = _.get(course, 'name');
 
-  const statements = helpers.flattenGet(course, 'purchases.purchase.transaction_purchase.transaction.statement');
+  const statements = helpers.flattenGet(course, 'purchases.purchase.transaction_purchases.transaction.statement');
 
   const amount = _.sumBy(_.filter(statements, { name: 'advisor_income' }), 'amount');
 
@@ -109,12 +109,10 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients }) => {
   const courseDisplayName = _.get(course, 'name');
   const advisor_id = _.get(ctxData, 'advisor.id');
 
-  const statements = helpers.flattenGet(course, 'purchases.purchase.transaction_purchase.transaction.statement');
+  const statements = helpers.flattenGet(course, 'purchases.purchase.transaction_purchases.transaction.statement');
   const advisor_income = _.sumBy(_.filter(statements, { name: 'advisor_income' }), 'amount');
   const platform_income = _.sumBy(_.filter(statements, { name: 'platform_income' }), 'amount');
-
-  const users = helpers.flattenGet(course, 'purchases.purchase.transaction_purchase.transaction.user');
-
+  const users = helpers.flattenGet(course, 'purchases.purchase.transaction_purchases.transaction.user');
   const $start_at = moment(_.get(course, 'start_at'));
   const session_count = _.get(course, 'session_occurence', 0);
   const session_duration = _.get(course, 'session_duration', 0);

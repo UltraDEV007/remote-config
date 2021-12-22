@@ -27,7 +27,7 @@ exports.getQuery = () => `
         user_id
         purchase_id
         purchase {
-          transaction_purchase {
+          transaction_purchases {
             transaction {
               statement {
                 id
@@ -91,7 +91,7 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils }) => {
     .utcOffset(await utils.getUserTimezone(advisor_id))
     .format(helpers.START_TIME_FORMAT)})`;
 
-  const statements = helpers.flattenGet(room, 'purchases.purchase.transaction_purchase.transaction.statement');
+  const statements = helpers.flattenGet(room, 'purchases.purchase.transaction_purchases.transaction.statement');
 
   const amount = _.get(_.find(statements, { name: 'refund' }), 'amount');
 
@@ -162,7 +162,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
   const user_id = _.get(ctxData, 'user.id');
 
-  const statements = helpers.flattenGet(room, 'purchases.purchase.transaction_purchase.transaction.statement');
+  const statements = helpers.flattenGet(room, 'purchases.purchase.transaction_purchases.transaction.statement');
 
   const amount = _.get(_.find(statements, { name: 'refund' }), 'amount');
 

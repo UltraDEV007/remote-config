@@ -21,7 +21,7 @@ exports.getQuery = () => `
         user_id
         purchase_id
         purchase {
-          transaction_purchase {
+          transaction_purchases {
             transaction {
               statement {
                 id
