@@ -24,24 +24,26 @@
         "user_id": "fH3k96KDlzYx42whT6Mfu5LODQv2",
         "purchase_id": "e20e0ec5-a3fd-4ecc-9c2f-13b4258b04b4",
         "purchase": {
-          "transaction_purchase": {
-            "transaction": {
-              "statement": [
-                {
-                  "id": "17e3cf17-f95a-4d29-afd5-15f6805891bf",
-                  "name": "refund",
-                  "type": "refund",
-                  "amount": 100000
-                },
-                {
-                  "id": "330021e6-2368-481c-9a88-63e20096fd0e",
-                  "name": "platform_iss",
-                  "type": "refund",
-                  "amount": -100000
-                }
-              ]
+          "transaction_purchases": [
+            {
+              "transaction": {
+                "statement": [
+                  {
+                    "id": "17e3cf17-f95a-4d29-afd5-15f6805891bf",
+                    "name": "refund",
+                    "type": "refund",
+                    "amount": 100000
+                  },
+                  {
+                    "id": "330021e6-2368-481c-9a88-63e20096fd0e",
+                    "name": "platform_iss",
+                    "type": "refund",
+                    "amount": -100000
+                  }
+                ]
+              }
             }
-          }
+          ]
         }
       }
     ]
@@ -54,7 +56,7 @@
     "session_duration": "30 phút"
   },
   "tuition": {
-    "payment_count": "Trọn gói"
+    "payment_count": "1 buổi"
   },
   "route": {
     "advisor_url": "https://web.unitz.dev/advisor?id=rM3EUyLfbTZtgUg906cpzQgCUkj1",
