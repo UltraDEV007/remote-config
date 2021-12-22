@@ -19,72 +19,74 @@
         "user_id": "fH3k96KDlzYx42whT6Mfu5LODQv2",
         "purchase_id": "c987e3dd-b33c-4bd0-b666-f5d353111cf7",
         "purchase": {
-          "transaction_purchase": {
-            "transaction": {
-              "statement": [
-                {
-                  "id": "bdfcddfb-ec82-4f0a-8236-2df8450fd548",
-                  "name": "tuition",
-                  "type": "payment",
-                  "amount": -100000
-                },
-                {
-                  "id": "480aad4f-1aa3-4452-a372-477e55a7e0df",
-                  "name": "advisor_income",
-                  "type": "payment",
-                  "amount": 90000
-                },
-                {
-                  "id": "b4560a9f-076e-49f4-958f-d41eef9be80c",
-                  "name": "advisor_tax",
-                  "type": null,
-                  "amount": 0
-                },
-                {
-                  "id": "a666eb6b-c2b5-46d8-bee9-a1b7747d3476",
-                  "name": "platform_income",
-                  "type": "charge_payment",
-                  "amount": 10000
-                },
-                {
-                  "id": "e6cc90f6-f4e3-466d-9cf2-327e35d31b0d",
-                  "name": "platform_tax",
-                  "type": null,
-                  "amount": 0
-                },
-                {
-                  "id": "4a175986-37c0-4c84-9e9f-254dd5ca8969",
-                  "name": "subtotal",
-                  "type": null,
-                  "amount": 100000
-                },
-                {
-                  "id": "a0b17760-4886-423d-8144-0960d9602675",
-                  "name": "tax",
-                  "type": null,
-                  "amount": 0
-                },
-                {
-                  "id": "2861153e-d677-471e-88ce-8879d5de9698",
-                  "name": "discount",
-                  "type": null,
-                  "amount": 0
-                },
-                {
-                  "id": "a0cc843c-bfbd-45e3-b415-7f7d9d16c2aa",
-                  "name": "total",
-                  "type": null,
-                  "amount": 100000
-                }
-              ],
-              "user": {
-                "profile": {
-                  "display_name": "Nhat Dev",
-                  "id": "6f079981-4b50-4da7-9e08-d89cadbed248"
+          "transaction_purchases": [
+            {
+              "transaction": {
+                "statement": [
+                  {
+                    "id": "bdfcddfb-ec82-4f0a-8236-2df8450fd548",
+                    "name": "tuition",
+                    "type": "payment",
+                    "amount": -100000
+                  },
+                  {
+                    "id": "480aad4f-1aa3-4452-a372-477e55a7e0df",
+                    "name": "advisor_income",
+                    "type": "payment",
+                    "amount": 90000
+                  },
+                  {
+                    "id": "b4560a9f-076e-49f4-958f-d41eef9be80c",
+                    "name": "advisor_tax",
+                    "type": null,
+                    "amount": 0
+                  },
+                  {
+                    "id": "a666eb6b-c2b5-46d8-bee9-a1b7747d3476",
+                    "name": "platform_income",
+                    "type": "charge_payment",
+                    "amount": 10000
+                  },
+                  {
+                    "id": "e6cc90f6-f4e3-466d-9cf2-327e35d31b0d",
+                    "name": "platform_tax",
+                    "type": null,
+                    "amount": 0
+                  },
+                  {
+                    "id": "4a175986-37c0-4c84-9e9f-254dd5ca8969",
+                    "name": "subtotal",
+                    "type": null,
+                    "amount": 100000
+                  },
+                  {
+                    "id": "a0b17760-4886-423d-8144-0960d9602675",
+                    "name": "tax",
+                    "type": null,
+                    "amount": 0
+                  },
+                  {
+                    "id": "2861153e-d677-471e-88ce-8879d5de9698",
+                    "name": "discount",
+                    "type": null,
+                    "amount": 0
+                  },
+                  {
+                    "id": "a0cc843c-bfbd-45e3-b415-7f7d9d16c2aa",
+                    "name": "total",
+                    "type": null,
+                    "amount": 100000
+                  }
+                ],
+                "user": {
+                  "profile": {
+                    "display_name": "Nhat Dev",
+                    "id": "6f079981-4b50-4da7-9e08-d89cadbed248"
+                  }
                 }
               }
             }
-          }
+          ]
         }
       }
     ]
