@@ -1,0 +1,33 @@
+{
+  "template": {
+    "name": "user.course.refund"
+  },
+  "user": {
+    "id": "xFL8xgByAXeH2W6WfAJQWS56OWj2",
+    "profile": {
+      "display_name": "Hung 33"
+    }
+  },
+  "advisor": {
+    "id": "PdOJWFBgNPUEMhX1JlsDm7zWy012",
+    "profile": {
+      "display_name": "Hung Vuong"
+    }
+  },
+  "course": {
+    "id": "2d263b94-9b98-4e0e-a901-974cdf95b366",
+    "name": "12.01 - 14:30",
+    "session_count": "Không giới hạn buổi",
+    "session_duration": "15 phút"
+  },
+  "tuition": {
+    "payment_count": "1 buổi"
+  },
+  "route": {
+    "advisor_url": "https://web.unitz.dev/advisor?id=PdOJWFBgNPUEMhX1JlsDm7zWy012",
+    "user_url": "https://web.unitz.dev/profile",
+    "course_url": "https://web.unitz.dev/course/detail?id=2d263b94-9b98-4e0e-a901-974cdf95b366",
+    "course_filter_url": "https://web.unitz.dev/education/course-filter",
+    "wallet_url": "https://web.unitz.dev/me/wallet"
+  }
+}
