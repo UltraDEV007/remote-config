@@ -1,5 +1,5 @@
 exports.getQuery = () => `
-  query($advisor_id: String!, $room_id: uuid!, $course_id: uuid!) {
+  query($user_id: String!, $advisor_id: String!, $room_id: uuid!, $course_id: uuid!) {
     advisor: advisor_by_pk(id: $advisor_id) {
       id
       profile {
@@ -10,6 +10,12 @@ exports.getQuery = () => `
       id
       start_at
       end_at
+    }
+    user: user_by_pk(id: $user_id) {
+      id
+      profile {
+        display_name
+      }
     }
     course: course_by_pk(id: $course_id) {
       id
@@ -32,6 +38,7 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
     advisor_id: _.get(payload, 'course.advisor_id'),
     course_id: _.get(payload, 'course.id'),
     room_id: _.get(payload, 'room.id'),
+    user_id: _.get(payload, 'purchase.user_id'),
   };
 };
 
@@ -148,10 +155,9 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
     ...ctxData,
     course: {
       ..._.pick(course, ['id', 'name']),
-      session_at,
+      reschedule_time: session_at,
       session_count: helpers.formatSessionOccurence(session_count),
       session_duration: helpers.formatCallDuration(session_duration),
-      diffMin,
     },
     tuition: {
       payment_count,

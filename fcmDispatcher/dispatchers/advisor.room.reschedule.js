@@ -23,6 +23,10 @@ exports.getQuery = () => `
       }
       per_amount
       per_unit
+      first_room: rooms(order_by: {start_at: asc}, limit: 1) {
+        start_at
+        id
+      }
     }
   }
 `;
@@ -101,8 +105,6 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const advisor_id = _.get(ctxData, 'advisor.id');
   const $now = moment();
 
-  const diffMin = moment($start_at).diff($now, 'minute');
-
   const session_at = _.capitalize(
     $start_at
       .locale('vi')
@@ -118,14 +120,14 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const per_session = parseInt(session_count) === 100000 ? '' : `/${session_count}`;
   const payment_count = ['per_session', 'session'].includes(per_unit) ? `${per_amount}${per_session} buổi` : 'Trọn gói';
 
-  const user_id = _.get(ctxData, 'user.id');
+  const first_session_start = moment(_.get(course, 'first_room.0.start_at'));
 
   await clients.hasuraClient.getClient().request(
     `
     mutation upsertnotifevent($payload: jsonb, $type: String) {
       insert_notification_one(
         object: {
-          owner_id: "${user_id}"
+          owner_id: "${advisor_id}"
           type_id: $type
           payload: $payload
         }
@@ -141,17 +143,22 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   );
 
   // send email effect
-  clients.sendgridClient.getClient().sendEmail(user_id, {
+  clients.sendgridClient.getClient().sendEmail(advisor_id, {
     template: {
       name: 'advisor.room.reschedule',
     },
     ...ctxData,
     course: {
       ..._.pick(course, ['id', 'name']),
-      session_at,
+      reschedule_time: session_at,
       session_count: helpers.formatSessionOccurence(session_count),
       session_duration: helpers.formatCallDuration(session_duration),
-      diffMin,
+      first_session_start: _.capitalize(
+        first_session_start
+          .locale('vi')
+          .utcOffset(await utils.getUserTimezone(advisor_id))
+          .format(helpers.START_TIME_FULL_FORMAT)
+      ),
     },
     tuition: {
       payment_count,
