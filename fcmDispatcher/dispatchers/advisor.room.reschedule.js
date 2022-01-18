@@ -10,6 +10,16 @@ exports.getQuery = () => `
       id
       start_at
       end_at
+      last_edit: logs(limit: 1, order_by: {created_at: desc}) {
+        advisor_id
+        course_id
+        start_at
+        status
+        end_at
+        duration
+        course_session_id
+        course_session_occurence
+      }
     }
     course: course_by_pk(id: $course_id) {
       id
@@ -103,7 +113,6 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
 
   const $start_at = moment(_.get(room, 'start_at'));
   const advisor_id = _.get(ctxData, 'advisor.id');
-  const $now = moment();
 
   const session_at = _.capitalize(
     $start_at
@@ -121,6 +130,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const payment_count = ['per_session', 'session'].includes(per_unit) ? `${per_amount}${per_session} buổi` : 'Trọn gói';
 
   const first_session_start = moment(_.get(course, 'first_room.0.start_at'));
+  const last_edit_time = moment(_.get(room, 'last_edit.0.start_at'));
 
   await clients.hasuraClient.getClient().request(
     `
@@ -155,6 +165,12 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
       session_duration: helpers.formatCallDuration(session_duration),
       first_session_start: _.capitalize(
         first_session_start
+          .locale('vi')
+          .utcOffset(await utils.getUserTimezone(advisor_id))
+          .format(helpers.START_TIME_FULL_FORMAT)
+      ),
+      last_edit_time: _.capitalize(
+        last_edit_time
           .locale('vi')
           .utcOffset(await utils.getUserTimezone(advisor_id))
           .format(helpers.START_TIME_FULL_FORMAT)

@@ -10,6 +10,16 @@ exports.getQuery = () => `
       id
       start_at
       end_at
+      last_edit: logs(limit: 1, order_by: {created_at: desc}) {
+        advisor_id
+        course_id
+        start_at
+        status
+        end_at
+        duration
+        course_session_id
+        course_session_occurence
+      }
     }
     user: user_by_pk(id: $user_id) {
       id
@@ -105,17 +115,18 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const room = _.get(ctxData, 'room');
 
   const $start_at = moment(_.get(room, 'start_at'));
-  const advisor_id = _.get(ctxData, 'advisor.id');
-  const $now = moment();
 
-  const diffMin = moment($start_at).diff($now, 'minute');
+  const user_id = _.get(ctxData, 'user.id');
 
   const session_at = _.capitalize(
     $start_at
       .locale('vi')
-      .utcOffset(await utils.getUserTimezone(advisor_id))
+      .utcOffset(await utils.getUserTimezone(user_id))
       .format(helpers.START_TIME_FULL_FORMAT)
   );
+
+  const last_edit_time = moment(_.get(room, 'last_edit.0.start_at'));
+
   const session_count = _.get(ctxData, 'course.session_occurence', 0);
   const session_duration = _.get(ctxData, 'course.session_duration', 0);
 
@@ -124,8 +135,6 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
 
   const per_session = parseInt(session_count) === 100000 ? '' : `/${session_count}`;
   const payment_count = ['per_session', 'session'].includes(per_unit) ? `${per_amount}${per_session} buổi` : 'Trọn gói';
-
-  const user_id = _.get(ctxData, 'user.id');
 
   await clients.hasuraClient.getClient().request(
     `
@@ -156,6 +165,12 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
     course: {
       ..._.pick(course, ['id', 'name']),
       reschedule_time: session_at,
+      last_edit_time: _.capitalize(
+        last_edit_time
+          .locale('vi')
+          .utcOffset(await utils.getUserTimezone(user_id))
+          .format(helpers.START_TIME_FULL_FORMAT)
+      ),
       session_count: helpers.formatSessionOccurence(session_count),
       session_duration: helpers.formatCallDuration(session_duration),
     },
