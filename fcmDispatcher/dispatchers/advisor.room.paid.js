@@ -114,17 +114,22 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils }) => {
 
 exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const { _, moment } = helpers;
-  const { slackClient, hasuraClient } = clients;
+  const { slackClient, hasuraClient, routeWebClient } = clients;
 
   const course = _.get(ctxData, 'course');
   const room = _.get(ctxData, 'room');
   const $start_at = moment(_.get(room, 'start_at'));
   const advisor_id = _.get(ctxData, 'advisor.id');
-  const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
+  // const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
+  const advisorDisplayName = routeWebClient.getClient().toAdminLink('admin.advisor', _.get(ctxData, 'advisor'));
 
-  const courseDisplayName = `${_.get(course, 'name')}(${$start_at
+  let courseDisplayName = routeWebClient.getClient().toAdminLink('admin.course', course);
+
+  courseDisplayName = `${courseDisplayName}(<${routeWebClient
+    .getClient()
+    .toAdminLink('admin.room', room)} | ${$start_at
     .utcOffset(await utils.getUserTimezone(advisor_id))
-    .format(helpers.START_TIME_FORMAT)})`;
+    .format(helpers.START_TIME_FORMAT)}>)`;
 
   const statements = helpers.flattenGet(room, 'purchases.transaction.transaction_purchases.transaction.statement');
   const users = helpers.flattenGet(room, 'purchases.transaction.transaction_purchases.transaction.user');

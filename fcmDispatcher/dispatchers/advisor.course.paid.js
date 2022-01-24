@@ -101,12 +101,15 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
 
 exports.effect = async ({ payload }, { ctxData, utils, helpers, clients }) => {
   const { _, moment } = helpers;
-  const { slackClient, hasuraClient } = clients;
+  const { slackClient, hasuraClient, routeWebClient } = clients;
 
   const course = _.get(ctxData, 'course');
 
-  const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
-  const courseDisplayName = _.get(course, 'name');
+  // const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
+  const advisorDisplayName = routeWebClient.getClient().toAdminLink('admin.advisor', _.get(ctxData, 'advisor'));
+
+  // const courseDisplayName = _.get(course, 'name');
+  const courseDisplayName = routeWebClient.getClient().toAdminLink('admin.course', course);
   const advisor_id = _.get(ctxData, 'advisor.id');
 
   const statements = helpers.flattenGet(course, 'purchases.purchase.transaction_purchases.transaction.statement');

@@ -116,9 +116,9 @@ exports.effect = async (
   const per_amount = _.get(ctxData, 'purchase.courses.0.per_amount');
   const price_amount = _.get(ctxData, 'purchase.courses.0.price_amount');
 
-  const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
-  const userDisplayName = _.get(ctxData, 'user.profile.display_name');
-  const courseDisplayName = _.get(course, 'name');
+  const advisorDisplayName = routeWebClient.getClient().toAdminLink('admin.advisor', _.get(ctxData, 'advisor'));
+  const userDisplayName = routeWebClient.getClient().toAdminLink('admin.user', _.get(ctxData, 'user'));
+  const courseDisplayName = routeWebClient.getClient().toAdminLink('admin.course', course);
 
   const $start_at = moment(_.get(course, 'start_at'));
   const session_count = _.get(course, 'session_occurence', 0);

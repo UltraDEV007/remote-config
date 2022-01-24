@@ -109,13 +109,14 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils }) => {
 
 exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const { _, moment } = helpers;
-  const { slackClient, hasuraClient } = clients;
+  const { slackClient, hasuraClient, routeWebClient } = clients;
 
   const course = _.get(ctxData, 'course');
 
   const advisor_id = _.get(ctxData, 'advisor.id');
 
-  const courseDisplayName = _.get(course, 'name');
+  // const courseDisplayName = _.get(course, 'name');
+  const courseDisplayName = routeWebClient.getClient().toAdminLink('admin.course', course);
 
   const session_count = _.get(ctxData, 'course.session_occurence', 0);
   const session_duration = _.get(ctxData, 'course.session_duration', 0);
@@ -127,7 +128,9 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
 
   const first_session_start = moment(_.get(ctxData, 'course.first_room.0.start_at'));
 
-  const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
+  // const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
+  const advisorDisplayName = routeWebClient.getClient().toAdminLink('admin.advisor', _.get(ctxData, 'advisor'));
+
   const user_id = _.get(ctxData, 'user.id');
 
   const price_amount = _.get(course, 'price_amount');

@@ -134,7 +134,7 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils }) => {
 
 exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const { _, moment } = helpers;
-  const { slackClient, hasuraClient } = clients;
+  const { slackClient, hasuraClient, routeWebClient } = clients;
 
   const course = _.get(ctxData, 'course');
   const room = _.get(ctxData, 'room');
@@ -142,9 +142,12 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const $start_at = moment(_.get(room, 'start_at'));
   const advisor_id = _.get(ctxData, 'advisor.id');
 
-  const courseDisplayName = `${_.get(course, 'name')}(${$start_at
+  let courseDisplayName = routeWebClient.getClient().toAdminLink('admin.course', course);
+  courseDisplayName = `${courseDisplayName}(<${routeWebClient
+    .getClient()
+    .toAdminLink('admin.room', room)} | ${$start_at
     .utcOffset(await utils.getUserTimezone(advisor_id))
-    .format(helpers.START_TIME_FORMAT)})`;
+    .format(helpers.START_TIME_FORMAT)}>)`;
   const session_at = _.capitalize(
     $start_at
       .locale('vi')
@@ -159,7 +162,9 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const per_session = parseInt(session_count) === 100000 ? '' : `/${session_count}`;
   const payment_count = ['per_session', 'session'].includes(per_unit) ? `${per_amount}${per_session} buổi` : 'Trọn gói';
 
-  const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
+  // const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
+  const advisorDisplayName = routeWebClient.getClient().toAdminLink('admin.advisor', _.get(ctxData, 'advisor'));
+
   const user_id = _.get(ctxData, 'user.id');
 
   const statements = helpers.flattenGet(room, 'purchases.purchase.transaction_purchases.transaction.statement');

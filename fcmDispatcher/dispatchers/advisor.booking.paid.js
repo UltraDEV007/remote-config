@@ -86,12 +86,15 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   };
 };
 
-exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient, hasuraClient } }) => {
+exports.effect = async ({ payload }, { ctxData, helpers, clients: { slackClient, hasuraClient, routeWebClient } }) => {
   const { _ } = helpers;
 
   const advisor_id = _.get(payload, 'session.advisor_id');
-  const userDisplayName = _.get(ctxData, 'user.profile.display_name');
-  const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
+  // const userDisplayName = _.get(ctxData, 'user.profile.display_name');
+  const userDisplayName = routeWebClient.getClient().toAdminLink('admin.user', _.get(ctxData, 'user'));
+  // const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
+  const advisorDisplayName = routeWebClient.getClient().toAdminLink('admin.advisor', _.get(ctxData, 'advisor'));
+
   const duration = _.get(payload, 'session.session_duration');
 
   await hasuraClient.getClient().request(
