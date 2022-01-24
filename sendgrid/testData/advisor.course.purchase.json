@@ -3,51 +3,68 @@
     "name": "advisor.course.purchase"
   },
   "user": {
-    "id": "fH3k96KDlzYx42whT6Mfu5LODQv2",
+    "id": "YUgdOvgNaTPOBfBJSs3YZN7rngS2",
     "profile": {
-      "display_name": "Nhat Dev"
+      "display_name": "Hung Tran 11"
     }
   },
   "advisor": {
-    "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
+    "id": "PdOJWFBgNPUEMhX1JlsDm7zWy012",
     "profile": {
-      "display_name": "Nam Phương"
+      "display_name": "Hung Vuong"
     }
   },
   "purchase": {
     "course_rooms": [
       {
-        "id": "19d7cb5a-645e-4cca-8bad-e089a16e1e9e"
+        "id": "1e0e3d56-f6a0-48a1-9ff7-a9d5eedc6308"
+      },
+      {
+        "id": "e87c2a4a-b715-43d4-bb44-e17f5f32ed33"
+      },
+      {
+        "id": "4ccee926-dee1-4895-8439-9f3cbe376527"
+      },
+      {
+        "id": "ac848ed4-f2a4-46de-b490-ceb8ed96cca1"
+      },
+      {
+        "id": "ab2a8a2c-3713-48e0-a049-3b5fa4e05f72"
+      },
+      {
+        "id": "6833ea4c-3cb6-47fb-9daa-3bf41e84f39e"
+      },
+      {
+        "id": "2b2f3921-9a71-4461-aa1a-48b512749cc0"
+      },
+      {
+        "id": "038d7007-4c11-4cbe-b031-aadeccf19f54"
       }
     ],
     "courses": [
       {
         "pricing_type": "per_session",
-        "price_amount": 100000,
+        "price_amount": 1600000,
         "price_currency": "vnd",
-        "per_amount": 1,
+        "per_amount": 8,
         "per_unit": "per_session",
         "course": {
-          "id": "6362831e-cad1-4485-9098-e88b5ebe605a",
-          "name": "Khoá học Nấu cơm",
-          "description": "<p>Khoá học Nấu cơm</p>",
-          "start_at": "2021-12-06T17:00:00+00:00",
-          "session_duration": 1800,
+          "id": "cf4d0773-cde2-4a8d-9d83-506601887779",
+          "name": "UnitzDev course [Repeat]",
+          "description": "<p>Thay Hung chuyen luyen thi</p><p>Sieu toc</p>",
+          "start_at": "2021-10-01T17:00:00+00:00",
+          "session_duration": 900,
           "session_occurence": 100000,
           "sessions": [
             {
-              "id": "690def22-fd22-4fed-87d8-9714f39b2033",
-              "is_active": true
-            },
-            {
-              "id": "3fc024b9-0235-4cab-9733-1fa0b8d81452",
+              "id": "2877cb2f-d802-428c-9603-2c553f8d70fd",
               "is_active": true
             }
           ],
           "first_room": [
             {
-              "start_at": "2021-12-07T09:30:00.623+00:00",
-              "id": "64b7aaae-a1e4-4be6-906e-0b8f53312252"
+              "start_at": "2021-10-03T12:00:00+00:00",
+              "id": "b4ece9b7-01dc-4e85-8068-f6fed34b4331"
             }
           ]
         }
@@ -55,21 +72,21 @@
     ]
   },
   "course": {
-    "id": "6362831e-cad1-4485-9098-e88b5ebe605a",
-    "name": "Khoá học Nấu cơm",
-    "first_session_start": "Thứ ba 07/12 16:30",
+    "id": "cf4d0773-cde2-4a8d-9d83-506601887779",
+    "name": "UnitzDev course [Repeat]",
+    "first_session_start": "Chủ nhật 03/10 04:00",
     "session_count": "Không giới hạn buổi",
-    "session_duration": "30 phút"
+    "session_duration": "15 phút"
   },
   "tuition": {
-    "amount": "100K",
-    "payment_count": "1 buổi"
+    "amount": "1.6M",
+    "payment_count": "8 buổi"
   },
   "route": {
     "advisor_url": "https://partner.unitz.dev/",
-    "course_url": "https://partner.unitz.dev/course/detail?id=6362831e-cad1-4485-9098-e88b5ebe605a",
+    "course_url": "https://partner.unitz.dev/course/detail?id=cf4d0773-cde2-4a8d-9d83-506601887779",
     "advisor_calendar_url": "https://partner.unitz.dev/calendar",
-    "room_url": "https://partner.unitz.dev/room?id=64b7aaae-a1e4-4be6-906e-0b8f53312252",
+    "room_url": "https://partner.unitz.dev/room?id=b4ece9b7-01dc-4e85-8068-f6fed34b4331",
     "add_course_url": "https://partner.unitz.dev/course/add"
   }
 }
