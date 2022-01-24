@@ -221,7 +221,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
         type: 'divider',
       },
     ],
-    channel: 'C02P4M8KFBK',
+    // channel: 'C02P4M8KFBK',
   });
 
   // send email effect
