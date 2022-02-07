@@ -1,0 +1,29 @@
+{
+  "template": {
+    "name": "advisor.course.paid_en_US"
+  },
+  "advisor": {
+    "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
+    "profile": {
+      "display_name": "Nam Phương"
+    }
+  },
+  "course": {
+    "id": "6ad222b5-5d40-40cd-b1e4-1f320d3febbd",
+    "name": "Khoá học 1 buổi ",
+    "first_session_start": "Thứ năm 02/12 19:00",
+    "start_at": "Thursday 02/12 00:00",
+    "session_count": "Không giới hạn buổi",
+    "session_duration": "30 phút"
+  },
+  "tuition": {
+    "amount": "90K",
+    "pay_from": "Nhat Dev"
+  },
+  "route": {
+    "advisor_url": "https://partner.unitz.dev/",
+    "course_url": "https://partner.unitz.dev/course/detail?id=6ad222b5-5d40-40cd-b1e4-1f320d3febbd",
+    "add_course_url": "https://partner.unitz.dev/course/add",
+    "advisor_wallet_url": "https://partner.unitz.dev/wallet"
+  }
+}
