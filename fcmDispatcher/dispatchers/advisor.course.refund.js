@@ -51,7 +51,7 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
   };
 };
 
-exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
+exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   const { _ } = helpers;
 
   const course = _.get(ctxData, 'purchase.courses.0.course');
@@ -62,9 +62,20 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
 
   const userDisplayName = _.get(ctxData, 'user.profile.display_name');
   const courseDisplayName = _.get(course, 'name');
+  const advisor_id = _.get(ctxData, 'advisor.id');
 
-  const title = 'Thông báo huỷ khoá học';
-  const body = `${userDisplayName} huỷ đăng ký khoá học ${courseDisplayName}.`;
+  const i18n = await utils.forUser(advisor_id);
+
+  // const title = 'Thông báo huỷ khoá học';
+
+  const title = i18n.t('RemoteConfig.Course.AdvisorCourseRefund.title');
+
+  // const body = `${userDisplayName} huỷ đăng ký khoá học ${courseDisplayName}.`;
+
+  const body = i18n.t('RemoteConfig.Course.AdvisorCourseRefund.body', {
+    course: courseDisplayName,
+    user: userDisplayName,
+  });
 
   return {
     notification: {
@@ -118,6 +129,8 @@ exports.effect = async (
   // const userDisplayName = _.get(ctxData, 'user.profile.display_name');
   // const courseDisplayName = _.get(course, 'name');
 
+  const i18n = await utils.forUser(advisor_id);
+
   const $start_at = moment(_.get(course, 'start_at'));
   const session_count = _.get(course, 'session_occurence', 0);
   const session_duration = _.get(course, 'session_duration', 0);
@@ -126,7 +139,13 @@ exports.effect = async (
   const first_room = _.get(course, 'first_room.0');
 
   const per_session = parseInt(session_count) === 100000 ? '' : `/${session_count}`;
-  const payment_count = ['per_session', 'session'].includes(per_unit) ? `${per_amount}${per_session} buổi` : 'Trọn gói';
+  // const payment_count = ['per_session', 'session'].includes(per_unit) ? `${per_amount}${per_session} buổi` : 'Trọn gói';
+
+  const payment_count = ['per_session', 'session'].includes(per_unit)
+    ? i18n.t('RemoteConfig.Course.Purchase.per_session', {
+        session: `${per_amount}${per_session}`,
+      })
+    : i18n.t('RemoteConfig.Course.Purchase.full_session_txt');
 
   // inapp noti effect
   hasuraClient.getClient().request(
@@ -159,12 +178,12 @@ exports.effect = async (
       ..._.pick(course, ['id', 'name']),
       first_session_start: _.capitalize(
         first_session_start
-          .locale('vi')
+          .locale(i18n.locale)
           .utcOffset(await utils.getUserTimezone(advisor_id))
           .format(helpers.START_TIME_FULL_FORMAT)
       ),
-      session_count: helpers.formatSessionOccurence(session_count),
-      session_duration: helpers.formatCallDuration(session_duration),
+      session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
+      session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
     },
     tuition: {
       amount: helpers.formatCurrencySSR(price_amount),

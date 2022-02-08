@@ -42,13 +42,24 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
 
   const userDisplayName = _.get(ctxData, 'user.profile.display_name');
 
+  const i18n = await utils.forUser(advisor_id);
+
   // query transaction info
   const statements = _.get(ctxData, 'statements');
   const amount = _.get(_.find(statements, { name: 'advisor_income' }), 'amount');
-  const title = `Bạn đã nhận được ${helpers.formatCurrencySSR(amount)} cho cuộc gọi ${kind} với ${userDisplayName}.`;
-  const body = `Gói ${helpers.formatCallDuration(duration)} - ${$start_at
-    .utcOffset(await utils.getUserTimezone(advisor_id))
-    .format(helpers.START_TIME_FORMAT)}`;
+  const title = i18n.t('RemoteConfig.Booking.AdvisorBookingPaid.title', {
+    amount: helpers.formatCurrencySSR(amount),
+    kind,
+    user: userDisplayName,
+  });
+  const body = i18n.t('RemoteConfig.Booking.Package', {
+    package: helpers.formatCallDurationWithI18n(i18n)(duration),
+    time: $start_at
+      .utcOffset(await utils.getUserTimezone(advisor_id))
+      .locale(i18n.locale)
+      .format(helpers.START_TIME_FORMAT),
+  });
+
   return {
     notification: {
       // title: `Your booking #${bookingId} is completed`,

@@ -50,7 +50,7 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
   };
 };
 
-exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
+exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   const { _ } = helpers;
 
   const course = _.get(ctxData, 'course');
@@ -60,9 +60,20 @@ exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
   const statements = helpers.flattenGet(course, 'purchases.purchase.transaction_purchases.transaction.statement');
 
   const amount = _.sumBy(_.filter(statements, { name: 'advisor_income' }), 'amount');
+  const advisor_id = _.get(ctxData, 'advisor.id');
 
-  const title = `Khoá học ${courseDisplayName} đã hoàn tất`;
-  const body = `Bạn nhận được ${helpers.formatCurrencySSR(amount)}`;
+  const i18n = await utils.forUser(advisor_id);
+
+  const title = i18n.t('RemoteConfig.Course.AdvisorCoursePaid.title', {
+    course: courseDisplayName,
+  });
+
+  // const title = `Khoá học ${courseDisplayName} đã hoàn tất`;
+  // const body = `Bạn nhận được ${helpers.formatCurrencySSR(amount)}`;
+
+  const body = i18n.t('RemoteConfig.Course.AdvisorCoursePaid.body', {
+    amount: helpers.formatCurrencySSR(amount),
+  });
 
   return {
     notification: {
@@ -120,10 +131,11 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients }) => {
   const session_count = _.get(course, 'session_occurence', 0);
   const session_duration = _.get(course, 'session_duration', 0);
   const first_session_start = moment(_.get(course, 'first_room.0.start_at'));
+  const i18n = await utils.forUser(advisor_id);
 
   const session_at = _.capitalize(
     $start_at
-      .locale('vi')
+      .locale(i18n.locale)
       .utcOffset(await utils.getUserTimezone(advisor_id))
       .format(helpers.START_TIME_FULL_FORMAT)
   );
@@ -191,14 +203,14 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients }) => {
   // send email effect
   clients.sendgridClient.getClient().sendEmail(advisor_id, {
     template: {
-      name: 'advisor.course.paid',
+      name: i18n.getTemplateSuffixName('advisor.course.paid'),
     },
     ...ctxData,
     course: {
       ..._.pick(course, ['id', 'name']),
       first_session_start: _.capitalize(
         first_session_start
-          .locale('vi')
+          .locale(i18n.locale)
           .utcOffset(await utils.getUserTimezone(advisor_id))
           .format(helpers.START_TIME_FULL_FORMAT)
       ),

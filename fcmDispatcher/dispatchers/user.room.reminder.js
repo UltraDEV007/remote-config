@@ -66,12 +66,22 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils, clients: { rou
   const $start_at = moment(_.get(room, 'start_at'));
   const advisor_id = _.get(ctxData, 'advisor.id');
 
+  const user_id = _.get(ctxData, 'user.id');
+  const i18n = await utils.forUser(user_id);
+
   const courseDisplayName = `${_.get(course, 'name')}(${$start_at
     .utcOffset(await utils.getUserTimezone(advisor_id))
+    .locale(i18n.locale)
     .format(helpers.START_TIME_FORMAT)})`;
 
-  const title = `Lớp học ${courseDisplayName}`;
-  const body = `Sẽ bắt đầu sau ${diffMin} phút.`;
+  // const title = `Lớp học ${courseDisplayName}`;
+  const title = i18n.t('RemoteConfig.Room.UserRoomReminder.title', {
+    course: courseDisplayName,
+  });
+  const body = i18n.t('RemoteConfig.Room.UserRoomReminder.body', {
+    diffMin,
+  });
+  // const body = `Sẽ bắt đầu sau ${diffMin} phút.`;
 
   return {
     notification: {

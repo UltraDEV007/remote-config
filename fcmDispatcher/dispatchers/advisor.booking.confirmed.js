@@ -31,10 +31,21 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   const duration = _.get(payload, 'session.session_duration');
 
   const userDisplayName = _.get(ctxData, 'user.profile.display_name');
-  const title = `Bạn có lịch hẹn mới với ${userDisplayName}`;
-  const body = `Gói ${helpers.formatCallDuration(duration)} - Lúc ${$start_at
-    .utcOffset(await utils.getUserTimezone(advisor_id))
-    .format(helpers.START_TIME_FORMAT)}`;
+
+  const i18n = await utils.forUser(advisor_id);
+
+  const title = i18n.t('RemoteConfig.Booking.AdvisorBookingConfirmed.title', {
+    user: userDisplayName,
+  });
+
+  const body = i18n.t('RemoteConfig.Booking.Package', {
+    package: helpers.formatCallDurationWithI18n(i18n)(duration),
+    time: $start_at
+      .utcOffset(await utils.getUserTimezone(advisor_id))
+      .locale(i18n.locale)
+      .format(helpers.START_TIME_FORMAT),
+  });
+
   return {
     notification: {
       // title: `You have new booking with ${userDisplayName}`,
