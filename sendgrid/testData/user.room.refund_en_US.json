@@ -1,0 +1,69 @@
+{
+  "template": {
+    "name": "user.room.refund_en_US"
+  },
+  "user": {
+    "id": "fH3k96KDlzYx42whT6Mfu5LODQv2",
+    "profile": {
+      "display_name": "Nhat Dev"
+    }
+  },
+  "advisor": {
+    "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
+    "profile": {
+      "display_name": "Nam Phương"
+    }
+  },
+  "room": {
+    "id": "258cb6f0-6173-42f5-affe-5d4d828adb39",
+    "start_at": "2021-12-06T07:00:00.141+00:00",
+    "end_at": "2021-12-06T07:30:00.141+00:00",
+    "purchases": [
+      {
+        "id": "a26f30ba-f14c-4fe8-b12d-37be31c18017",
+        "user_id": "fH3k96KDlzYx42whT6Mfu5LODQv2",
+        "purchase_id": "e20e0ec5-a3fd-4ecc-9c2f-13b4258b04b4",
+        "purchase": {
+          "transaction_purchases": [
+            {
+              "transaction": {
+                "statement": [
+                  {
+                    "id": "17e3cf17-f95a-4d29-afd5-15f6805891bf",
+                    "name": "refund",
+                    "type": "refund",
+                    "amount": 100000
+                  },
+                  {
+                    "id": "330021e6-2368-481c-9a88-63e20096fd0e",
+                    "name": "platform_iss",
+                    "type": "refund",
+                    "amount": -100000
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "course": {
+    "id": "ea2f8635-6aeb-4bd5-871a-eae3747f503d",
+    "name": "Khoa Hoc ABC",
+    "session_at": "Monday 06/12 14:00",
+    "session_count": "Không giới hạn buổi học",
+    "session_duration": "30 minutes"
+  },
+  "tuition": {
+    "payment_count": "1 session"
+  },
+  "route": {
+    "advisor_url": "https://web.unitz.dev/advisor?id=rM3EUyLfbTZtgUg906cpzQgCUkj1",
+    "user_url": "https://web.unitz.dev/profile",
+    "course_url": "https://web.unitz.dev/course/detail?id=ea2f8635-6aeb-4bd5-871a-eae3747f503d",
+    "course_filter_url": "https://web.unitz.dev/education/course-filter",
+    "room_url": "https://web.unitz.dev/room?id=258cb6f0-6173-42f5-affe-5d4d828adb39",
+    "wallet_url": "https://web.unitz.dev/me/wallet"
+  }
+}
