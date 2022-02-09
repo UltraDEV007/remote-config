@@ -17,10 +17,10 @@
   "course": {
     "id": "e837ecbf-b064-48c6-a9d2-a68f56fe4ca5",
     "name": "Khoá Học Database",
-    "start_at": "Thứ sáu 10/12 13:30",
-    "session_count": "Không giới hạn buổi",
-    "session_duration": "30 phút",
-    "session_at": "Thứ sáu 10/12 13:30"
+    "start_at": "Friday 10/12 13:30",
+    "session_count": "Unlimited sessions",
+    "session_duration": "30 minutes",
+    "session_at": "Friday 10/12 13:30"
   },
   "route": {
     "advisor_url": "https://partner.unitz.dev/",
