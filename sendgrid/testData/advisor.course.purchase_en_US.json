@@ -1,0 +1,75 @@
+{
+  "template": {
+    "name": "advisor.course.purchase_en_US"
+  },
+  "user": {
+    "id": "fH3k96KDlzYx42whT6Mfu5LODQv2",
+    "profile": {
+      "display_name": "Nhat Dev"
+    }
+  },
+  "advisor": {
+    "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
+    "profile": {
+      "display_name": "Nam Phương"
+    }
+  },
+  "purchase": {
+    "course_rooms": [
+      {
+        "id": "19d7cb5a-645e-4cca-8bad-e089a16e1e9e"
+      }
+    ],
+    "courses": [
+      {
+        "pricing_type": "per_session",
+        "price_amount": 100000,
+        "price_currency": "vnd",
+        "per_amount": 1,
+        "per_unit": "per_session",
+        "course": {
+          "id": "6362831e-cad1-4485-9098-e88b5ebe605a",
+          "name": "Khoá học Nấu cơm",
+          "description": "<p>Khoá học Nấu cơm</p>",
+          "start_at": "2021-12-06T17:00:00+00:00",
+          "session_duration": 1800,
+          "session_occurence": 100000,
+          "sessions": [
+            {
+              "id": "690def22-fd22-4fed-87d8-9714f39b2033",
+              "is_active": true
+            },
+            {
+              "id": "3fc024b9-0235-4cab-9733-1fa0b8d81452",
+              "is_active": true
+            }
+          ],
+          "first_room": [
+            {
+              "start_at": "2021-12-07T09:30:00.623+00:00",
+              "id": "64b7aaae-a1e4-4be6-906e-0b8f53312252"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "course": {
+    "id": "6362831e-cad1-4485-9098-e88b5ebe605a",
+    "name": "Khoá học Nấu cơm",
+    "first_session_start": "Tuesday 07/12 16:30",
+    "session_count": "Unlimited sessions",
+    "session_duration": "30 minutes"
+  },
+  "tuition": {
+    "amount": "100K",
+    "payment_count": "1 session"
+  },
+  "route": {
+    "advisor_url": "https://partner.unitz.dev/",
+    "course_url": "https://partner.unitz.dev/course/detail?id=6362831e-cad1-4485-9098-e88b5ebe605a",
+    "advisor_calendar_url": "https://partner.unitz.dev/calendar",
+    "room_url": "https://partner.unitz.dev/room?id=64b7aaae-a1e4-4be6-906e-0b8f53312252",
+    "add_course_url": "https://partner.unitz.dev/course/add"
+  }
+}
