@@ -1,0 +1,30 @@
+{
+  "template": {
+    "name": "advisor.room.connect_en_US"
+  },
+  "advisor": {
+    "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
+    "profile": {
+      "display_name": "Nam Phương"
+    }
+  },
+  "room": {
+    "id": "271e5e27-9e87-4e54-87bf-54d3be3a5d47",
+    "start_at": "2021-12-10T06:30:00.697+00:00",
+    "end_at": "2021-12-10T07:00:00.697+00:00",
+    "course_session_id": "3141646a-6f76-47fa-b5eb-417d7eda7cd2"
+  },
+  "course": {
+    "id": "e837ecbf-b064-48c6-a9d2-a68f56fe4ca5",
+    "name": "Khoá Học Database",
+    "start_at": "Friday 10/12 13:30",
+    "session_count": "Unlimited sessions",
+    "session_duration": "30 minutes",
+    "session_at": "Friday 10/12 13:30"
+  },
+  "route": {
+    "advisor_url": "https://partner.unitz.dev/",
+    "room_url": "https://partner.unitz.dev/room?id=271e5e27-9e87-4e54-87bf-54d3be3a5d47",
+    "course_url": "https://partner.unitz.dev/course/detail?id=e837ecbf-b064-48c6-a9d2-a68f56fe4ca5"
+  }
+}
