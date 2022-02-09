@@ -65,16 +65,28 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils }) => {
   const $start_at = moment(_.get(room, 'start_at'));
   const advisor_id = _.get(ctxData, 'advisor.id');
 
+  const i18n = await utils.forUser(advisor_id);
+
   const courseDisplayName = `${_.get(course, 'name')}(${$start_at
     .utcOffset(await utils.getUserTimezone(advisor_id))
+    .locale(i18n.locale)
     .format(helpers.START_TIME_FORMAT)})`;
 
   const statements = helpers.flattenGet(room, 'purchases.transaction.transaction_purchases.transaction.statement');
 
   const amount = _.sumBy(_.filter(statements, { name: 'advisor_income' }), 'amount');
 
-  const title = `Lớp học ${courseDisplayName} đã hoàn tất`;
-  const body = `Bạn nhận được ${helpers.formatCurrencySSR(amount)}`;
+  // const title = `Lớp học ${courseDisplayName} đã hoàn tất`;
+
+  const title = i18n.t('RemoteConfig.Room.AdvisorRoomPaid.title', {
+    course: courseDisplayName,
+  });
+
+  const body = i18n.t('RemoteConfig.Room.AdvisorRoomPaid.body', {
+    amount: helpers.formatCurrencySSR(amount),
+  });
+
+  // const body = `Bạn nhận được ${helpers.formatCurrencySSR(amount)}`;
 
   return {
     notification: {
@@ -120,6 +132,9 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const room = _.get(ctxData, 'room');
   const $start_at = moment(_.get(room, 'start_at'));
   const advisor_id = _.get(ctxData, 'advisor.id');
+
+  const i18n = await utils.forUser(advisor_id);
+
   // const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
   const advisorDisplayName = routeWebClient.getClient().toAdminLink('admin.advisor', _.get(ctxData, 'advisor'));
 
@@ -141,7 +156,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const session_duration = _.get(ctxData, 'course.session_duration', 0);
   const session_at = _.capitalize(
     $start_at
-      .locale('vi')
+      .locale(i18n.locale)
       .utcOffset(await utils.getUserTimezone(advisor_id))
       .format(helpers.START_TIME_FULL_FORMAT)
   );
@@ -206,14 +221,14 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   // send email effect
   clients.sendgridClient.getClient().sendEmail(advisor_id, {
     template: {
-      name: 'advisor.room.paid',
+      name: i18n.getTemplateSuffixName('advisor.room.paid'),
     },
     ...ctxData,
     course: {
       ..._.pick(course, ['id', 'name']),
       start_at: session_at,
-      session_count: helpers.formatSessionOccurence(session_count),
-      session_duration: helpers.formatCallDuration(session_duration),
+      session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
+      session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
       session_at,
     },
     tuition: {

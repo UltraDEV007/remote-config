@@ -215,8 +215,8 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients }) => {
           .format(helpers.START_TIME_FULL_FORMAT)
       ),
       start_at: session_at,
-      session_count: helpers.formatSessionOccurence(session_count),
-      session_duration: helpers.formatCallDuration(session_duration),
+      session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
+      session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
     },
     tuition: {
       amount: helpers.formatCurrencySSR(advisor_income),

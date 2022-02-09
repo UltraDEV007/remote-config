@@ -220,7 +220,7 @@ exports.effect = async (
   // send email effect
   sendgridClient.getClient().sendEmail(advisor_id, {
     template: {
-      name: 'advisor.course.purchase',
+      name: i18n.getTemplateSuffixName('advisor.course.purchase'),
     },
     ...ctxData,
     course: {

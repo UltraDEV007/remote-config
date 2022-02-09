@@ -60,12 +60,19 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   const $start_at = moment(_.get(course, 'start_at'));
   const advisor_id = _.get(ctxData, 'advisor.id');
 
+  const i18n = await utils.forUser(advisor_id);
+
   const courseDisplayName = `${_.get(course, 'name')}(${$start_at
     .utcOffset(await utils.getUserTimezone(advisor_id))
+    .locale(i18n.locale)
     .format(helpers.START_TIME_FORMAT)})`;
 
-  const title = `Lớp học ${courseDisplayName} không diễn ra.`;
-  const body = 'Bạn không nhận được học phí từ lớp học.';
+  const title = i18n.t('RemoteConfig.Room.AdvisorRoomRefund.title', {
+    course: courseDisplayName,
+  });
+  // const title = `Lớp học ${courseDisplayName} không diễn ra.`;
+  // const body = 'Bạn không nhận được học phí từ lớp học.';
+  const body = i18n.t('RemoteConfig.Room.AdvisorRoomRefund.body');
 
   return {
     notification: {
@@ -115,9 +122,11 @@ exports.effect = async (
   const $start_at = moment(_.get(room, 'start_at'));
   const session_count = _.get(ctxData, 'course.session_occurence', 0);
   const session_duration = _.get(ctxData, 'course.session_duration', 0);
+  const i18n = await utils.forUser(advisor_id);
+
   const session_at = _.capitalize(
     $start_at
-      .locale('vi')
+      .locale(i18n.locale)
       .utcOffset(await utils.getUserTimezone(advisor_id))
       .format(helpers.START_TIME_FULL_FORMAT)
   );
@@ -144,14 +153,14 @@ exports.effect = async (
 
   sendgridClient.getClient().sendEmail(advisor_id, {
     template: {
-      name: 'advisor.room.refund',
+      name: i18n.getTemplateSuffixName('advisor.room.refund'),
     },
     ...ctxData,
     course: {
       ..._.pick(course, ['id', 'name']),
       start_at: session_at,
-      session_count: helpers.formatSessionOccurence(session_count),
-      session_duration: helpers.formatCallDuration(session_duration),
+      session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
+      session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
       session_at,
     },
     route: {

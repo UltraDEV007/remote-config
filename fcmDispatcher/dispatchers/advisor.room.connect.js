@@ -45,12 +45,23 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils, clients: { rou
   const $start_at = moment(_.get(room, 'start_at'));
   const advisor_id = _.get(ctxData, 'advisor.id');
 
+  const i18n = await utils.forUser(advisor_id);
+
   const courseDisplayName = `${_.get(course, 'name')}(${$start_at
     .utcOffset(await utils.getUserTimezone(advisor_id))
+    .locale(i18n.locale)
     .format(helpers.START_TIME_FORMAT)})`;
 
-  const title = `Lớp học ${courseDisplayName}`;
-  const body = `Đã bắt đầu - Thời lượng ${helpers.formatCallDuration(duration)}.`;
+  const title = i18n.t('RemoteConfig.Room.AdvisorRoomConnect.title', {
+    course: courseDisplayName,
+  });
+
+  const body = i18n.t('RemoteConfig.Room.AdvisorRoomConnect.body', {
+    duration: helpers.formatCallDurationWithI18n(i18n)(duration),
+  });
+
+  // const title = `Lớp học ${courseDisplayName}`;
+  // const body = `Đã bắt đầu - Thời lượng ${helpers.formatCallDuration(duration)}.`;
 
   return {
     notification: {
@@ -114,23 +125,25 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients: { sendg
   const $start_at = moment(_.get(room, 'start_at'));
   const session_count = _.get(ctxData, 'course.session_occurence', 0);
   const session_duration = _.get(ctxData, 'course.session_duration', 0);
+  const i18n = await utils.forUser(advisor_id);
+
   const session_at = _.capitalize(
     $start_at
-      .locale('vi')
+      .locale(i18n.locale)
       .utcOffset(await utils.getUserTimezone(advisor_id))
       .format(helpers.START_TIME_FULL_FORMAT)
   );
 
   sendgridClient.getClient().sendEmail(advisor_id, {
     template: {
-      name: 'advisor.room.connect',
+      name: i18n.getTemplateSuffixName('advisor.room.connect'),
     },
     ...ctxData,
     course: {
       ..._.pick(course, ['id', 'name']),
       start_at: session_at,
-      session_count: helpers.formatSessionOccurence(session_count),
-      session_duration: helpers.formatCallDuration(session_duration),
+      session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
+      session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
       session_at,
     },
     route: {
