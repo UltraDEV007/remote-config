@@ -78,22 +78,36 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
   };
 };
 
-exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
+exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   const { _ } = helpers;
-
+  const user_id = _.get(ctxData, 'user.id');
   const course = _.get(ctxData, 'purchase.courses.0.course');
   const per_unit = _.get(ctxData, 'purchase.courses.0.per_unit');
   const per_amount = _.get(ctxData, 'purchase.courses.0.per_amount');
   const price_amount = _.get(ctxData, 'purchase.courses.0.price_amount');
   const price_currency = _.get(ctxData, 'purchase.courses.0.price_currency');
 
+  const i18n = await utils.forUser(user_id);
+
   const userDisplayName = _.get(ctxData, 'user.profile.display_name');
   const courseDisplayName = _.get(course, 'name');
 
-  const title = `Bạn đã mua khoá học ${courseDisplayName}.`;
-  const body = ['per_session', 'session'].includes(per_unit)
-    ? `Thanh toán ${helpers.formatCurrencySSR(price_amount, price_currency)} cho ${per_amount} buổi`
-    : `Trọn gói: ${helpers.formatCurrencySSR(price_amount, price_currency)}`;
+  const title = i18n.t('RemoteConfig.Course.UserCoursePurchase.title', {
+    course: courseDisplayName,
+  });
+
+  // const title = `Bạn đã mua khoá học ${courseDisplayName}.`;
+  // const body = ['per_session', 'session'].includes(per_unit)
+  //   ? `Thanh toán ${helpers.formatCurrencySSR(price_amount, price_currency)} cho ${per_amount} buổi`
+  //   : `Trọn gói: ${helpers.formatCurrencySSR(price_amount, price_currency)}`;
+
+  const body = i18n.t(
+    `RemoteConfig.Course.Purchase.${['per_session', 'session'].includes(per_unit) ? '' : 'full_'}session`,
+    {
+      amount: helpers.formatCurrencySSR(price_amount, price_currency),
+      per_amount,
+    }
+  );
 
   return {
     notification: {
@@ -142,6 +156,7 @@ exports.effect = async (
   const session_duration = _.get(course, 'session_duration', 0);
   const first_session_start = moment(_.get(ctxData, 'purchase.first_room.0.room.start_at'));
   const room = _.get(ctxData, 'purchase.first_room.0.room');
+  const i18n = await utils.forUser(user_id);
 
   const course_amount = helpers.flattenGet(course, 'purchases.purchase.courses');
 
@@ -153,7 +168,13 @@ exports.effect = async (
 
   const num_per = _.sumBy(course_amount, 'per_amount');
 
-  const payment_count = ['per_session', 'session'].includes(per_unit) ? `${num_per}${per_session} buổi` : 'Trọn gói';
+  // const payment_count = ['per_session', 'session'].includes(per_unit) ? `${num_per}${per_session} buổi` : 'Trọn gói';
+
+  const payment_count = ['per_session', 'session'].includes(per_unit)
+    ? i18n.t('RemoteConfig.Course.Purchase.per_session', {
+        session: `${num_per}${per_session}`,
+      })
+    : i18n.t('RemoteConfig.Course.Purchase.full_session_txt');
 
   await hasuraClient.getClient().request(
     `
@@ -178,20 +199,20 @@ exports.effect = async (
   // send email effect
   sendgridClient.getClient().sendEmail(user_id, {
     template: {
-      name: 'user.course.purchase',
+      name: i18n.getTemplateSuffixName('user.course.purchase'),
     },
     ...ctxData,
     course: {
       ..._.pick(course, ['id', 'name']),
       first_session_start: _.capitalize(
         first_session_start
-          .locale('vi')
+          .locale(i18n.locale)
           .utcOffset(await utils.getUserTimezone(advisor_id))
           .format(helpers.START_TIME_FULL_FORMAT)
       ),
 
-      session_count: helpers.formatSessionOccurence(session_count),
-      session_duration: helpers.formatCallDuration(session_duration),
+      session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
+      session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
     },
     tuition: {
       payment_count,

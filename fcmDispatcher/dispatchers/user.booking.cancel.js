@@ -31,10 +31,21 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   const duration = _.get(payload, 'session.session_duration');
 
   const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
-  const title = `Lịch hẹn với ${advisorDisplayName} đã bị huỷ.`;
-  const body = `Gói ${helpers.formatCallDuration(duration)} - ${$start_at
-    .utcOffset(await utils.getUserTimezone(user_id))
-    .format(helpers.START_TIME_FORMAT)}`;
+
+  const i18n = await utils.forUser(user_id);
+
+  const title = i18n.t('RemoteConfig.Booking.UserBookingCancel.title', {
+    advisor: advisorDisplayName,
+  });
+
+  const body = i18n.t('RemoteConfig.Booking.Package', {
+    package: helpers.formatCallDurationWithI18n(i18n)(duration),
+    time: $start_at
+      .utcOffset(await utils.getUserTimezone(user_id))
+      .locale(i18n.locale)
+      .format(helpers.START_TIME_FORMAT),
+  });
+
   return {
     notification: {
       title,

@@ -31,19 +31,33 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
   };
 };
 
-exports.dispatch = async ({ payload }, { ctxData, helpers }) => {
+exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   const { _ } = helpers;
 
   const duration = _.get(payload, 'session.session_duration');
   const kind = _.get(payload, 'session.kind');
 
   const userDisplayName = _.get(ctxData, 'user.profile.display_name');
+  const advisor_id = _.get(payload, 'session.advisor_id');
+
+  const i18n = await utils.forUser(advisor_id);
 
   // query transaction info
   const statements = _.get(ctxData, 'statements');
   const amount = _.get(_.find(statements, { name: 'advisor_income' }), 'amount');
-  const title = `Bạn đã nhận được ${helpers.formatCurrencySSR(amount)} cho cuộc gọi ${kind} với ${userDisplayName}.`;
-  const body = `Gói ${helpers.formatCallDuration(duration)}`;
+
+  const title = i18n.t('RemoteConfig.Call.AdvisorCallPaid.title', {
+    amount: helpers.formatCurrencySSR(amount),
+    kind,
+    user: userDisplayName,
+  });
+
+  // const body = `Gói ${helpers.formatCallDuration(duration)}`;
+
+  const body = i18n.t('RemoteConfig.Call.Package', {
+    package: helpers.formatCallDurationWithI18n(i18n)(duration),
+  });
+
   return {
     notification: {
       // title: `Your booking #${bookingId} is completed`,

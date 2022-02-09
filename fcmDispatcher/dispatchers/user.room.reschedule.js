@@ -60,18 +60,31 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils, clients: { rou
   const start_at = _.get(ctxData, 'room.start_at');
   const $now = moment();
   const diffMin = moment(start_at).diff($now, 'minute');
+  const user_id = _.get(ctxData, 'user.id');
+  const i18n = await utils.forUser(user_id);
 
   const $start_at = moment(_.get(room, 'start_at'));
   const advisor_id = _.get(ctxData, 'advisor.id');
 
   const courseDisplayName = `${_.get(course, 'name')}(${$start_at
-    .utcOffset(await utils.getUserTimezone(advisor_id))
+    .utcOffset(await utils.getUserTimezone(user_id))
+    .locale(i18n.locale)
     .format(helpers.START_TIME_FORMAT)})`;
 
-  const title = `Thay đổi giờ học lớp ${courseDisplayName}`;
-  const body = `Sẽ bắt đầu vào ${$start_at
-    .utcOffset(await utils.getUserTimezone(advisor_id))
-    .format(helpers.START_TIME_FORMAT)}.`;
+  // const title = `Thay đổi giờ học lớp ${courseDisplayName}`;
+  const title = i18n.t('RemoteConfig.Room.UserRoomReschedule.title', {
+    course: courseDisplayName,
+  });
+
+  const body = i18n.t('RemoteConfig.Room.UserRoomReschedule.body', {
+    time: $start_at
+      .utcOffset(await utils.getUserTimezone(user_id))
+      .locale(i18n.locale)
+      .format(helpers.START_TIME_FORMAT),
+  });
+  // const body = `Sẽ bắt đầu vào ${$start_at
+  //   .utcOffset(await utils.getUserTimezone(advisor_id))
+  //   .format(helpers.START_TIME_FORMAT)}.`;
 
   return {
     notification: {

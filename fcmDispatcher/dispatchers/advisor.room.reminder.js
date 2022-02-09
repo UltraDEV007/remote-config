@@ -67,13 +67,22 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils, clients: { rou
   const diffMin = moment(start_at).diff($now, 'minute');
   const $start_at = moment(_.get(room, 'start_at'));
   const advisor_id = _.get(ctxData, 'advisor.id');
+  const i18n = await utils.forUser(advisor_id);
 
   const courseDisplayName = `${_.get(course, 'name')}(${$start_at
     .utcOffset(await utils.getUserTimezone(advisor_id))
+    .locale(i18n.locale)
     .format(helpers.START_TIME_FORMAT)})`;
 
-  const title = `Lớp học ${courseDisplayName}`;
-  const body = `Sẽ bắt đầu sau ${diffMin} phút.`;
+  // const title = `Lớp học ${courseDisplayName}`;
+  const title = i18n.t('RemoteConfig.Room.AdvisorRoomReminder.title', {
+    course: courseDisplayName,
+  });
+
+  const body = i18n.t('RemoteConfig.Room.AdvisorRoomReminder.body', {
+    diffMin,
+  });
+  // const body = `Sẽ bắt đầu sau ${diffMin} phút.`;
 
   return {
     notification: {
@@ -122,29 +131,32 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients: { sendg
   const session_count = _.get(ctxData, 'course.session_occurence', 0);
   const session_duration = _.get(ctxData, 'course.session_duration', 0);
   const attend_count = _.get(ctxData, 'room.attendees_aggregate.aggregate.count', 0);
+  const i18n = await utils.forUser(advisor_id);
 
   const $now = moment();
   const diffMin = moment($start_at).diff($now, 'minute');
 
   const session_at = _.capitalize(
     $start_at
-      .locale('vi')
+      .locale(i18n.locale)
       .utcOffset(await utils.getUserTimezone(advisor_id))
       .format(helpers.START_TIME_FULL_FORMAT)
   );
 
   sendgridClient.getClient().sendEmail(advisor_id, {
     template: {
-      name: 'advisor.room.reminder',
+      name: i18n.getTemplateSuffixName('advisor.room.reminder'),
     },
     ...ctxData,
     course: {
       ..._.pick(course, ['id', 'name']),
       start_at: session_at,
-      session_count: helpers.formatSessionOccurence(session_count),
-      session_duration: helpers.formatCallDuration(session_duration),
+      session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
+      session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
       session_at,
-      attend_count: `${attend_count} học viên`,
+      attend_count: i18n.t('RemoteConfig.Room.student', {
+        count: attend_count,
+      }),
       diffMin,
     },
     route: {

@@ -56,7 +56,7 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
 
 exports.dispatch = async ({ payload }, { ctxData, helpers, utils, clients: { routeWebClient } }) => {
   const { _, moment } = helpers;
-
+  const user_id = _.get(ctxData, 'user.id');
   const course = _.get(ctxData, 'course');
   const room = _.get(ctxData, 'room');
   const start_at = _.get(ctxData, 'room.start_at');
@@ -66,12 +66,22 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils, clients: { rou
   const $start_at = moment(_.get(room, 'start_at'));
   const advisor_id = _.get(ctxData, 'advisor.id');
 
+  const i18n = await utils.forUser(user_id);
+
   const courseDisplayName = `${_.get(course, 'name')}(${$start_at
     .utcOffset(await utils.getUserTimezone(advisor_id))
+    .locale(i18n.locale)
     .format(helpers.START_TIME_FORMAT)})`;
 
-  const title = `Lớp học ${courseDisplayName}`;
-  const body = `Đã bắt đầu - Thời lượng ${helpers.formatCallDuration(duration)}.`;
+  const title = i18n.t('RemoteConfig.Room.UserRoomConnect.title', {
+    course: courseDisplayName,
+  });
+  const body = i18n.t('RemoteConfig.Room.UserRoomConnect.body', {
+    duration: helpers.formatCallDurationWithI18n(i18n)(duration),
+  });
+
+  // const title = `Lớp học ${courseDisplayName}`;
+  // const body = `Đã bắt đầu - Thời lượng ${helpers.formatCallDuration(duration)}.`;
 
   return {
     notification: {
@@ -134,10 +144,13 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
 
   const $start_at = moment(_.get(room, 'start_at'));
   const advisor_id = _.get(ctxData, 'advisor.id');
+  const user_id = _.get(ctxData, 'user.id');
+
+  const i18n = await utils.forUser(user_id);
 
   const session_at = _.capitalize(
     $start_at
-      .locale('vi')
+      .locale(i18n.locale)
       .utcOffset(await utils.getUserTimezone(advisor_id))
       .format(helpers.START_TIME_FULL_FORMAT)
   );
@@ -147,21 +160,25 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const per_unit = _.get(course, 'per_unit');
   const per_amount = _.get(course, 'per_amount');
   const per_session = parseInt(session_count) === 100000 ? '' : `/${session_count}`;
-  const payment_count = ['per_session', 'session'].includes(per_unit) ? `${per_amount}${per_session} buổi` : 'Trọn gói';
+  // const payment_count = ['per_session', 'session'].includes(per_unit) ? `${per_amount}${per_session} buổi` : 'Trọn gói';
 
-  const user_id = _.get(ctxData, 'user.id');
+  const payment_count = ['per_session', 'session'].includes(per_unit)
+    ? i18n.t('RemoteConfig.Course.Purchase.per_session', {
+        session: `${per_amount}${per_session}`,
+      })
+    : i18n.t('RemoteConfig.Course.Purchase.full_session_txt');
 
   // send email effect
   clients.sendgridClient.getClient().sendEmail(user_id, {
     template: {
-      name: 'user.room.connect',
+      name: i18n.getTemplateSuffixName('user.room.connect'),
     },
     ...ctxData,
     course: {
       ..._.pick(course, ['id', 'name']),
       session_at,
-      session_count: helpers.formatSessionOccurence(session_count),
-      session_duration: helpers.formatCallDuration(session_duration),
+      session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
+      session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
     },
     tuition: {
       payment_count,
