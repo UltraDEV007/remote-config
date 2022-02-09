@@ -1,0 +1,179 @@
+{
+  "template": {
+    "name": "advisor.room.reminder_en_US"
+  },
+  "advisor": {
+    "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
+    "profile": {
+      "display_name": "Nam Phương"
+    }
+  },
+  "room": {
+    "id": "bb948bd2-7de1-48c0-8ab0-e78e2bff3fbf",
+    "start_at": "2021-12-01T04:30:22.127+00:00",
+    "end_at": "2021-12-01T05:00:22.127+00:00",
+    "course_session_id": "d7da8da8-e3f2-4a11-ab49-fe7b8fc72d70",
+    "attendees_aggregate": {
+      "aggregate": {
+        "count": 1
+      }
+    },
+    "purchases": [
+      {
+        "id": "20018469-f8b2-47e3-97d5-804670c81be4",
+        "user_id": "fH3k96KDlzYx42whT6Mfu5LODQv2",
+        "purchase_id": "c789adb1-1b9c-4d10-8076-c827c2c525e5",
+        "purchase": {
+          "transaction_purchases": [
+            {
+              "transaction": {
+                "statement": [
+                  {
+                    "id": "f5b5fa1a-69ca-4eba-a476-8e1a66f60cc3",
+                    "name": "tuition",
+                    "type": "payment",
+                    "amount": -100000
+                  },
+                  {
+                    "id": "b5039dcf-4577-4f38-aa4a-38cc74261cfd",
+                    "name": "advisor_income",
+                    "type": "payment",
+                    "amount": 90000
+                  },
+                  {
+                    "id": "c1265afc-7916-428e-bf73-a7722d833a18",
+                    "name": "advisor_tax",
+                    "type": null,
+                    "amount": 0
+                  },
+                  {
+                    "id": "f7a01cb0-8fe8-407b-b1ea-c91f28408ab8",
+                    "name": "platform_income",
+                    "type": "charge_payment",
+                    "amount": 10000
+                  },
+                  {
+                    "id": "393a39bb-7e49-4af0-8997-f870d2100db5",
+                    "name": "platform_tax",
+                    "type": null,
+                    "amount": 0
+                  },
+                  {
+                    "id": "9016a520-8466-4b6b-af9f-952506c24764",
+                    "name": "subtotal",
+                    "type": null,
+                    "amount": 100000
+                  },
+                  {
+                    "id": "f05742e3-fe5f-4c48-b013-4026dd11fc3e",
+                    "name": "tax",
+                    "type": null,
+                    "amount": 0
+                  },
+                  {
+                    "id": "b844ed07-37f4-4f12-a365-48676ca9d84d",
+                    "name": "discount",
+                    "type": null,
+                    "amount": 0
+                  },
+                  {
+                    "id": "108f7add-8cc5-444a-9dbe-86ee4e8e29a9",
+                    "name": "total",
+                    "type": null,
+                    "amount": 100000
+                  }
+                ],
+                "session_id": "bb948bd2-7de1-48c0-8ab0-e78e2bff3fbf"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "3192280d-04bb-4ecc-a847-65af9f3b90ff",
+        "user_id": "fH3k96KDlzYx42whT6Mfu5LODQv2",
+        "purchase_id": "661e7d6e-5d71-4619-9c06-7d19e33fdbab",
+        "purchase": {
+          "transaction_purchases": [
+            {
+              "transaction": {
+                "statement": [
+                  {
+                    "id": "f9afe44c-e9f4-4062-baa3-3af52cf862a6",
+                    "name": "tuition",
+                    "type": "payment",
+                    "amount": -100000
+                  },
+                  {
+                    "id": "b7a49ba6-0728-4838-a4e9-0228c3674124",
+                    "name": "advisor_income",
+                    "type": "payment",
+                    "amount": 90000
+                  },
+                  {
+                    "id": "b93aa1e3-9c66-4aea-b57e-e68e303f4f03",
+                    "name": "advisor_tax",
+                    "type": null,
+                    "amount": 0
+                  },
+                  {
+                    "id": "0b890805-dbb1-466a-b892-c96f96a6b935",
+                    "name": "platform_income",
+                    "type": "charge_payment",
+                    "amount": 10000
+                  },
+                  {
+                    "id": "84590ba1-bded-471b-8b2e-5538ea96403f",
+                    "name": "platform_tax",
+                    "type": null,
+                    "amount": 0
+                  },
+                  {
+                    "id": "9d5a2271-a2b4-4e59-9c01-91a0770b852f",
+                    "name": "subtotal",
+                    "type": null,
+                    "amount": 100000
+                  },
+                  {
+                    "id": "d5eca026-2b17-4e4e-9eab-5c2e8b961b44",
+                    "name": "tax",
+                    "type": null,
+                    "amount": 0
+                  },
+                  {
+                    "id": "5b5e57d3-b9ea-4a69-9f23-f7f3a1ca25c6",
+                    "name": "discount",
+                    "type": null,
+                    "amount": 0
+                  },
+                  {
+                    "id": "2e15864f-3466-42c1-a6d0-82cddf1dba9a",
+                    "name": "total",
+                    "type": null,
+                    "amount": 100000
+                  }
+                ],
+                "session_id": "bb948bd2-7de1-48c0-8ab0-e78e2bff3fbf"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "course": {
+    "id": "d8eef82e-1b43-4cfc-9d17-c88818eb7a1f",
+    "name": "Khoá học lập trình Javascript",
+    "start_at": "Wednesday 01/12 11:30",
+    "session_count": "Unlimited sessions",
+    "session_duration": "30 minutes",
+    "session_at": "Wednesday 01/12 11:30",
+    "attend_count": "1 học viên",
+    "diffMin": -100993
+  },
+  "route": {
+    "advisor_url": "https://partner.unitz.dev/",
+    "room_url": "https://partner.unitz.dev/room?id=bb948bd2-7de1-48c0-8ab0-e78e2bff3fbf",
+    "course_url": "https://partner.unitz.dev/course/detail?id=d8eef82e-1b43-4cfc-9d17-c88818eb7a1f"
+  }
+}
