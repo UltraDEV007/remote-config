@@ -13,8 +13,8 @@
     "name": "Khoá học mobile 1",
     "first_session_start": "Thursday 02/12 15:00",
     "start_at": "Thursday 02/12 00:00",
-    "session_count": "8 buổi",
-    "session_duration": "30 phút"
+    "session_count": "8 sessions",
+    "session_duration": "30 minutes"
   },
   "tuition": {
     "amount": "90K",
