@@ -122,14 +122,24 @@ exports.effect = async (
 
   const advisor_id = _.get(ctxData, 'advisor.id');
   const course = _.get(ctxData, 'course');
-  const per_unit = _.get(course, 'per_unit');
-  const per_amount = _.get(course, 'per_amount');
-  const price_amount = _.get(course, 'price_amount');
-  const price_currency = _.get(course, 'price_currency');
+  const session_count = _.get(course, 'session_occurence', 0);
+  const session_duration = _.get(course, 'session_duration', 0);
 
   const user = _.get(course, 'enrolls.0.user');
 
+  const $start_at = moment(_.get(course, 'first_room.0.start_at'));
+  const room = _.get(course, 'first_room.0');
+
   const user_id = _.get(user, 'id');
+
+  const i18n = await utils.forUser(user_id);
+
+  const session_at = _.capitalize(
+    $start_at
+      .locale(i18n.locale)
+      .utcOffset(await utils.getUserTimezone(advisor_id))
+      .format(helpers.START_TIME_FULL_FORMAT)
+  );
 
   //   inapp noti effect
   hasuraClient.getClient().request(
@@ -151,4 +161,27 @@ exports.effect = async (
       payload,
     }
   );
+
+  sendgridClient.getClient().sendEmail(user_id, {
+    template: {
+      name: i18n.getTemplateSuffixName('user.demoCourse.reject'),
+    },
+    ...ctxData,
+    user,
+    course: {
+      ..._.pick(course, ['id', 'name']),
+      session_at,
+      session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
+      session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
+    },
+
+    route: {
+      advisor_url: routeWebClient.getClient().toUserUrl('advisor', _.get(ctxData, 'advisor')),
+      user_url: routeWebClient.getClient().toUserUrl('profile'),
+      course_url: routeWebClient.getClient().toUserUrl('courseDetail', course),
+      course_filter_url: routeWebClient.getClient().toUserUrl('courseFilter'),
+      room_url: routeWebClient.getClient().toUserUrl('room', room),
+      wallet_url: routeWebClient.getClient().toUserUrl('userWallet'),
+    },
+  });
 };

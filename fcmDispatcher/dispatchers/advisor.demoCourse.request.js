@@ -209,4 +209,30 @@ exports.effect = async (
       payload,
     }
   );
+
+  sendgridClient.getClient().sendEmail(advisor_id, {
+    template: {
+      name: i18n.getTemplateSuffixName('advisor.demoCourse.request'),
+    },
+    ...ctxData,
+    course: {
+      ..._.pick(course, ['id', 'name']),
+      session_at: _.capitalize(
+        first_session_start
+          .locale(i18n.locale)
+          .utcOffset(await utils.getUserTimezone(advisor_id))
+          .format(helpers.START_TIME_FULL_FORMAT)
+      ),
+      session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
+      session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
+    },
+
+    route: {
+      advisor_url: routeWebClient.getClient().toAdvisorUrl('home'),
+      course_url: routeWebClient.getClient().toAdvisorUrl('courseDetail', course),
+      advisor_calendar_url: routeWebClient.getClient().toAdvisorUrl('calendar', course),
+      room_url: routeWebClient.getClient().toAdvisorUrl('room', first_room),
+      add_course_url: routeWebClient.getClient().toAdvisorUrl('addCourse'),
+    },
+  });
 };
