@@ -129,10 +129,12 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const $now = moment();
 
   const diffMin = moment($start_at).diff($now, 'minute');
+  const user_id = _.get(ctxData, 'user.id');
+  const i18n = await utils.forUser(user_id);
 
   const session_at = _.capitalize(
     $start_at
-      .locale('vi')
+      .locale(i18n.locale)
       .utcOffset(await utils.getUserTimezone(advisor_id))
       .format(helpers.START_TIME_FULL_FORMAT)
   );
@@ -143,21 +145,24 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const per_amount = _.get(course, 'per_amount');
 
   const per_session = parseInt(session_count) === 100000 ? '' : `/${session_count}`;
-  const payment_count = ['per_session', 'session'].includes(per_unit) ? `${per_amount}${per_session} buổi` : 'Trọn gói';
 
-  const user_id = _.get(ctxData, 'user.id');
+  const payment_count = ['per_session', 'session'].includes(per_unit)
+    ? i18n.t('RemoteConfig.Course.Purchase.per_session', {
+        session: `${per_amount}${per_session}`,
+      })
+    : i18n.t('RemoteConfig.Course.Purchase.full_session_txt');
 
   // send email effect
   clients.sendgridClient.getClient().sendEmail(user_id, {
     template: {
-      name: 'user.room.reminder',
+      name: i18n.getTemplateSuffixName('user.room.reminder'),
     },
     ...ctxData,
     course: {
       ..._.pick(course, ['id', 'name']),
       session_at,
-      session_count: helpers.formatSessionOccurence(session_count),
-      session_duration: helpers.formatCallDuration(session_duration),
+      session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
+      session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
       diffMin,
     },
     tuition: {
