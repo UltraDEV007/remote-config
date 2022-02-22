@@ -11,8 +11,8 @@
   "course": {
     "id": "e53781b8-297f-4785-ad83-17f4a5f26f63",
     "name": "Khoa hoc Postpone 1",
-    "start_at": "Tuesday 22/02 00:00",
-    "new_start_at": "Tuesday 01/03 00:00",
+    "start_at": "Tuesday 22/02",
+    "new_start_at": "Tuesday 08/03",
     "session_count": "Unlimited sessions",
     "session_duration": "30 minutes"
   },
