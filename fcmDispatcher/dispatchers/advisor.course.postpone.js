@@ -150,7 +150,7 @@ exports.effect = async (
     $start_at
       .locale('vi')
       .utcOffset(await utils.getUserTimezone(advisor_id))
-      .format(helpers.START_TIME_FULL_FORMAT)
+      .format(helpers.START_DAY_FULL_FORMAT)
   )}`;
 
   console.log('title', title, body);
@@ -223,13 +223,13 @@ exports.effect = async (
         old_start_time
           .locale(i18n.locale)
           .utcOffset(await utils.getUserTimezone(advisor_id))
-          .format(helpers.START_TIME_FULL_FORMAT)
+          .format(helpers.START_DAY_FULL_FORMAT)
       ),
       new_start_at: _.capitalize(
         $start_at
           .locale(i18n.locale)
           .utcOffset(await utils.getUserTimezone(advisor_id))
-          .format(helpers.START_TIME_FULL_FORMAT)
+          .format(helpers.START_DAY_FULL_FORMAT)
       ),
       session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
       session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
