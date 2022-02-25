@@ -21,9 +21,9 @@
     "pay_from": "Nhat Dev"
   },
   "route": {
-    "advisor_url": "https://unitz.page.link/?link=https://partner.unitz.dev/&apn=app.unitz.advisor&ibi=app.unitz.advisor",
-    "course_url": "https://unitz.page.link/?link=https://partner.unitz.dev/course/detail?id=cf4aa2a3-3893-4df3-be73-6860e0b66d20&apn=app.unitz.advisor&ibi=app.unitz.advisor",
-    "add_course_url": "https://unitz.page.link/?link=https://partner.unitz.dev/course/add&apn=app.unitz.advisor&ibi=app.unitz.advisor",
-    "advisor_wallet_url": "https://unitz.page.link/?link=https://partner.unitz.dev/wallet&apn=app.unitz.advisor&ibi=app.unitz.advisor"
+    "advisor_url": "https://unitz.page.link/?link=https://partner.unitz.dev/&apn=app.unitz.advisor&isi=1569969242&ibi=app.unitz.advisor",
+    "course_url": "https://unitz.page.link/?link=https://partner.unitz.dev/course/detail?id=cf4aa2a3-3893-4df3-be73-6860e0b66d20&apn=app.unitz.advisor&isi=1569969242&ibi=app.unitz.advisor",
+    "add_course_url": "https://unitz.page.link/?link=https://partner.unitz.dev/course/add&apn=app.unitz.advisor&isi=1569969242&ibi=app.unitz.advisor",
+    "advisor_wallet_url": "https://unitz.page.link/?link=https://partner.unitz.dev/wallet&apn=app.unitz.advisor&isi=1569969242&ibi=app.unitz.advisor"
   }
 }
