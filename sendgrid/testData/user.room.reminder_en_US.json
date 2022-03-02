@@ -25,16 +25,16 @@
     "session_at": "Tuesday 14/12 10:00",
     "session_count": "Unlimited sessions",
     "session_duration": "30 minutes",
-    "diffMin": -91271
+    "diffMin": -112683
   },
   "tuition": {
     "payment_count": "1 session"
   },
   "route": {
-    "advisor_url": "https://web.unitz.dev/advisor?id=rM3EUyLfbTZtgUg906cpzQgCUkj1",
-    "user_url": "https://web.unitz.dev/profile",
-    "course_url": "https://web.unitz.dev/course/detail?id=a7809f9b-4dd5-4621-b765-05db3b8a886c",
-    "course_filter_url": "https://web.unitz.dev/education/course-filter",
-    "room_url": "https://web.unitz.dev/room?id=ba0c4d0a-0dfc-49bc-a214-8df6cda75cdd"
+    "advisor_url": "https://unitz.page.link/?link=https://web.unitz.dev/advisor?id=rM3EUyLfbTZtgUg906cpzQgCUkj1&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user",
+    "user_url": "https://unitz.page.link/?link=https://web.unitz.dev/profile&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user",
+    "course_url": "https://unitz.page.link/?link=https://web.unitz.dev/course/detail?id=a7809f9b-4dd5-4621-b765-05db3b8a886c&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user",
+    "course_filter_url": "https://unitz.page.link/?link=https://web.unitz.dev/education/course-filter&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user",
+    "room_url": "https://unitz.page.link/?link=https://web.unitz.dev/room?id=ba0c4d0a-0dfc-49bc-a214-8df6cda75cdd&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user"
   }
 }
