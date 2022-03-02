@@ -52,7 +52,7 @@ exports.getQuery = () => `
       }
       per_amount
       per_unit
-      purchases(where: {purchase: {user_id: {_eq: $user_id}}}) {
+      purchases(where: {purchase: {user_id: {_eq: $user_id}, status_latest: {status: {_eq: "completed"}}}}) {
         id
         price_amount
         is_active
