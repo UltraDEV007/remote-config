@@ -1,27 +1,27 @@
 const config = [
   {
     title: 'Unitz community',
-    name: 'UNITZ COMMUNITY 1',
+    name: 'UNITZ COMMUNITY',
     url: 'https://www.facebook.com/groups/unitz.community',
   },
   {
     title: 'Fanpage',
-    name: 'UNITZ APP 1',
+    name: 'UNITZ APP',
     url: 'https://www.facebook.com/UnitzApp',
   },
   {
     title: 'Zalo',
-    name: 'Công Ty TNHH UNITZ 1',
+    name: 'Công Ty TNHH UNITZ',
     url: 'https://zalo.me/2510053737522180594',
   },
   {
     title: 'Email',
-    name: 'support@unitz.app 1',
+    name: 'support@unitz.app',
     url: 'mailto:support@unitz.app',
   },
   {
     title: 'Website',
-    name: 'https://unitz.app 1',
+    name: 'https://unitz.app',
     url: 'https://unitz.app',
   },
   {
