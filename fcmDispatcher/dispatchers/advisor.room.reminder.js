@@ -147,6 +147,7 @@ exports.effect = async ({ payload }, { ctxData, utils, helpers, clients: { sendg
     template: {
       name: i18n.getTemplateSuffixName('advisor.room.reminder'),
     },
+    ...i18n.getContactEmailInfo('advisor.room.reminder'),
     ...ctxData,
     course: {
       ..._.pick(course, ['id', 'name']),

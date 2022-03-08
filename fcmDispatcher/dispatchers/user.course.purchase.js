@@ -201,6 +201,7 @@ exports.effect = async (
     template: {
       name: i18n.getTemplateSuffixName('user.course.purchase'),
     },
+    ...i18n.getContactEmailInfo('user.course.purchase'),
     ...ctxData,
     course: {
       ..._.pick(course, ['id', 'name']),

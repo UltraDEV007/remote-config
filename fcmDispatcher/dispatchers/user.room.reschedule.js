@@ -180,6 +180,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
     template: {
       name: i18n.getTemplateSuffixName('user.room.reschedule'),
     },
+    ...i18n.getContactEmailInfo('user.room.reschedule'),
     ...ctxData,
     course: {
       ..._.pick(course, ['id', 'name']),

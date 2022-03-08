@@ -166,6 +166,7 @@ exports.effect = async (
     template: {
       name: i18n.getTemplateSuffixName('user.demoCourse.confirm'),
     },
+    ...i18n.getContactEmailInfo('user.demoCourse.confirm'),
     ...ctxData,
     user,
     course: {
