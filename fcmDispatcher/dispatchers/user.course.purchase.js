@@ -48,7 +48,7 @@ exports.getQuery = () => `
           first_room: rooms(order_by: {start_at: asc}, limit: 1) {
             start_at
           }
-          purchases(where: {purchase: {user_id: {_eq: $user_id}}}) {
+          purchases(where: {purchase: {user_id: {_eq: $user_id}, status_latest: {status: {_eq: "completed"}}}}) {
             id
             price_amount
             is_active
@@ -201,6 +201,7 @@ exports.effect = async (
     template: {
       name: i18n.getTemplateSuffixName('user.course.purchase'),
     },
+    ...i18n.getContactEmailInfo('user.course.purchase'),
     ...ctxData,
     course: {
       ..._.pick(course, ['id', 'name']),

@@ -34,7 +34,7 @@ exports.getQuery = () => `
       first_room: rooms(where: {course_room_attendees: {user_id: {_eq: "$user_id"}}}, order_by: {start_at: asc}, limit: 1) {
         start_at
       }
-      purchases(where: {purchase: {user_id: {_eq: $user_id}}}) {
+      purchases(where: {purchase: {user_id: {_eq: $user_id}, status_latest: {status: {_eq: "completed"}}}}) {
         id
         price_amount
         per_amount
@@ -180,6 +180,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
     template: {
       name: i18n.getTemplateSuffixName('user.purchase.remind'),
     },
+    ...i18n.getContactEmailInfo('user.purchase.remind'),
     ...ctxData,
     course: {
       ..._.pick(course, ['id', 'name']),
