@@ -59,7 +59,7 @@ exports.template = template;
 
 const config = {
   version: 1,
-  platformFee: 0.1,
+  platformFee: 0.2,
   advisorTax: 0,
   platformTax: 0,
 };
