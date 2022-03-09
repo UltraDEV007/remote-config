@@ -5,7 +5,7 @@ const config = [
     url: 'https://www.facebook.com/groups/unitz.community',
   },
   {
-    title: 'Fanpage',
+    title: 'Fanpage',84909663807
     name: 'UNITZ APP',
     url: 'https://www.facebook.com/UnitzApp',
   },
@@ -26,7 +26,7 @@ const config = [
   },
   {
     title: 'Phone number',
-    name: '0909663807 (Ms. My)',
+    name: '0856 507 095 (Ms. My)',
   },
 ];
 
