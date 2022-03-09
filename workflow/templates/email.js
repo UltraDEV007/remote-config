@@ -26,7 +26,7 @@ const config = [
   },
   {
     title: 'Phone number',
-    name: '0856 507 095 (Ms. My)',
+    name: '0856 507 095 (Ms. Trang)',
   },
 ];
 
