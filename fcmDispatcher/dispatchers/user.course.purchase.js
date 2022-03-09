@@ -51,6 +51,7 @@ exports.getQuery = () => `
           purchases(where: {purchase: {user_id: {_eq: $user_id}, status_latest: {status: {_eq: "completed"}}}}) {
             id
             price_amount
+            per_amount
             is_active
             purchase {
               statement {
@@ -58,10 +59,6 @@ exports.getQuery = () => `
                 id
               }
               user_id
-              courses {
-                per_amount
-                per_unit
-              }
             }
           }
         }
@@ -83,10 +80,9 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   const user_id = _.get(ctxData, 'user.id');
   const course = _.get(ctxData, 'purchase.courses.0.course');
   const per_unit = _.get(ctxData, 'purchase.courses.0.per_unit');
-  const per_amount = _.get(ctxData, 'purchase.courses.0.per_amount');
   const price_amount = _.get(ctxData, 'purchase.courses.0.price_amount');
   const price_currency = _.get(ctxData, 'purchase.courses.0.price_currency');
-
+  const per_amount = _.sumBy(_.get(course, 'purchases'), 'per_amount');
   const i18n = await utils.forUser(user_id);
 
   const userDisplayName = _.get(ctxData, 'user.profile.display_name');
@@ -166,7 +162,7 @@ exports.effect = async (
 
   const per_session = parseInt(session_count) === 100000 ? '' : `/${session_count}`;
 
-  const num_per = _.sumBy(course_amount, 'per_amount');
+  const num_per = _.sumBy(_.get(course, 'purchases'), 'per_amount');
 
   // const payment_count = ['per_session', 'session'].includes(per_unit) ? `${num_per}${per_session} buổi` : 'Trọn gói';
 
