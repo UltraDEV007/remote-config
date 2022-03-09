@@ -5,7 +5,7 @@ const config = [
     url: 'https://www.facebook.com/groups/unitz.community',
   },
   {
-    title: 'Fanpage',84909663807
+    title: 'Fanpage',
     name: 'UNITZ APP',
     url: 'https://www.facebook.com/UnitzApp',
   },
