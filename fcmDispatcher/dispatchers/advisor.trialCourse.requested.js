@@ -12,6 +12,15 @@ exports.getQuery = () => `
         display_name
       }
     }
+
+    activity: course_activity(where: {course_id: {_eq: $course_id}, creator: {id: {_eq: $user_id}}}) {
+      course_id
+      payload
+      creator {
+        id
+      }
+    }
+
     course: course_by_pk(id: $course_id) {
         advisor_id
         type
@@ -146,7 +155,8 @@ exports.effect = async (
   const session_count = _.get(course, 'session_occurence', 0);
   const session_duration = _.get(course, 'session_duration', 0);
 
-  const first_session_start = moment(_.get(course, 'first_room.0.start_at'));
+  const activity = _.get(ctxData, 'activity');
+  const first_session_start = moment(_.get(activity, '0.payload.room.start_at'));
   const first_room = _.get(course, 'first_room.0');
 
   const advisorDisplayName = routeWebClient.getClient().toAdminLink('admin.advisor', _.get(ctxData, 'advisor'));
