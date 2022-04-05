@@ -170,38 +170,38 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   );
 
   // send email effect
-  clients.sendgridClient.getClient().sendEmail(user_id, {
-    template: {
-      name: i18n.getTemplateSuffixName('user.course.postpone'),
-    },
-    ...i18n.getContactEmailInfo('user.course.postpone'),
-    ...ctxData,
-    course: {
-      ..._.pick(course, ['id', 'name']),
-      start_at: _.capitalize(
-        old_start_time
-          .locale(i18n.locale)
-          .utcOffset(await utils.getUserTimezone(advisor_id))
-          .format(helpers.START_DAY_FULL_FORMAT)
-      ),
-      new_start_at: _.capitalize(
-        $start_at
-          .locale(i18n.locale)
-          .utcOffset(await utils.getUserTimezone(advisor_id))
-          .format(helpers.START_DAY_FULL_FORMAT)
-      ),
-      session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
-      session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
-    },
-    tuition: {
-      payment_count,
-    },
-    route: {
-      advisor_url: clients.routeWebClient.getClient().toUserUrl('advisor', _.get(ctxData, 'advisor')),
-      user_url: clients.routeWebClient.getClient().toUserUrl('profile'),
-      course_url: clients.routeWebClient.getClient().toUserUrl('courseDetail', course),
-      course_filter_url: clients.routeWebClient.getClient().toUserUrl('courseFilter'),
-      wallet_url: clients.routeWebClient.getClient().toUserUrl('userWallet'),
-    },
-  });
+  // clients.sendgridClient.getClient().sendEmail(user_id, {
+  //   template: {
+  //     name: i18n.getTemplateSuffixName('user.course.postpone'),
+  //   },
+  //   ...i18n.getContactEmailInfo('user.course.postpone'),
+  //   ...ctxData,
+  //   course: {
+  //     ..._.pick(course, ['id', 'name']),
+  //     start_at: _.capitalize(
+  //       old_start_time
+  //         .locale(i18n.locale)
+  //         .utcOffset(await utils.getUserTimezone(advisor_id))
+  //         .format(helpers.START_DAY_FULL_FORMAT)
+  //     ),
+  //     new_start_at: _.capitalize(
+  //       $start_at
+  //         .locale(i18n.locale)
+  //         .utcOffset(await utils.getUserTimezone(advisor_id))
+  //         .format(helpers.START_DAY_FULL_FORMAT)
+  //     ),
+  //     session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
+  //     session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
+  //   },
+  //   tuition: {
+  //     payment_count,
+  //   },
+  //   route: {
+  //     advisor_url: clients.routeWebClient.getClient().toUserUrl('advisor', _.get(ctxData, 'advisor')),
+  //     user_url: clients.routeWebClient.getClient().toUserUrl('profile'),
+  //     course_url: clients.routeWebClient.getClient().toUserUrl('courseDetail', course),
+  //     course_filter_url: clients.routeWebClient.getClient().toUserUrl('courseFilter'),
+  //     wallet_url: clients.routeWebClient.getClient().toUserUrl('userWallet'),
+  //   },
+  // });
 };
