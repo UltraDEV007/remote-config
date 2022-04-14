@@ -155,40 +155,40 @@ exports.effect = async (
 
   console.log('title', title, body);
 
-  await slackClient.getClient().postMessage({
-    text: title,
-    blocks: [
-      {
-        type: 'header',
-        text: {
-          type: 'plain_text',
-          text: 'advisor.course.postpone',
-        },
-      },
-      {
-        type: 'context',
-        elements: [
-          {
-            type: 'mrkdwn',
-            text: title,
-          },
-        ],
-      },
-      {
-        type: 'context',
-        elements: [
-          {
-            type: 'mrkdwn',
-            text: body,
-          },
-        ],
-      },
-      {
-        type: 'divider',
-      },
-    ],
-    // channel: 'C02P4M8KFBK',
-  });
+  // await slackClient.getClient().postMessage({
+  //   text: title,
+  //   blocks: [
+  //     {
+  //       type: 'header',
+  //       text: {
+  //         type: 'plain_text',
+  //         text: 'advisor.course.postpone',
+  //       },
+  //     },
+  //     {
+  //       type: 'context',
+  //       elements: [
+  //         {
+  //           type: 'mrkdwn',
+  //           text: title,
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       type: 'context',
+  //       elements: [
+  //         {
+  //           type: 'mrkdwn',
+  //           text: body,
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       type: 'divider',
+  //     },
+  //   ],
+  //   // channel: 'C02P4M8KFBK',
+  // });
 
   // inapp noti effect
   hasuraClient.getClient().request(
