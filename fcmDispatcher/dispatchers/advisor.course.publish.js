@@ -71,7 +71,7 @@ exports.effect = async (
 
   const $start_at = moment(_.get(course, 'start_at'));
 
-  const title = `Khoá học "${courseDisplayName}" của ${advisorDisplayName} đã được khởi tạo.`;
+  const title = `Khoá học "${courseDisplayName}" của ${advisorDisplayName} đã được công bố.`;
   const body = `Ngày bắt đầu: ${_.capitalize(
     $start_at
       .locale('vi')
