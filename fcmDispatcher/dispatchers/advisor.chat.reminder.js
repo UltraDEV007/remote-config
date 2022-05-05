@@ -1,5 +1,5 @@
 exports.getQuery = () => `
-  query($user_id: String!, $advisor_id: String!) {
+  query($user_id: String!, $advisor_id: String!, $message_id: String!) {
     user: user_by_pk(id: $user_id) {
       id
       profile {
@@ -12,6 +12,10 @@ exports.getQuery = () => `
         display_name
       }
     }
+    message: message_by_pk(id: $message_id) {
+      message_jsonb
+      message
+    }
   }
 `;
 
@@ -19,6 +23,7 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
   return {
     user_id: _.get(payload, 'session.user_id'),
     advisor_id: _.get(payload, 'session.advisor_id'),
+    message_id: _.get(payload, 'conversation.messages.0.id'),
   };
 };
 
@@ -26,10 +31,14 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   const { _, moment } = helpers;
   const advisor_id = _.get(ctxData, 'advisor.id');
   const i18n = await utils.forUser(advisor_id);
-  const title = i18n.t('RemoteConfig.Chat.AdvisorChatReminder.title');
+  const title = i18n.t('RemoteConfig.Chat.AdvisorChatReminder.title', {
+    user: _.get(ctxData, 'user.profile.display_name'),
+  });
   const body = i18n.t('RemoteConfig.Chat.AdvisorChatReminder.body', {
     user: _.get(ctxData, 'user.profile.display_name'),
   });
+
+  console.log(JSON.stringify(payload));
 
   return {
     notification: {
@@ -66,9 +75,11 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
 };
 
 exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
-  const { _, moment } = helpers;
+  const { _, rendererQuill } = helpers;
   const { hasuraClient } = clients;
   const advisor_id = _.get(ctxData, 'advisor.id');
+  const message = _.get(ctxData, 'message');
+
   const i18n = await utils.forUser(advisor_id);
   await hasuraClient.getClient().request(
     `
@@ -96,6 +107,9 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
     },
     ...i18n.getContactEmailInfo('advisor.chat.reminder'),
     ...ctxData,
+    last_message: `<blockquote
+                    style="margin: 0; background: #eee; padding: 2px 10px; border-radius: 1em"
+                  >${rendererQuill.renderMessage()(message)}</blockquote>`,
     route: {
       advisor_url: clients.routeWebClient.getClient().toAdvisorUrl('home'),
       chat_url: clients.routeWebClient.getClient().toAdvisorUrl('messageWithUser', _.get(ctxData, 'user')),
