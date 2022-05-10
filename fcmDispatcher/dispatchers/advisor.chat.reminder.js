@@ -108,7 +108,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
     ...i18n.getContactEmailInfo('advisor.chat.reminder'),
     ...ctxData,
     last_message: `<blockquote
-                    style="margin: 0; background: #eee; padding: 2px 10px; border-radius: 1em"
+                    style="margin: 0; background: #eee; padding: 2px 10px; border-radius: 1em; margin-top:20px"
                   >${rendererQuill.renderMessage()(message)}</blockquote>`,
     route: {
       advisor_url: clients.routeWebClient.getClient().toAdvisorUrl('home'),
