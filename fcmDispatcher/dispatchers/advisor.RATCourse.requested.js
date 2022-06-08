@@ -163,7 +163,7 @@ exports.effect = async (
   const userDisplayName = routeWebClient.getClient().toAdminLink('admin.user', user);
   const courseDisplayName = routeWebClient.getClient().toAdminLink('admin.course', course);
 
-  const title = `${userDisplayName} đã yêu cầu học thử khoá "${courseDisplayName}" của ${advisorDisplayName}.`;
+  const title = `${userDisplayName} đã yêu cầu khung giờ khác cho khoá "${courseDisplayName}" của ${advisorDisplayName}.`;
   const body = ['per_session', 'session'].includes(per_unit) ? `${per_amount} buổi: Miễn phí` : 'Trọn gói: Miễn phí';
 
   slackClient.getClient().postMessage({
