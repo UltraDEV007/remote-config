@@ -31,6 +31,7 @@ exports.getQuery = () => `
       price_currency
       per_amount
       per_unit
+      session_per_purchase
       first_room: rooms(where: {course_room_attendees: {user_id: {_eq: "$user_id"}}}, order_by: {start_at: asc}, limit: 1) {
         start_at
       }
@@ -141,11 +142,13 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const per_amount = _.sumBy(_.get(course, 'purchases'), 'per_amount');
   const per_session = parseInt(session_count) === 100000 ? '' : `/${session_count}`;
 
-  const payment_count = ['per_session', 'session'].includes(per_unit)
-    ? i18n.t('RemoteConfig.Course.Purchase.per_session', {
-        session: `${per_amount}${per_session}`,
-      })
-    : i18n.t('RemoteConfig.Course.Purchase.full_session_txt');
+  // const payment_count = ['per_session', 'session'].includes(per_unit)
+  //   ? i18n.t('RemoteConfig.Course.Purchase.per_session', {
+  //       session: `${per_amount}${per_session}`,
+  //     })
+  //   : i18n.t('RemoteConfig.Course.Purchase.full_session_txt');
+
+  const payment_count = _.get(course, 'session_per_purchase');
 
   const first_session_start = moment(_.get(ctxData, 'course.first_room.0.start_at'));
 
@@ -194,7 +197,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
       session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
     },
     tuition: {
-      payment_count,
+      payment_count: helpers.formatSessionOccurenceWithI18n(i18n)(payment_count),
     },
     route: {
       advisor_url: clients.routeWebClient.getClient().toUserUrl('advisor', _.get(ctxData, 'advisor')),
