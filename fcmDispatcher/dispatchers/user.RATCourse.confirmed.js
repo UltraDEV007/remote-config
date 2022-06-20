@@ -1,5 +1,5 @@
 exports.getQuery = () => `
-  query($user_id: String!, $advisor_id: String!, $course_id: uuid!) {
+  query($user_id: String!, $advisor_id: String!, $course_id: uuid!, $course_activity_id: uuid!) {
     advisor: advisor_by_pk(id: $advisor_id) {
       id
       profile {
@@ -12,6 +12,15 @@ exports.getQuery = () => `
         display_name
       }
     }
+
+    activity: course_activity_by_pk(id: $course_activity_id) {
+      course_id
+      payload
+      creator {
+        id
+      }
+    }
+
     course: course_by_pk(id: $course_id) {
         advisor_id
         type
@@ -56,6 +65,7 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
     advisor_id: _.get(payload, 'course.advisor_id'),
     course_id: _.get(payload, 'course.id'),
     user_id: _.get(payload, 'user_id'),
+    course_activity_id: _.get(payload, 'course_activity.id'),
   };
 };
 
@@ -75,14 +85,8 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   const advisor_id = _.get(ctxData, 'advisor.id');
 
   const i18n = await utils.forUser(advisor_id);
-
-  // const title = 'Thông báo huỷ khoá học';
-
-  const title = i18n.t('RemoteConfig.TrialCourse.UserTrialCourseConfirm.title');
-
-  // const body = `${userDisplayName} huỷ đăng ký khoá học ${courseDisplayName}.`;
-
-  const body = i18n.t('RemoteConfig.TrialCourse.UserTrialCourseConfirm.body', {
+  const title = i18n.t('RemoteConfig.RATCourse.UserRATCourseConfirm.title');
+  const body = i18n.t('RemoteConfig.RATCourse.UserRATCourseReject.body', {
     course: courseDisplayName,
   });
 
@@ -148,6 +152,10 @@ exports.effect = async (
       .format(helpers.START_TIME_FULL_FORMAT)
   );
 
+  const attendees_count = _.get(course, 'attendees_aggregate.aggregate.count', 0);
+  const sessions = _.get(ctxData, 'activity.payload.sessions');
+  const user_note = _.get(ctxData, 'activity.payload.notes');
+
   //   inapp noti effect
   hasuraClient.getClient().request(
     `
@@ -181,6 +189,9 @@ exports.effect = async (
       session_at,
       session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
       session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
+      attendee_count: helpers.formatAttendeeWithI18n(i18n)(attendees_count),
+      RAT_time: helpers.formatSessionSlotTime(i18n)(sessions),
+      notes: user_note || '',
     },
 
     route: {
@@ -190,6 +201,7 @@ exports.effect = async (
       course_filter_url: routeWebClient.getClient().toUserUrl('courseFilter'),
       room_url: routeWebClient.getClient().toUserUrl('room', room),
       wallet_url: routeWebClient.getClient().toUserUrl('userWallet'),
+      payment_url: routeWebClient.getClient().toUserUrl('payment', course),
     },
   });
 };

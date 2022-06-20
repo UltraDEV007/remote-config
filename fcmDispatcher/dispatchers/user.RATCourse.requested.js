@@ -69,24 +69,15 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
 
 exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
   const { _ } = helpers;
-
   const course = _.get(ctxData, 'course');
-  const per_unit = _.get(course, 'per_unit');
-  const per_amount = _.get(course, 'per_amount');
-  const price_amount = _.get(course, 'price_amount');
-  const price_currency = _.get(course, 'price_currency');
-
   const user = _.get(ctxData, 'user');
-
-  const userDisplayName = _.get(user, 'profile.display_name');
   const courseDisplayName = _.get(course, 'name');
-  const advisor_id = _.get(ctxData, 'advisor.id');
 
   const user_id = _.get(user, 'id');
 
   const i18n = await utils.forUser(user_id);
-  const title = i18n.t('RemoteConfig.RATCourse.UserRATCourseReject.title');
-  const body = i18n.t('RemoteConfig.RATCourse.UserRATCourseReject.body', {
+  const title = i18n.t('RemoteConfig.RATCourse.UserRATCourseRequest.title');
+  const body = i18n.t('RemoteConfig.RATCourse.UserRATCourseRequest.body', {
     course: courseDisplayName,
   });
 
@@ -97,7 +88,7 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
       body,
     },
     data: {
-      type: 'user.RATCourse.rejected',
+      type: 'user.RATCourse.requested',
       sound: 'sound1',
     },
     apns: {
@@ -172,16 +163,16 @@ exports.effect = async (
       }
     `,
     {
-      type: 'user.RATCourse.rejected',
+      type: 'user.RATCourse.requested',
       payload,
     }
   );
 
   sendgridClient.getClient().sendEmail(user_id, {
     template: {
-      name: i18n.getTemplateSuffixName('user.RATCourse.rejected'),
+      name: i18n.getTemplateSuffixName('user.RATCourse.requested'),
     },
-    ...i18n.getContactEmailInfo('user.RATCourse.rejected'),
+    ...i18n.getContactEmailInfo('user.RATCourse.requested'),
     ...ctxData,
     user,
     course: {
@@ -204,6 +195,9 @@ exports.effect = async (
       payment_url: routeWebClient.getClient().toUserUrl('payment', course),
       chat_url: routeWebClient.getClient().toUserUrl('messageWithAdvisor', _.get(ctxData, 'advisor')),
       home_url: routeWebClient.getClient().toUserUrl('home'),
+      course_more_url: routeWebClient
+        .getClient()
+        .toUserUrl('advisor', { ...(_.get(ctxData, 'advisor') || {}), tab: 'course' }, false),
     },
   });
 };

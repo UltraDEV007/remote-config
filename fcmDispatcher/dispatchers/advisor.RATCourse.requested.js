@@ -1,5 +1,5 @@
 exports.getQuery = () => `
-  query($user_id: String!, $advisor_id: String!, $course_id: uuid!) {
+  query($user_id: String!, $advisor_id: String!, $course_id: uuid!, $course_activity_id: uuid!) {
     advisor: advisor_by_pk(id: $advisor_id) {
       id
       profile {
@@ -13,7 +13,7 @@ exports.getQuery = () => `
       }
     }
 
-    activity: course_activity(where: {course_id: {_eq: $course_id}, creator: {id: {_eq: $user_id}}}) {
+    activity: course_activity_by_pk(id: $course_activity_id) {
       course_id
       payload
       creator {
@@ -43,7 +43,14 @@ exports.getQuery = () => `
             start_at
             id
         }
-            
+        attendees{
+          user_id
+        }
+        attendees_aggregate {
+          aggregate{
+            count
+          }
+        }
         enrolls {
             user_id
             course_id
@@ -65,6 +72,7 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
     advisor_id: _.get(payload, 'course.advisor_id'),
     course_id: _.get(payload, 'course.id'),
     user_id: _.get(payload, 'user_id'),
+    course_activity_id: _.get(payload, 'course_activity.id'),
   };
 };
 
@@ -85,13 +93,8 @@ exports.dispatch = async ({ payload }, { ctxData, utils, helpers }) => {
 
   const i18n = await utils.forUser(advisor_id);
 
-  // const title = 'Thông báo huỷ khoá học';
-
-  const title = i18n.t('RemoteConfig.TrialCourse.AdvisorTrialCourseRequest.title');
-
-  // const body = `${userDisplayName} huỷ đăng ký khoá học ${courseDisplayName}.`;
-
-  const body = i18n.t('RemoteConfig.TrialCourse.AdvisorTrialCourseRequest.body', {
+  const title = i18n.t('RemoteConfig.RATCourse.AdvisorRATCourseRequest.title');
+  const body = i18n.t('RemoteConfig.RATCourse.AdvisorRATCourseRequest.body', {
     user: userDisplayName,
   });
 
@@ -140,17 +143,11 @@ exports.effect = async (
   const course = _.get(ctxData, 'course');
   const per_unit = _.get(course, 'per_unit');
   const per_amount = _.get(course, 'per_amount');
-  const price_amount = _.get(course, 'price_amount');
-  const price_currency = _.get(course, 'price_currency');
+  const sessions = _.get(ctxData, 'activity.payload.sessions');
+  const user_note = _.get(ctxData, 'activity.payload.notes');
 
   const user = _.get(ctxData, 'user');
-
-  // const advisorDisplayName = _.get(ctxData, 'advisor.profile.display_name');
-  // const userDisplayName = _.get(ctxData, 'user.profile.display_name');
-  // const courseDisplayName = _.get(course, 'name');
-
   const i18n = await utils.forUser(advisor_id);
-
   const $start_at = moment(_.get(course, 'start_at'));
   const session_count = _.get(course, 'session_occurence', 0);
   const session_duration = _.get(course, 'session_duration', 0);
@@ -166,6 +163,7 @@ exports.effect = async (
   const title = `${userDisplayName} đã yêu cầu khung giờ khác cho khoá "${courseDisplayName}" của ${advisorDisplayName}.`;
   const body = ['per_session', 'session'].includes(per_unit) ? `${per_amount} buổi: Miễn phí` : 'Trọn gói: Miễn phí';
 
+  const attendees_count = _.get(course, 'attendees_aggregate.aggregate.count', 0);
   slackClient.getClient().postMessage({
     text: title,
     blocks: [
@@ -238,6 +236,9 @@ exports.effect = async (
       ),
       session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
       session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
+      attendee_count: helpers.formatAttendeeWithI18n(i18n)(attendees_count),
+      RAT_time: helpers.formatSessionSlotTime(i18n)(sessions),
+      notes: user_note || '',
     },
 
     route: {
@@ -248,7 +249,7 @@ exports.effect = async (
       add_course_url: routeWebClient.getClient().toAdvisorUrl('addCourse'),
       course_activity_url: routeWebClient
         .getClient()
-        .toAdvisorUrl('courseDetail', { ...(course || {}), tab: 'activity' }),
+        .toAdvisorUrl('courseDetail', { ...(course || {}), tab: 'activity' }, false),
     },
   });
 };
