@@ -81,7 +81,7 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils }) => {
     course: courseDisplayName,
     start_at: $start_at
       .locale(i18n.locale)
-      .utcOffset(await utils.getUserTimezone(advisor_id))
+      .utcOffset(await utils.getUserTimezone(user_id))
       .format(helpers.START_DAY_FULL_FORMAT),
   });
 

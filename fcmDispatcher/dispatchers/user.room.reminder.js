@@ -71,7 +71,7 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils, clients: { rou
   const i18n = await utils.forUser(user_id);
 
   const courseDisplayName = `${_.get(course, 'name')}(${$start_at
-    .utcOffset(await utils.getUserTimezone(advisor_id))
+    .utcOffset(await utils.getUserTimezone(user_id))
     .locale(i18n.locale)
     .format(helpers.START_TIME_FORMAT)})`;
 
@@ -136,7 +136,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const session_at = _.capitalize(
     $start_at
       .locale(i18n.locale)
-      .utcOffset(await utils.getUserTimezone(advisor_id))
+      .utcOffset(await utils.getUserTimezone(user_id))
       .format(helpers.START_TIME_FULL_FORMAT)
   );
   const session_count = _.get(ctxData, 'course.session_occurence', 0);

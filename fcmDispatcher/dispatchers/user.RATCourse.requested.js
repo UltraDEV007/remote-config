@@ -139,7 +139,7 @@ exports.effect = async (
   const session_at = _.capitalize(
     $start_at
       .locale(i18n.locale)
-      .utcOffset(await utils.getUserTimezone(advisor_id))
+      .utcOffset(await utils.getUserTimezone(user_id))
       .format(helpers.START_TIME_FULL_FORMAT)
   );
 
