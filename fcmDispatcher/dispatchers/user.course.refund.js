@@ -228,7 +228,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
       first_session_start: _.capitalize(
         first_session_start
           .locale(i18n.locale)
-          .utcOffset(await utils.getUserTimezone(advisor_id))
+          .utcOffset(await utils.getUserTimezone(user_id))
           .format(helpers.START_TIME_FULL_FORMAT)
       ),
       session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
