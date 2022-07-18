@@ -2,10 +2,41 @@
   "template": {
     "name": "advisor.room.connect"
   },
+  "contact_list": [
+    {
+      "title": "Cộng đồng dành cho chuyên gia",
+      "name": "UNITZ COMMUNITY",
+      "url": "https://www.facebook.com/groups/unitz.community"
+    },
+    {
+      "title": "Trang Facebook",
+      "name": "UNITZ APP",
+      "url": "https://www.facebook.com/UnitzApp"
+    },
+    {
+      "title": "Zalo",
+      "name": "Công Ty TNHH UNITZ",
+      "url": "https://zalo.me/2510053737522180594"
+    },
+    {
+      "title": "Email",
+      "name": "supplier@unitz.app",
+      "url": "mailto:supplier@unitz.app"
+    },
+    {
+      "title": "Website",
+      "name": "https://advisor.unitz.app",
+      "url": "https://advisor.unitz.app"
+    },
+    {
+      "title": "Số điện thoại",
+      "name": "0856 507 095 (Ms. Trang)"
+    }
+  ],
   "advisor": {
     "id": "rM3EUyLfbTZtgUg906cpzQgCUkj1",
     "profile": {
-      "display_name": "Nam Phương"
+      "display_name": "Nhat Dev"
     }
   },
   "room": {
@@ -17,14 +48,14 @@
   "course": {
     "id": "e837ecbf-b064-48c6-a9d2-a68f56fe4ca5",
     "name": "Khoá Học Database",
-    "start_at": "Friday 10/12 13:30",
-    "session_count": "Unlimited sessions",
-    "session_duration": "30 minutes",
-    "session_at": "Friday 10/12 13:30"
+    "start_at": "Thứ sáu 10/12 13:30",
+    "session_count": "Không giới hạn buổi học",
+    "session_duration": "30 phút",
+    "session_at": "Thứ sáu 10/12 13:30"
   },
   "route": {
-    "advisor_url": "https://partner.unitz.dev/",
-    "room_url": "https://partner.unitz.dev/room?id=271e5e27-9e87-4e54-87bf-54d3be3a5d47",
-    "course_url": "https://partner.unitz.dev/course/detail?id=e837ecbf-b064-48c6-a9d2-a68f56fe4ca5"
+    "advisor_url": "https://unitz.page.link/?link=https://partner.unitz.dev/&apn=app.unitz.advisor&isi=1569969242&ibi=app.unitz.advisor",
+    "room_url": "https://unitz.page.link/?link=https://partner.unitz.dev/room?id=271e5e27-9e87-4e54-87bf-54d3be3a5d47&apn=app.unitz.advisor&isi=1569969242&ibi=app.unitz.advisor",
+    "course_url": "https://unitz.page.link/?link=https://partner.unitz.dev/course/detail?id=e837ecbf-b064-48c6-a9d2-a68f56fe4ca5&apn=app.unitz.advisor&isi=1569969242&ibi=app.unitz.advisor"
   }
 }
