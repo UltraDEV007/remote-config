@@ -48,8 +48,8 @@
     }
   },
   "course": {
-    "reschedule_time": "Tuesday 22/11 16:04",
-    "last_edit_time": "Tuesday 22/11 16:04",
+    "reschedule_time": "Tuesday 22/11 16:09",
+    "last_edit_time": "Tuesday 22/11 16:09",
     "session_count": "0 sessions",
     "session_duration": "0 minutes"
   },
@@ -57,11 +57,7 @@
     "payment_count": "Full package"
   },
   "route": {
-    "advisor_url": "https://unitz.page.link/?link=https://web.unitz.dev/advisor?id=undefined&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user",
-    "user_url": "https://unitz.page.link/?link=https://web.unitz.dev/profile&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user",
-    "course_url": "https://unitz.page.link/?link=https://web.unitz.dev/course/detail?id=undefined&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user",
-    "course_filter_url": "https://unitz.page.link/?link=https://web.unitz.dev/education/course-filter&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user",
-    "room_url": "https://unitz.page.link/?link=https://web.unitz.dev/room?id=undefined&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user",
+    "user_url": "https://unitz.page.link/?link=https://zoom.unitz.app/profile&apn=app.unitz.biz&isi=1569969242&ibi=app.unitz.biz",
     "account_url": "https://unitz.page.link/?link=https://zoom.unitz.app/unitz-cat-2&apn=app.unitz.biz&isi=1569969242&ibi=app.unitz.biz",
     "verify_email_url": "http://localhost:8000/auth?mode=resetPassword&oobCode=sLFOrbCuxz8xzLDA47u9cPkSFo0YbFKIB-VgEWD16zkAAAGEnbAIRA&apiKey=AIzaSyC0qjhR7EwOd4-y-WvkPjxO_krET5XmXUo&continueUrl=http%3A%2F%2Flocalhost%3A8000&lang=en"
   }
