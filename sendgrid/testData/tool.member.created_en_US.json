@@ -1,0 +1,58 @@
+{
+  "template": {
+    "name": "tool.member.created_en_US"
+  },
+  "contact_list": [
+    {
+      "title": "Unitz community",
+      "name": "UNITZ COMMUNITY",
+      "url": "https://www.facebook.com/groups/unitz.community"
+    },
+    {
+      "title": "Fanpage",
+      "name": "UNITZ APP",
+      "url": "https://www.facebook.com/UnitzApp"
+    },
+    {
+      "title": "Zalo",
+      "name": "UNITZ Co., Ltd",
+      "url": "https://zalo.me/2510053737522180594"
+    },
+    {
+      "title": "Email",
+      "name": "support@unitz.app",
+      "url": "mailto:support@unitz.app"
+    },
+    {
+      "title": "Website",
+      "name": "https://unitz.app",
+      "url": "https://unitz.app"
+    },
+    {
+      "title": "Phone number",
+      "name": "0856 507 095 (Ms. Trang)"
+    }
+  ],
+  "user": {
+    "id": "PdOJWFBgNPUEMhX1JlsDm7zWy012",
+    "profile": {
+      "display_name": "Hung Tran"
+    }
+  },
+  "course": {
+    "reschedule_time": "Tuesday 22/11 15:20",
+    "last_edit_time": "Tuesday 22/11 15:20",
+    "session_count": "0 sessions",
+    "session_duration": "0 minutes"
+  },
+  "tuition": {
+    "payment_count": "Full package"
+  },
+  "route": {
+    "advisor_url": "https://unitz.page.link/?link=https://web.unitz.dev/advisor?id=undefined&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user",
+    "user_url": "https://unitz.page.link/?link=https://web.unitz.dev/profile&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user",
+    "course_url": "https://unitz.page.link/?link=https://web.unitz.dev/course/detail?id=undefined&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user",
+    "course_filter_url": "https://unitz.page.link/?link=https://web.unitz.dev/education/course-filter&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user",
+    "room_url": "https://unitz.page.link/?link=https://web.unitz.dev/room?id=undefined&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user"
+  }
+}
