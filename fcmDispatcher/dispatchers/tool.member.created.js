@@ -1,9 +1,17 @@
 exports.getQuery = () => `
-  query($user_id: String!) {
+  query($user_id: String!, $account_id: uuid!) {
     user: user_by_pk(id: $user_id) {
       id
       profile {
         display_name
+      }
+    }
+    account: b2b_account_by_pk(id: $account_id) {
+      id
+      slug
+      profile: account_profile {
+        display_name
+        avatar_url
       }
     }
   }
@@ -11,7 +19,8 @@ exports.getQuery = () => `
 
 exports.getVars = ({ payload }, { helpers: { _ } }) => {
   return {
-    user_id: _.get(payload, 'purchase.user_id'),
+    user_id: _.get(payload, 'user.id'),
+    account_id: _.get(payload, 'account.id'),
   };
 };
 
@@ -79,12 +88,14 @@ exports.dispatch = async ({ payload }, { ctxData, helpers, utils, clients: { rou
       },
     },
   };
-  console.log('rtnrtnrtnrtn', rtn);
+  console.log('rtn', rtn);
+  return rtn;
 };
 
 exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const { _, moment } = helpers;
 
+  const account = _.get(ctxData, 'account');
   const course = _.get(ctxData, 'course');
   const room = _.get(ctxData, 'room');
 
@@ -143,27 +154,10 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
     },
     ...i18n.getContactEmailInfo('tool.member.created'),
     ...ctxData,
-    course: {
-      ..._.pick(course, ['id', 'name']),
-      reschedule_time: session_at,
-      last_edit_time: _.capitalize(
-        last_edit_time
-          .locale(i18n.locale)
-          .utcOffset(await utils.getUserTimezone(user_id))
-          .format(helpers.START_TIME_FULL_FORMAT)
-      ),
-      session_count: helpers.formatSessionOccurenceWithI18n(i18n)(session_count),
-      session_duration: helpers.formatCallDurationWithI18n(i18n)(session_duration),
-    },
-    tuition: {
-      payment_count,
-    },
     route: {
-      advisor_url: clients.routeWebClient.getClient().toUserUrl('advisor', _.get(ctxData, 'advisor')),
-      user_url: clients.routeWebClient.getClient().toUserUrl('profile'),
-      course_url: clients.routeWebClient.getClient().toUserUrl('courseDetail', course),
-      course_filter_url: clients.routeWebClient.getClient().toUserUrl('courseFilter'),
-      room_url: clients.routeWebClient.getClient().toUserUrl('room', room),
+      user_url: clients.routeWebClient.getClient().toToolUrl('profile'),
+      account_url: clients.routeWebClient.getClient().toToolUrl('toolAccountDetail', account),
+      verify_email_url: _.get(payload, 'link.verifyEmail'),
     },
   });
 };
