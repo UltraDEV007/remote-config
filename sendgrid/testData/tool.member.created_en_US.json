@@ -50,6 +50,7 @@
   "route": {
     "user_url": "https://unitz.page.link/?link=https://zoom.unitz.app/profile&apn=app.unitz.biz&isi=1569969242&ibi=app.unitz.biz",
     "account_url": "https://unitz.page.link/?link=https://zoom.unitz.app/unitz-cat-2&apn=app.unitz.biz&isi=1569969242&ibi=app.unitz.biz",
-    "verify_email_url": "http://localhost:8000/auth?mode=resetPassword&oobCode=sLFOrbCuxz8xzLDA47u9cPkSFo0YbFKIB-VgEWD16zkAAAGEnbAIRA&apiKey=AIzaSyC0qjhR7EwOd4-y-WvkPjxO_krET5XmXUo&continueUrl=http%3A%2F%2Flocalhost%3A8000&lang=en"
+    "verify_email_url": "http://localhost:8000/auth?mode=resetPassword&oobCode=sLFOrbCuxz8xzLDA47u9cPkSFo0YbFKIB-VgEWD16zkAAAGEnbAIRA&apiKey=AIzaSyC0qjhR7EwOd4-y-WvkPjxO_krET5XmXUo&continueUrl=http%3A%2F%2Flocalhost%3A8000&lang=en",
+    "unsubscribe_url": "/"
   }
 }
