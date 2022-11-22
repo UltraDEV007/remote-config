@@ -48,8 +48,8 @@
     }
   },
   "course": {
-    "reschedule_time": "Tuesday 22/11 15:51",
-    "last_edit_time": "Tuesday 22/11 15:51",
+    "reschedule_time": "Tuesday 22/11 15:53",
+    "last_edit_time": "Tuesday 22/11 15:53",
     "session_count": "0 sessions",
     "session_duration": "0 minutes"
   },
@@ -62,6 +62,6 @@
     "course_url": "https://unitz.page.link/?link=https://web.unitz.dev/course/detail?id=undefined&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user",
     "course_filter_url": "https://unitz.page.link/?link=https://web.unitz.dev/education/course-filter&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user",
     "room_url": "https://unitz.page.link/?link=https://web.unitz.dev/room?id=undefined&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user",
-    "account_url": "https://unitz.page.link/?link=https://web.unitz.dev/84bddc49-a50b-434a-bcb2-ac42eec331fa&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user"
+    "account_url": "https://unitz.page.link/?link=https://web.unitz.dev/unitz-cat-2&apn=app.unitz.user&isi=1566840590&ibi=app.unitz.user"
   }
 }
