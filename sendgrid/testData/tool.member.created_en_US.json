@@ -39,9 +39,17 @@
       "display_name": "Hung Tran"
     }
   },
+  "account": {
+    "id": "84bddc49-a50b-434a-bcb2-ac42eec331fa",
+    "slug": "unitz-cat-2",
+    "profile": {
+      "display_name": "Unitz-Cat",
+      "avatar_url": "https://firebasestorage.googleapis.com/v0/b/unitz-app.appspot.com/o/YUgdOvgNaTPOBfBJSs3YZN7rngS2%2FCourseAttachments%2F1668661004472logounitzok2.jpeg?alt=media&token=ca030567-85fe-404c-8b28-fd523ca8b11e"
+    }
+  },
   "course": {
-    "reschedule_time": "Tuesday 22/11 15:26",
-    "last_edit_time": "Tuesday 22/11 15:26",
+    "reschedule_time": "Tuesday 22/11 15:30",
+    "last_edit_time": "Tuesday 22/11 15:30",
     "session_count": "0 sessions",
     "session_duration": "0 minutes"
   },
