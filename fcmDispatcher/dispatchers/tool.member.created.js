@@ -158,6 +158,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
       user_url: clients.routeWebClient.getClient().toToolUrl('profile'),
       account_url: clients.routeWebClient.getClient().toToolUrl('toolAccountDetail', account),
       verify_email_url: _.get(payload, 'link.verifyEmail'),
+      unsubscribe_url: '/',
     },
   });
 };
