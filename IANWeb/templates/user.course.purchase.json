@@ -1,0 +1,11 @@
+{
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "plain_text",
+				"text": "Congratulations! You have purchased course {{courseLink}} successfully."
+			}
+		}
+	]
+}
