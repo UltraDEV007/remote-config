@@ -1,7 +1,8 @@
-Builder:
-https://app.slack.com/block-kit-builder/T01ULDSCABF#%7B%22blocks%22:%5B%7B%22type%22:%22section%22,%22text%22:%7B%22type%22:%22mrkdwn%22,%22text%22:%22New%20Paid%20Time%20Off%20request%20from%20%3Cexample.com%7CFred%20Enriquez%3E%5Cn%5Cn%3Chttps://example.com%7CView%20request%3E%22%7D%7D%5D%7D
+Builder: SendGrid Dynamic template editor
 
 Events:
 1. tool.user.course.enrolled | khi học viên được assign/add vào trong một khoá học | Done | Backlog | 
 2. tool.teacher.course.enrolled | Khi giáo viên được assign/add vào trong một khoá học | Done | Blacklog |
-3. 
+3. tool.user.room.remind | Thông báo tới giờ vào lớp (trước n phút)
+4. tool.teacher.room.remind | Thông báo tới giờ vào lớp (trước n phút)
+5. tool.member.created | Khi học vien hoặc giáo viên được thêm vào trong 1 tổ chức
