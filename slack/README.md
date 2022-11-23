@@ -3,8 +3,3 @@ https://app.slack.com/block-kit-builder/T01ULDSCABF#%7B%22blocks%22:%5B%7B%22typ
 
 Events:
 |Event Name| Function | 
-1. user.RATCourse.confirmed
-  Doi tuong: 
-  
-  
-  
