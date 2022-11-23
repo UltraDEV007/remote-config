@@ -1,0 +1,56 @@
+{
+  "template": {
+    "name": "tool.member.created_en_US"
+  },
+  "contact_list": [
+    {
+      "title": "Unitz community",
+      "name": "UNITZ COMMUNITY",
+      "url": "https://www.facebook.com/groups/unitz.community"
+    },
+    {
+      "title": "Fanpage",
+      "name": "UNITZ APP",
+      "url": "https://www.facebook.com/UnitzApp"
+    },
+    {
+      "title": "Zalo",
+      "name": "UNITZ Co., Ltd",
+      "url": "https://zalo.me/2510053737522180594"
+    },
+    {
+      "title": "Email",
+      "name": "support@unitz.app",
+      "url": "mailto:support@unitz.app"
+    },
+    {
+      "title": "Website",
+      "name": "https://unitz.app",
+      "url": "https://unitz.app"
+    },
+    {
+      "title": "Phone number",
+      "name": "0856 507 095 (Ms. Trang)"
+    }
+  ],
+  "user": {
+    "id": "PdOJWFBgNPUEMhX1JlsDm7zWy012",
+    "profile": {
+      "display_name": "Hung Tran"
+    }
+  },
+  "account": {
+    "id": "84bddc49-a50b-434a-bcb2-ac42eec331fa",
+    "slug": "unitz-cat-2",
+    "profile": {
+      "display_name": "Unitz-Cat",
+      "avatar_url": "https://firebasestorage.googleapis.com/v0/b/unitz-app.appspot.com/o/YUgdOvgNaTPOBfBJSs3YZN7rngS2%2FCourseAttachments%2F1668661004472logounitzok2.jpeg?alt=media&token=ca030567-85fe-404c-8b28-fd523ca8b11e"
+    }
+  },
+  "route": {
+    "user_url": "https://unitz.page.link/?link=https://zoom.unitz.app/profile&apn=app.unitz.biz&isi=1569969242&ibi=app.unitz.biz",
+    "account_url": "https://unitz.page.link/?link=https://zoom.unitz.app/unitz-cat-2&apn=app.unitz.biz&isi=1569969242&ibi=app.unitz.biz",
+    "verify_email_url": "http://localhost:8000/auth?mode=resetPassword&oobCode=sLFOrbCuxz8xzLDA47u9cPkSFo0YbFKIB-VgEWD16zkAAAGEnbAIRA&apiKey=AIzaSyC0qjhR7EwOd4-y-WvkPjxO_krET5XmXUo&continueUrl=http%3A%2F%2Flocalhost%3A8000&lang=en",
+    "unsubscribe_url": "/"
+  }
+}
