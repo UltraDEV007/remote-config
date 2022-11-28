@@ -8,17 +8,17 @@ Subject: Confirm your Unitz email address
 Subject: You’ve been invited to an organization
 
 3. tool.teacher.course.enrolled_en_US | After an admin assign a teacher to a course | Done | Backlog | 
-Subject: {{admin_name}} assigned you to the course {{course_name}}
-{{course_start_date}} (example: 22 Nov 2022)
-{{course_schedule}} (example: Monday, 9am - 10:30am)
+Subject: {{admin_name}} assigned you to the course {{course_name}} |
+- {{course_start_date}} (example: 22 Nov 2022)
+- {{course_schedule}} (example: Monday, 9am - 10:30am)
 Button: Prepare the lessons => This button will go to the Course overview, and the teacher can click to edit the course, and update the materials of the course and add materials for the lessons.
 
 4. tool.user.course.enrolled_en_US | After an admin enroll a student to a course | Done | Backlog | 
-Subject: You’ve been enrolled to the course {{course_name}}
+Subject: You’ve been enrolled to the course {{course_name}} |
 Button: View the course => This button will go to the Course overview, and the student can see materials uploaded from the teacher if there are any available.
 
 5. tool.user.program.enrolled_en_US | After an admin enroll a student to a program | Done | Backlog |
-Subject: You’ve been enrolled to the program {{program_name}}
+Subject: You’ve been enrolled to the program {{program_name}} |
 Button: View the program => This button will go to the Program overview, and the student can see courses within the program.
 
 6. tool.member.lesson.cancelled_en_US | After the lesson was canceled by the teacher or the school admin | Done | Backlog |
