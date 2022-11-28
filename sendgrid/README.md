@@ -4,7 +4,7 @@ Events: name | Function | Status
 1. tool.auth.sendVerificationEmail_en_US | After signing up by email | Done | Backlog |
 Subject: Confirm your Unitz email address
 
-2.tool.member.created_en_US | After an admin invites another admin/teacher/student to the organization | Done | Backlog |
+2. tool.member.created_en_US | After an admin invites another admin/teacher/student to the organization | Done | Backlog |
 Subject: You’ve been invited to an organization
 
 3. tool.teacher.course.enrolled_en_US | After an admin assign a teacher to a course | Done | Backlog | 
