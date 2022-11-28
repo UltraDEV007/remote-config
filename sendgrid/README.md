@@ -11,7 +11,7 @@ Subject: You’ve been invited to an organization
 Subject: {{admin_name}} assigned you to the course {{course_name}} 
 - {{course_start_date}} (example: 22 Nov 2022)
 - {{course_schedule}} (example: Monday, 9am - 10:30am)
-Button: Prepare the lessons => This button will go to the Course overview, and the teacher can click to edit the course, and update the materials of the course and add materials for the lessons.
+- Button: Prepare the lessons => This button will go to the Course overview, and the teacher can click to edit the course, and update the materials of the course and add materials for the lessons.
 
 4. tool.user.course.enrolled_en_US | After an admin enroll a student to a course | Done | Backlog | 
 Subject: You’ve been enrolled to the course {{course_name}} |
