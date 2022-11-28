@@ -8,7 +8,7 @@ Subject: Confirm your Unitz email address
 Subject: You’ve been invited to an organization
 
 3. tool.teacher.course.enrolled_en_US | After an admin assign a teacher to a course | Done | Backlog | 
-Subject: {{admin_name}} assigned you to the course {{course_name}} |
+Subject: {{admin_name}} assigned you to the course {{course_name}} 
 - {{course_start_date}} (example: 22 Nov 2022)
 - {{course_schedule}} (example: Monday, 9am - 10:30am)
 Button: Prepare the lessons => This button will go to the Course overview, and the teacher can click to edit the course, and update the materials of the course and add materials for the lessons.
