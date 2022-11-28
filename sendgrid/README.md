@@ -17,7 +17,7 @@ Button: Prepare the lessons => This button will go to the Course overview, and t
 Subject: You’ve been enrolled to the course {{course_name}}
 Button: View the course => This button will go to the Course overview, and the student can see materials uploaded from the teacher if there are any available.
 
-5.tool.user.program.enrolled_en_US | After an admin enroll a student to a program | Done | Backlog |
+5. tool.user.program.enrolled_en_US | After an admin enroll a student to a program | Done | Backlog |
 Subject: You’ve been enrolled to the program {{program_name}}
 Button: View the program => This button will go to the Program overview, and the student can see courses within the program.
 
