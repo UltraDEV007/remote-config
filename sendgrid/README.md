@@ -40,7 +40,7 @@ Subject: Unitz Password Reset
 
 13. tool.teacher.room.remind | Thông báo tới giờ vào lớp (trước n phút)|NO EMAILS!
 
-24. tool.new.member.created_en_US | After an admin invites another admin/ teacher/ student to the organization
-Recipient: Other admins/teachers/students of the organization that haven’t had any account created at Unitz
+24. tool.new.member.created_en_US | After an admin invites another admin/ teacher/ student to the organization | Done | Blacklog | 
+Recipient: Other admins/teachers/students of the organization that haven’t had any account created at Unitz |
 Subject: You’ve been invited to an organization
 
