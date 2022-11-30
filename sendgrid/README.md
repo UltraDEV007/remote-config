@@ -14,12 +14,12 @@ Subject: {{admin_name}} assigned you to the course {{course_name}}
 - Button: Prepare the lessons => This button will go to the Course overview, and the teacher can click to edit the course, and update the materials of the course and add materials for the lessons.
 
 4. tool.user.course.enrolled_en_US | After an admin enroll a student to a course | Done | Backlog | 
-Subject: You’ve been enrolled to the course {{course_name}} |
-Button: View the course => This button will go to the Course overview, and the student can see materials uploaded from the teacher if there are any available.
+- Subject: You’ve been enrolled to the course {{course_name}} |
+- Button: View the course => This button will go to the Course overview, and the student can see materials uploaded from the teacher if there are any available.
 
 5. tool.user.program.enrolled_en_US | After an admin enroll a student to a program | Done | Backlog |
-Subject: You’ve been enrolled to the program {{program_name}} |
-Button: View the program => This button will go to the Program overview, and the student can see courses within the program.
+- Subject: You’ve been enrolled to the program {{program_name}} |
+- Button: View the program => This button will go to the Program overview, and the student can see courses within the program.
 
 6. tool.member.lesson.cancelled_en_US | After the lesson was canceled by the teacher or the school admin | Done | Backlog |
 Subject: The lesson on {{lesson_time}} of the course {{course_name}} has been canceled
@@ -41,6 +41,6 @@ Subject: Unitz Password Reset
 13. tool.teacher.room.remind | Thông báo tới giờ vào lớp (trước n phút)|NO EMAILS!
 
 24. tool.new.member.created_en_US | After an admin invites another admin/ teacher/ student to the organization | Done | Blacklog | 
-Recipient: Other admins/teachers/students of the organization that haven’t had any account created at Unitz |
-Subject: You’ve been invited to an organization
+- Recipient: Other admins/teachers/students of the organization that haven’t had any account created at Unitz |
+- Subject: You’ve been invited to an organization
 
