@@ -4,7 +4,7 @@ Events: name | Function | Status
 1. tool.auth.sendVerificationEmail_en_US | After signing up by email | Done | Backlog |
 Subject: Confirm your Unitz email address
 
-2. tool.member.created_en_US | After an admin invites another admin/teacher/student to the organization | Done | Backlog |
+2. tool.member.created_en_US | After an admin invites another admin/teacher/student to the organization  (if they already have an account at Unitz with the email address invited) | Done | Backlog |
 Subject: You’ve been invited to an organization
 
 3. tool.teacher.course.enrolled_en_US | After an admin assign a teacher to a course | Done | Backlog | 
@@ -37,6 +37,10 @@ Subject: Unitz Password Reset
 11. tool.student.welcome_en_Us | After student successfully confirmed their email address and joined an organization on Unitz | In Progress
 
 12. tool.user.room.remind | Thông báo tới giờ vào lớp (trước n phút)|NO EMAILS!
+
 13. tool.teacher.room.remind | Thông báo tới giờ vào lớp (trước n phút)|NO EMAILS!
 
+24. tool.new.member.created_en_US | After an admin invites another admin/ teacher/ student to the organization
+Recipient: Other admins/teachers/students of the organization that haven’t had any account created at Unitz
+Subject: You’ve been invited to an organization
 
