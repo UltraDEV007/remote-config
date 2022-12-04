@@ -96,56 +96,10 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const { _, moment } = helpers;
 
   const account = _.get(ctxData, 'account');
-  const course = _.get(ctxData, 'course');
-  const room = _.get(ctxData, 'room');
-
-  const $start_at = moment(_.get(room, 'start_at'));
 
   const user_id = _.get(ctxData, 'user.id');
   const i18n = await utils.forUser(user_id);
 
-  const session_at = _.capitalize(
-    $start_at
-      .locale(i18n.locale)
-      .utcOffset(await utils.getUserTimezone(user_id))
-      .format(helpers.START_TIME_FULL_FORMAT)
-  );
-
-  const last_edit_time = moment(_.get(room, 'last_edit.0.start_at'));
-
-  const session_count = _.get(ctxData, 'course.session_occurence', 0);
-  const session_duration = _.get(ctxData, 'course.session_duration', 0);
-
-  const per_unit = _.get(course, 'per_unit');
-  const per_amount = _.get(course, 'per_amount');
-
-  const per_session = parseInt(session_count) === 100000 ? '' : `/${session_count}`;
-
-  const payment_count = ['per_session', 'session'].includes(per_unit)
-    ? i18n.t('RemoteConfig.Course.Purchase.per_session', {
-        session: `${per_amount}${per_session}`,
-      })
-    : i18n.t('RemoteConfig.Course.Purchase.full_session_txt');
-
-  // await clients.hasuraClient.getClient().request(
-  //   `
-  //   mutation upsertnotifevent($payload: jsonb, $type: String) {
-  //     insert_notification_one(
-  //       object: {
-  //         owner_id: "${user_id}"
-  //         type_id: $type
-  //         payload: $payload
-  //       }
-  //     ) {
-  //       id
-  //     }
-  //   }
-  // `,
-  //   {
-  //     type: 'tool.member.created',
-  //     payload,
-  //   }
-  // );
 
   // send email effect
   clients.sendgridClient.getClient().sendEmail(user_id, {
@@ -154,6 +108,11 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
     },
     ...i18n.getContactEmailInfo('tool.member.created'),
     ...ctxData,
+    organization_name: _.get(account, 'profile.display_name'),
+    admin_name: _.get(account, 'profile.display_name'),
+    login: {
+      link: clients.routeWebClient.getClient().toToolUrl('toolAccountDetail', account),
+    },
     route: {
       user_url: clients.routeWebClient.getClient().toToolUrl('profile'),
       account_url: clients.routeWebClient.getClient().toToolUrl('toolAccountDetail', account),
