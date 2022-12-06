@@ -30,11 +30,21 @@ Events: name | Function | Status
 8. tool.auth.sendResetPasswordEmail_en_US | After clicking reset password button | Done | Backlog | 
 - Subject: Unitz Password Reset 
 
-9. tool.admin.welcome_en_Us | After user successfully confirmed their email address and created an organization on Unitz | In Progress
+9. tool.admin.welcome_en_Us | After user successfully confirmed their email address and created an organization on Unitz | Done | Backlog |
+- Subject: Welcome to Unitz
+- Note URL for videos
+- {{program.video.url}}: https://youtu.be/4dlQBpBFZ5w
+- {{introvideo.admins.url}}: https://youtu.be/VWRkQM2gE6g
 
-10. tool.teacher.welcome_en_Us | After teacher successfully confirmed their email address and joined an organization on Unitz | In Progress
+10. tool.teacher.welcome_en_Us | After teacher successfully confirmed their email address and joined an organization on Unitz | Done | Backlog |
+- Subject: Welcome to Unitz
+- {{create.course.video.url}}: https://youtu.be/sccs0pZ6KG4
+- {{introvideo.teachers.url}}: https://youtu.be/zFk6bvQ2Vzw
 
-11. tool.student.welcome_en_Us | After student successfully confirmed their email address and joined an organization on Unitz | In Progress
+11. tool.student.welcome_en_Us | After student successfully confirmed their email address and joined an organization on Unitz | Done | Backlog |
+- Subject: Welcome to Unitz
+- {{gotoclass.video.url}}: https://youtu.be/fNio6MVCbrA
+- {{introvideo.student.url}}: https://youtu.be/WokCNDf1LYg
 
 12. tool.user.room.remind | Thông báo tới giờ vào lớp (trước n phút)|NO EMAILS!
 
