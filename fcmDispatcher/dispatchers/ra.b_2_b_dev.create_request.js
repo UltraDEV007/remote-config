@@ -29,45 +29,8 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
 
   // slack message effect
   clients.slackClient.getClient().sendMessage({
-    template: {
-      name: 'ra.b_2_b_dev.create_request',
-    },
     ...payload,
   });
-  // clients.slackClient.getClient().postMessage({
-  //   text: 'title',
-  //   blocks: [
-  //     {
-  //       type: 'header',
-  //       text: {
-  //         type: 'plain_text',
-  //         text: _.get(payload, 'type'),
-  //       },
-  //     },
-  //     {
-  //       type: 'context',
-  //       elements: [
-  //         {
-  //           type: 'mrkdwn',
-  //           text: 'title',
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       type: 'context',
-  //       elements: [
-  //         {
-  //           type: 'mrkdwn',
-  //           text: 'body',
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       type: 'divider',
-  //     },
-  //   ],
-  //   // channel: 'C02P4M8KFBK',
-  // });
   // send email effect
   // clients.sendgridClient.getClient().sendEmail(user_id, {
   //   template: {
