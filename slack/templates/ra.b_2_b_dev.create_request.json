@@ -12,6 +12,13 @@
 			"type": "section",
 			"text": {
 				"type": "mrkdwn",
+				"text": "{{account_url}}"
+			}
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
 				"text": "Something happen {{user.profile.display_name}}"
 			}
 		}
