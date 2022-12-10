@@ -19,5 +19,26 @@
   "type": "ra.b_2_b_dev.create_request",
   "target_table": "b2b.dev",
   "notes": null,
-  "approved_at": null
+  "approved_at": null,
+  "ar": {
+    "id": "4b1a1a81-2306-4551-a45a-414482891441"
+  },
+  "user": {
+    "id": "YUgdOvgNaTPOBfBJSs3YZN7rngS2",
+    "profile": {
+      "display_name": "Hung Tran 11"
+    }
+  },
+  "account": {
+    "id": "84bddc49-a50b-434a-bcb2-ac42eec331fa",
+    "slug": "unitz-cat-2",
+    "profile": {
+      "display_name": "Unitz-Cat",
+      "avatar_url": "https://firebasestorage.googleapis.com/v0/b/unitz-app.appspot.com/o/YUgdOvgNaTPOBfBJSs3YZN7rngS2%2FCourseAttachments%2F1668661004472logounitzok2.jpeg?alt=media&token=ca030567-85fe-404c-8b28-fd523ca8b11e"
+    }
+  },
+  "route": {
+    "user_url": "https://unitz.page.link/?link=https://zoom.unitz.app/profile&apn=app.unitz.biz&isi=1569969242&ibi=app.unitz.biz",
+    "account_url": "https://unitz.page.link/?link=https://zoom.unitz.app/unitz-cat-2&apn=app.unitz.biz&isi=1569969242&ibi=app.unitz.biz"
+  }
 }
