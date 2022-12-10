@@ -12,7 +12,7 @@
 			"type": "section",
 			"text": {
 				"type": "mrkdwn",
-				"text": "{{account_url}}"
+				"text": "test url {{account_url}}"
 			}
 		},
 		{
