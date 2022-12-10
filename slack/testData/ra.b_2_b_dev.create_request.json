@@ -1,0 +1,29 @@
+{
+  "text": "Test message",
+  "blocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "Something happen <example.com|Fred Enriquez>\n\n<https://example.com|View request>"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "Something happen "
+      }
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": "*[ENV: ] *"
+        }
+      ]
+    }
+  ],
+  "channel": "C02TL062TMM"
+}
