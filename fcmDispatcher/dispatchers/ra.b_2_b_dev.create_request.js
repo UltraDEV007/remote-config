@@ -14,7 +14,7 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
 
 exports.dispatch = async ({ payload }, { ctxData, helpers, utils, clients: { routeWebClient } }) => {
   const { _, moment } = helpers;
-  const rtn = rtn;
+  const rtn = {};
   console.log('rtn', rtn);
   return rtn;
 };
