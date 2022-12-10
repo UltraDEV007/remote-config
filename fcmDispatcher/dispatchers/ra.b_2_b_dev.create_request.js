@@ -1,5 +1,5 @@
 exports.getQuery = () => `
-  query($account_id: uuid!) {
+  query($ar_id: uuid!) {
     ar: b2b_approval_request_by_pk(id: $ar_id) {
       id
     }
