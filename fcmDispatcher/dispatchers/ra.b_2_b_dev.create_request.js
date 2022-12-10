@@ -28,40 +28,46 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   // const i18n = await utils.forUser(user_id);
 
   // slack message effect
-  clients.slackClient.getClient().postMessage({
-    text: 'title',
-    blocks: [
-      {
-        type: 'header',
-        text: {
-          type: 'plain_text',
-          text: _.get(payload, 'type'),
-        },
-      },
-      {
-        type: 'context',
-        elements: [
-          {
-            type: 'mrkdwn',
-            text: 'title',
-          },
-        ],
-      },
-      {
-        type: 'context',
-        elements: [
-          {
-            type: 'mrkdwn',
-            text: 'body',
-          },
-        ],
-      },
-      {
-        type: 'divider',
-      },
-    ],
-    // channel: 'C02P4M8KFBK',
+  clients.slackClient.getClient().sendMessage({
+    template: {
+      name: 'tool.member.created',
+    },
+    ...payload,
   });
+  // clients.slackClient.getClient().postMessage({
+  //   text: 'title',
+  //   blocks: [
+  //     {
+  //       type: 'header',
+  //       text: {
+  //         type: 'plain_text',
+  //         text: _.get(payload, 'type'),
+  //       },
+  //     },
+  //     {
+  //       type: 'context',
+  //       elements: [
+  //         {
+  //           type: 'mrkdwn',
+  //           text: 'title',
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       type: 'context',
+  //       elements: [
+  //         {
+  //           type: 'mrkdwn',
+  //           text: 'body',
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       type: 'divider',
+  //     },
+  //   ],
+  //   // channel: 'C02P4M8KFBK',
+  // });
   // send email effect
   // clients.sendgridClient.getClient().sendEmail(user_id, {
   //   template: {
