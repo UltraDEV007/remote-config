@@ -1,0 +1,18 @@
+{
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "Something happen <example.com|Fred Enriquez>\n\n<https://example.com|View request>"
+			}
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "Something happen {{user.profile.display_name}}"
+			}
+		}
+	]
+}
