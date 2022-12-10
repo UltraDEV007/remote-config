@@ -30,7 +30,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   // slack message effect
   clients.slackClient.getClient().sendMessage({
     template: {
-      name: 'tool.member.created',
+      name: 'ra.b_2_b_dev.create_request',
     },
     ...payload,
   });
