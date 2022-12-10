@@ -24,6 +24,7 @@ exports.getVars = ({ payload }, { helpers: { _ } }) => {
   return {
     ar_id: _.get(payload, 'id'),
     user_id: _.get(payload, 'item.created_by'),
+    account_id: _.get(payload, 'item.account_id'),
   };
 };
 
