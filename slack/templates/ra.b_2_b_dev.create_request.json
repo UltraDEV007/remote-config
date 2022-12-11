@@ -1,26 +1,47 @@
 {
-	"text": "Test message",
+	"text": "Approval request",
 	"blocks": [
 		{
 			"type": "section",
 			"text": {
 				"type": "mrkdwn",
-				"text": "Something happen <example.com|Fred Enriquez>\n\n<https://example.com|View request>"
+				"text": "<{{route.account_url}}|Approval Request> {{type}}\nAccount: <{{route.account_url}}|{{account.profile.display_name}}>"
 			}
 		},
 		{
-			"type": "section",
-			"text": {
-				"type": "mrkdwn",
-				"text": "test url {{route.account_url}}"
-			}
+			"type": "context",
+			"elements": [
+				{
+					"type": "plain_text",
+					"text": "{{user.profile.display_name}} requested to create {{table}} item ({{item_id}})",
+					"emoji": true
+				}
+			]
 		},
 		{
-			"type": "section",
-			"text": {
-				"type": "mrkdwn",
-				"text": "Something happen {{user.profile.display_name}}"
-			}
+			"type": "actions",
+			"elements": [
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Approve",
+						"emoji": true
+					},
+					"value": "click_approve",
+					"action_id": "actionId-0"
+				},
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Reject",
+						"emoji": true
+					},
+					"value": "click_reject",
+					"action_id": "actionId-1"
+				}
+			]
 		}
 	]
 }
