@@ -13,7 +13,7 @@
 			"elements": [
 				{
 					"type": "plain_text",
-					"text": "{{user.profile.display_name}} requested to create {{table}} item ({{item_id}})",
+					"text": "{{user.profile.display_name}} requested to create {{table}} [{{item.id}}]",
 					"emoji": true
 				}
 			]
