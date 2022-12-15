@@ -108,6 +108,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
     },
     ...i18n.getContactEmailInfo('tool.member.created'),
     ...ctxData,
+    subject: 'Unitz',
     organization_name: _.get(account, 'profile.display_name'),
     admin_name: _.get(account, 'profile.display_name'),
     login: {
