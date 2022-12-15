@@ -96,6 +96,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
   const { _, moment } = helpers;
 
   const account = _.get(ctxData, 'account');
+  const user = _.get(ctxData, 'user');
 
   const user_id = _.get(ctxData, 'user.id');
   const i18n = await utils.forUser(user_id);
@@ -110,7 +111,7 @@ exports.effect = async ({ payload }, { ctxData, helpers, utils, clients }) => {
     ...ctxData,
     subject: 'Unitz',
     organization_name: _.get(account, 'profile.display_name'),
-    admin_name: _.get(account, 'profile.display_name'),
+    admin_name: _.get(user, 'profile.display_name'),
     login: {
       link: clients.routeWebClient.getClient().toToolUrl('toolAccountDetail', account),
     },
