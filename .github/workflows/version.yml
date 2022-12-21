@@ -1,0 +1,60 @@
+name: versioning
+
+on:
+  push:
+    branches:
+      - "master"
+jobs:
+  versioning:
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./ws-tool-web/modules/remote-config
+    steps:
+      - uses: 'actions/checkout@v3'
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+      - name: setup node v14
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          check-latest: true
+      - name: clone workspace
+        uses: actions/checkout@v2
+        with:
+          repository: Unitz-Co/ws-tool-web
+          path: ws-tool-web
+          token: ${{ secrets.PAT_TOKEN }}
+          persist-credentials: true
+      - name: checkout submodule
+        run: |
+          cd ws-tool-web
+          git config --file .gitmodules --get-regexp url | while read url; do
+            git config --file=.gitmodules $(echo "$url" | sed -E "s/git@github.com:|https:\/\/github.com\//https:\/\/${{ secrets.PAT_TOKEN }}:${{ secrets.PAT_TOKEN }}@github.com\//")
+          done
+          git submodule sync
+          git submodule update --init --recursive --remote --force
+      - uses: actions/cache@v2
+        id: cachenodemodules
+        with:
+          path: |
+            ${{env.working-directory}}/node_modules
+            ./ws-tool-web/node_modules
+          key: ${{ runner.os }}nodemodules-${{ hashFiles('**/yarn.lock', '**/package-lock.json', '**/package.json') }}
+      - name: build modules
+        working-directory: ${{env.working-directory}}
+        if: steps.cachenodemodules.outputs.cache-hit != 'true'
+        run: |
+          yarn
+      - name: versioning build
+        working-directory: ${{env.working-directory}}
+        run: |
+          ../../packages/host-version/bin/version
+      - uses: iRoachie/slack-github-actions@v2.3.0
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        with:
+          status: ${{ job.status }}
+        if: ${{ always() }}
