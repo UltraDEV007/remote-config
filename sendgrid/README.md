@@ -33,12 +33,12 @@ Events: name | Function | Status
 9. tool.admin.welcome_en_Us | After user successfully confirmed their email address and created an organization on Unitz | Done | Backlog |
 - Subject: Welcome to Unitz
 - Note URL for videos
-- {{program.video.url}}: https://youtu.be/ePlNNF2JkJo
+- {{program.video.url}}:  https://youtu.be/vlWml-HNvIw
 - {{introvideo.admins.url}}: https://youtu.be/VWRkQM2gE6g
 
 10. tool.teacher.welcome_en_Us | After teacher successfully confirmed their email address and joined an organization on Unitz | Done | Backlog |
 - Subject: Welcome to Unitz
-- {{create.course.video.url}}: https://youtu.be/qS4eMA1Zeo0
+- {{create.course.video.url}}: https://youtu.be/5T5LhjQ63ko
 - {{introvideo.teachers.url}}: https://youtu.be/zFk6bvQ2Vzw
 
 11. tool.student.welcome_en_Us | After student successfully confirmed their email address and joined an organization on Unitz | Done | Backlog |
