@@ -43,7 +43,7 @@ Events: name | Function | Status
 
 11. tool.student.welcome_en_Us | After student successfully confirmed their email address and joined an organization on Unitz | Done | Backlog |
 - Subject: Welcome to Unitz
-- {{gotoclass.video.url}}: https://youtu.be/fNio6MVCbrA
+- {{gotoclass.video.url}}: https://youtu.be/5TyPMhWkHvo
 - {{introvideo.student.url}}: https://youtu.be/WokCNDf1LYg
 
 12. tool.user.room.remind | Thông báo tới giờ vào lớp (trước n phút)|NO EMAILS!
