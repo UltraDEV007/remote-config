@@ -1,0 +1,21 @@
+{
+  "template": {
+    "name": "tool.auth.sendVerificationEmail_en_US"
+  },
+  "user": {
+    "id": "YUgdOvgNaTPOBfBJSs3YZN7rngS2",
+    "profile": {
+      "display_name": "Hung Tran 11"
+    }
+  },
+  "subject": "Verify your email for UnitzApp",
+  "admin_name": "Hung Tran 11",
+  "login": {
+    "link": "https://unitz.page.link/?link=https://zoom.unitz.app/account/me&apn=app.unitz.biz&isi=1569969242&ibi=app.unitz.biz"
+  },
+  "route": {
+    "user_url": "https://unitz.page.link/?link=https://zoom.unitz.app/profile&apn=app.unitz.biz&isi=1569969242&ibi=app.unitz.biz",
+    "verify_email_url": "https://zoom.unitz.app/auth?mode=verifyEmail&oobCode=1CZvmrzp3_P0_L0B19pF0Hu8eMbSXlvJ8K7gYzoFid8AAAGFuZ0xcw&apiKey=AIzaSyC0qjhR7EwOd4-y-WvkPjxO_krET5XmXUo&continueUrl=https%3A%2F%2Fzoom.unitz.app&lang=en",
+    "unsubscribe_url": "/"
+  }
+}
