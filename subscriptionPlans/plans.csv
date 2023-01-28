@@ -1,0 +1,5 @@
+plan_id,name,billingFrequency,currencyIsoCode,price
+unitz_plan_free,Free,1,USD,0
+unitz_plan_basic,Basic,1,USD,99
+unitz_plan_professional,Pro,1,USD,199
+unitz_plan_enterprise,Enterprise,1,USD,1999

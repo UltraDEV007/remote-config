@@ -1,0 +1,4 @@
+plan_id,unitz_plan_free,unitz_plan_basic,unitz_plan_professional,unitz_plan_enterprise
+member,10,20,50,10000
+course,3,50,100,10000
+account,1,3,5,10
